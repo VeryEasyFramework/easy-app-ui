@@ -1,0 +1,9 @@
+deno.lock
+node_modules
+client/dist
+client/.vite
+
+
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

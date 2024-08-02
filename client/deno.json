@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "@vite": "npm:vite@^5.2.10",
+    "@vue": "npm:vue@^3.4.23",
+    "@vitePluginVue": "npm:@vitejs/plugin-vue@^5.0.4"
+  }
+}
