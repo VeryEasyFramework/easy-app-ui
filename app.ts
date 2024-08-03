@@ -1,4 +1,4 @@
-import { EasyApp } from "@eveffer/easy-app";
+import { EasyApp } from "@vef/easy-app";
 
 const app = new EasyApp({
   appRootPath: ".",

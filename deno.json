@@ -2,7 +2,9 @@
   "workspace": [
     "client"
   ],
-  "imports": { "@eveffer/easy-app": "jsr:@eveffer/easy-app@^0.1.6" },
+  "imports": {
+    "@vef/easy-app": "jsr:@vef/easy-app@^0.1.6"
+  },
   "tasks": {
     "dev": "deno run --allow-all --watch app.ts dev",
     "client-dev": "cd client && deno run -A --node-modules-dir npm:vite",
