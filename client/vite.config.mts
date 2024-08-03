@@ -3,6 +3,7 @@ import vue from "@vitePluginVue";
 
 import "@vue";
 import "@vueRouter";
+import "@easyApi";
 
 // export { EasyApi } from "@vef/easy-app";
 // https://vitejs.dev/config/
