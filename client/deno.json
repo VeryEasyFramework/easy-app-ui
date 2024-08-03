@@ -4,6 +4,6 @@
     "@vue": "npm:vue@^3.4.23",
     "@vitePluginVue": "npm:@vitejs/plugin-vue@^5.0.4",
     "@vueRouter": "npm:vue-router@^4.4.2",
-    "@easyApi": "npm:@eveffer/easyapi@0.1.5"
+    "@easyApi": "npm:@eveffer/easyapi@0.1.7"
   }
 }

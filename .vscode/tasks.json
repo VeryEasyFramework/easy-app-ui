@@ -1,0 +1,61 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+    {
+      "type": "deno",
+      "command": "task",
+      "args": [
+        "client-dev"
+      ],
+      "problemMatcher": [
+        "$deno"
+      ],
+      "label": "VEF Client: dev",
+      "detail": "$ deno task cache && cd client && deno run -A --node-modules-dir npm:vite",
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": true,
+        "group": "VEF",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
+    {
+      "type": "deno",
+      "command": "task",
+      "args": [
+        "server-dev"
+      ],
+      "problemMatcher": [
+        "$deno"
+      ],
+      "label": "VEF Server: dev",
+      "detail": "$ deno task cache && deno run --allow-all --watch app.ts dev",
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": false,
+        "group": "VEF",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    }, {
+      "label": "VEF: dev",
+      "dependsOn": [
+        "VEF Client: dev",
+        "VEF Server: dev"
+      ],
+      "dependsOrder": "parallel",
+      "type": "shell",
+      "command": "echo",
+      "args": ["Starting VEF Client and Server..."],
+      "runOptions": {
+        "runOn": "folderOpen",
+        "instanceLimit": 1,
+      }
+    }
+  ]
+}

@@ -5,7 +5,7 @@
   "imports": { "@vef/easy-app": "jsr:@vef/easy-app@^0.1.10" },
   "tasks": {
     "cache": "deno cache --allow-scripts=npm:esbuild,npm:@eveffer/easyapi --node-modules-dir client/vite.config.mts",
-    "dev": "deno task cache && deno run --allow-all --watch app.ts dev",
+    "server-dev": "deno task cache && deno run --allow-all --watch app.ts dev",
     "client-dev": "deno task cache && cd client && deno run -A --node-modules-dir npm:vite",
     "build": "deno task cache && cd client && deno run -A --node-modules-dir npm:vite build",
     "serve": "deno task cache && deno run --allow-all app.ts"
