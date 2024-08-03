@@ -42,7 +42,8 @@
         "showReuseMessage": true,
         "clear": true
       }
-    }, {
+    },
+    {
       "label": "VEF: dev",
       "dependsOn": [
         "VEF Client: dev",
@@ -51,11 +52,14 @@
       "dependsOrder": "parallel",
       "type": "shell",
       "command": "echo",
-      "args": ["Starting VEF Client and Server..."],
+      "args": [
+        "Starting VEF Client and Server..."
+      ],
       "runOptions": {
         "runOn": "folderOpen",
-        "instanceLimit": 1,
-      }
+        "instanceLimit": 1
+      },
+      "problemMatcher": []
     }
   ]
 }

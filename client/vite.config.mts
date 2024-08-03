@@ -14,7 +14,7 @@ export default defineConfig({
     port: 5174,
     strictPort: true,
     origin: "http://localhost:5174",
-
+    open: "http://localhost:8000",
     hmr: {
       //   host: "localhost",
 
