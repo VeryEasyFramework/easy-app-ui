@@ -2,7 +2,7 @@
   <img src="/vef-small.png" alt="Very Easy Framework" />
   <div>
     <h1>Very Easy Framework</h1>
-    <p>Very Easy Framework is a full-stack framework for building web applications with Vue 3 and Express.</p>
+    <h2>{appName}</h2>
     <h2>API Documentation</h2>
     <pre class="docs">{{ apiDocs }}</pre>
   </div>
