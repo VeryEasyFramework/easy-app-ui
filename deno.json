@@ -2,13 +2,12 @@
   "workspace": [
     "client"
   ],
-  "imports": {
-    "@vef/easy-app": "jsr:@vef/easy-app@^0.1.6"
-  },
+  "imports": { "@vef/easy-app": "jsr:@vef/easy-app@^0.1.10" },
   "tasks": {
-    "dev": "deno run --allow-all --watch app.ts dev",
-    "client-dev": "cd client && deno run -A --node-modules-dir npm:vite",
-    "build": "cd client && deno run -A --node-modules-dir npm:vite build",
-    "serve": "deno run --allow-all app.ts"
+    "cache": "deno cache --allow-scripts=npm:esbuild --node-modules-dir client/vite.config.mts",
+    "dev": "deno task cache && deno run --allow-all --watch app.ts dev",
+    "client-dev": "deno task cache && cd client && deno run -A --node-modules-dir npm:vite",
+    "build": "deno task cache && cd client && deno run -A --node-modules-dir npm:vite build",
+    "serve": "deno task cache && deno run --allow-all app.ts"
   }
 }
