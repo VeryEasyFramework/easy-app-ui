@@ -2,7 +2,7 @@
   "workspace": [
     "client"
   ],
-  "imports": { "@vef/easy-app": "jsr:@vef/easy-app@^0.1.10" },
+  "imports": { "@vef/easy-app": "jsr:@vef/easy-app@^0.1.11" },
   "tasks": {
     "cache": "deno cache --allow-scripts=npm:esbuild,npm:@eveffer/easyapi --node-modules-dir client/vite.config.mts",
     "server-dev": "deno task cache && deno run --allow-all --watch app.ts dev",
