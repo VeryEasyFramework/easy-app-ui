@@ -25,7 +25,7 @@
 import { onBeforeMount, onMounted, ref } from 'vue';
 import { api, websocket } from './api'
 
-import { InputData, RootLayout, APIExplorer, Grid } from "@eveffer/easy-client"
+import { InputData, RootLayout, APIExplorer } from "@eveffer/easy-client"
 const apiDocs = ref<string>('')
 onBeforeMount(() => {
   const popovers = document.createElement("div");

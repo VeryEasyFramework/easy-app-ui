@@ -5,34 +5,16 @@
       "type": "deno",
       "command": "task",
       "args": [
-        "client-dev"
+        "dev"
       ],
-      "problemMatcher": [
-        "$deno"
-      ],
-      "label": "VEF Client: dev",
-      "detail": "$ deno task cache && cd client && deno run -A --node-modules-dir npm:vite",
-      "presentation": {
-        "echo": false,
-        "reveal": "always",
-        "focus": true,
-        "group": "VEF",
-        "panel": "dedicated",
-        "showReuseMessage": true,
-        "clear": true
-      }
-    },
-    {
-      "type": "deno",
-      "command": "task",
-      "args": [
-        "server-dev"
-      ],
+      "options": {
+        "cwd": "server",
+      },
       "problemMatcher": [
         "$deno"
       ],
       "label": "VEF Server: dev",
-      "detail": "$ deno task cache && deno run --allow-all --watch app.ts dev",
+      "detail": "run VEF server in development mode",
       "presentation": {
         "echo": false,
         "reveal": "always",
@@ -60,6 +42,78 @@
         "instanceLimit": 1
       },
       "problemMatcher": []
-    }
+    },
+    {
+      "type": "npm",
+      "script": "install",
+      "path": "client",
+
+      "problemMatcher": [
+      ],
+      "label": "VEF Client: install",
+      "detail": "install dependencies from package",
+      "options": {
+        "cwd": "client",
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": true,
+        "group": "VEF",
+        "close": true,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },  {
+      "type": "npm",
+      "script": "dev",
+      "dependsOn": [
+        "VEF Client: install"
+      ],
+      "runOptions": {
+        "instanceLimit": 1
+      },
+      "problemMatcher": [
+        "$vite"
+      ],
+      "label": "VEF Client: dev",
+      "detail": "run VEF client in development mode",
+      "options": {
+        "cwd": "client",
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": true,
+        "group": "VEF",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    }, {
+      "type": "npm",
+      "script": "build",
+      "runOptions": {
+        "instanceLimit": 1
+      },
+      "problemMatcher": [
+        "$vite"
+      ],
+      "label": "VEF Client: build",
+      "detail": "build VEF client for production",
+      "options": {
+        "cwd": "client",
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": true,
+        "group": "VEF",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    },
   ]
 }

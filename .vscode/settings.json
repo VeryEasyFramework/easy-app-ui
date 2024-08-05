@@ -1,7 +1,7 @@
 {
   "deno.enable": true,
   "deno.disablePaths": [
-    "./client/src"
+    "./client"
   ],
   "task.autoDetect": "on",
 }

@@ -1,7 +1,7 @@
 import type { Ref } from "vue";
 
 import { RouteLocationNormalized, Router } from "vue-router";
-import {
+import type {
   Grid,
   GridItem,
   TextBase,
