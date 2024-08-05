@@ -5,6 +5,6 @@
     "@vitePluginVue": "npm:@vitejs/plugin-vue@^5.0.4",
     "@vueRouter": "npm:vue-router@^4.4.2",
     "@easyApi": "npm:@eveffer/easyapi@0.1.7",
-    "@easyClient": "npm:@eveffer/easy-client@^0.1.10"
+    "@easyClient": "npm:@eveffer/easy-client@^0.1.12"
   }
 }
