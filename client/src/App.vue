@@ -1,30 +1,37 @@
 <template>
   <RootLayout>
-    <Grid justify="center">
+    <Grid :columns="['1fr', 'max-content']" padding>
+      <Grid row center>
+        <div class="text-center">
+          <div class="mb-3">
+
+            <img src="/vef-small.png" alt="Very Easy Framework" />
+          </div>
+
+          <div>
+            <h1>Very Easy Framework</h1>
+            <h2>{appName}</h2>
+
+          </div>
+        </div>
+      </Grid>
 
       <APIExplorer style="width: 1200px;" :api="api" />
-    </Grid>
-    <img src="/vef-small.png" alt="Very Easy Framework" />
-    <div>
-      <h1>Very Easy Framework</h1>
-      <h2>{appName}</h2>
-      <InputData label="hello" />
-      <h2>API Documentation</h2>
-      <WidgetCard>
 
-        <pre class="docs">{{ apiDocs }}</pre>
-      </WidgetCard>
-      <pre class="docs">{{ apiDocs }}</pre>
-    </div>
+    </Grid>
   </RootLayout>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import { api, websocket } from './api'
 
 import { InputData, RootLayout, APIExplorer, Grid } from "@eveffer/easy-client"
 const apiDocs = ref<string>('')
-
+onBeforeMount(() => {
+  const popovers = document.createElement("div");
+  popovers.id = "popovers";
+  document.body.appendChild(popovers);
+});
 onMounted(async () => {
   const result = await api.call("app", "apiDocs")
   apiDocs.value = JSON.stringify(result, null, 2)
