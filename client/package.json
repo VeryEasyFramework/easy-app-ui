@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.4.31",
-    "@eveffer/easy-client": "^0.1.12"
+    "@eveffer/easy-client": "^0.1.14"
   },
   "devDependencies": {
     "@types/node": "^22.1.0",

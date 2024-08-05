@@ -5,7 +5,7 @@
     <template #nav>
       <SideNavBar>
         <template #top>
-          <IconNav icon="home" label="Home" route="/"/>
+          <IconNav icon="home" label="Home" route="/app"/>
         </template>
       </SideNavBar>
     </template>
