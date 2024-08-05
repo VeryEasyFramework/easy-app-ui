@@ -4,7 +4,8 @@ import vue from "@vitePluginVue";
 import "@vue";
 import "@vueRouter";
 import "@easyApi";
-
+import "@easyClient";
+import "npm:sass";
 // export { EasyApi } from "@vef/easy-app";
 // https://vitejs.dev/config/
 export default defineConfig({

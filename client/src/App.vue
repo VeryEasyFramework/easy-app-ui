@@ -1,16 +1,28 @@
 <template>
-  <img src="/vef-small.png" alt="Very Easy Framework" />
-  <div>
-    <h1>Very Easy Framework</h1>
-    <h2>{appName}</h2>
-    <h2>API Documentation</h2>
-    <pre class="docs">{{ apiDocs }}</pre>
-  </div>
+  <RootLayout>
+    <Grid justify="center">
+
+      <APIExplorer style="width: 1200px;" :api="api" />
+    </Grid>
+    <img src="/vef-small.png" alt="Very Easy Framework" />
+    <div>
+      <h1>Very Easy Framework</h1>
+      <h2>{appName}</h2>
+      <InputData label="hello" />
+      <h2>API Documentation</h2>
+      <WidgetCard>
+
+        <pre class="docs">{{ apiDocs }}</pre>
+      </WidgetCard>
+      <pre class="docs">{{ apiDocs }}</pre>
+    </div>
+  </RootLayout>
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { api } from './api'
+import { api, websocket } from './api'
 
+import { InputData, RootLayout, APIExplorer, Grid } from "@eveffer/easy-client"
 const apiDocs = ref<string>('')
 
 onMounted(async () => {
