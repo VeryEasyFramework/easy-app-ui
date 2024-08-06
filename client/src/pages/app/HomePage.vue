@@ -5,32 +5,26 @@
     <template #nav>
       <SideNavBar>
         <template #top>
+          <div class="logo">
+
+            <img src="/vef-small.png" alt="Very Easy Framework"/>
+          </div>
+
+        </template>
+        <template #middle>
           <IconNav icon="home" label="Home" route="/app"/>
+          <IconNav icon="api" label="API" route="/app/api"/>
+        </template>
+        <template #bottom>
+          <IconNav icon="logout" label="Logout" color="error" @click="appStore.logout"
+                   route="/login"/>
         </template>
       </SideNavBar>
     </template>
     <template #main>
-
-      <Grid :columns="['1fr', 'max-content']" padding>
-        <Grid row center>
-          <div class="text-center">
-            <div class="mb-3">
-
-              <img src="/vef-small.png" alt="Very Easy Framework"/>
-            </div>
-
-            <div>
-              <h1>Very Easy Framework</h1>
-              <h2>{appName}</h2>
-
-            </div>
-          </div>
-        </Grid>
-
-        <APIExplorer style="width: 1200px;" :api="api"/>
-
-      </Grid>
+      <TransitionRouterView/>
     </template>
+
   </SideNavLayout>
 </template>
 <script setup lang="ts">
@@ -47,18 +41,23 @@ import {
   SideNavBar
 } from "@eveffer/easy-client"
 import {api} from "@/api/index.ts";
+import {useAppStore} from "@/stores/index.ts";
 
 const apiDocs = ref<string>('')
-
+const appStore = useAppStore();
 onMounted(async () => {
   const result = await api.call("app", "apiDocs")
   apiDocs.value = JSON.stringify(result, null, 2)
 });
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  img {
+    width: 40px;
+    height: 40px;
+  }
+
+  height: 50px;
   will-change: filter;
 }
 

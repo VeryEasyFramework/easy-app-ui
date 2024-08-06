@@ -35,7 +35,7 @@ const handleLogin = async () => {
   }
   // await appStore.login(email, password);
   appStore.isAuthenticated = true;
-  await router.push("/app");
+  await router.push("/app/api");
 
 
 };

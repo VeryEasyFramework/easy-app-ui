@@ -4,7 +4,7 @@ import {useAppStore} from "@/stores/index.ts";
 
 const modules = import.meta.glob(`@/pages/**/*.vue`);
 export const router = createEasyRouter({
-   homeRoute: "",
+   homeRoute: "/app",
    modules
 });
 
@@ -22,7 +22,7 @@ router.beforeEach(async (to, from, next) => {
    console.log("to.path", to.path);
    if (to.path === "/login" && appStore.isAuthenticated) {
       console.log("authenticated");
-      next("/app");
+      next("/app/api");
       return;
    }
 
