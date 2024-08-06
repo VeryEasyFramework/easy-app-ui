@@ -52,22 +52,17 @@ onMounted(async () => {
 </script>
 <style lang="scss" scoped>
 .logo {
+
+  height: 50px;
+  will-change: filter;
+
   img {
     width: 40px;
     height: 40px;
   }
 
-  height: 50px;
-  will-change: filter;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
 
 .docs {
   background-color: #1a1a1a;
