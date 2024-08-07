@@ -1,5 +1,5 @@
 {
-  "imports": { "@vef/easy-app": "jsr:@vef/easy-app@^0.2.0" },
+  "imports": { "@vef/easy-app": "jsr:@vef/easy-app@^0.2.1" },
   "tasks": {
     "dev": "deno run --allow-all --watch app.ts dev",
     "serve": "deno run --allow-all app.ts"
