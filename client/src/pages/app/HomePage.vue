@@ -7,28 +7,27 @@
         <template #top>
           <div class="logo">
 
-            <img src="/vef-small.png" alt="Very Easy Framework"/>
+            <img src="/vef-small.png" alt="Very Easy Framework" />
           </div>
 
         </template>
         <template #middle>
-          <IconNav icon="home" label="Home" route="/app"/>
-          <IconNav icon="api" label="API" route="/app/api"/>
+          <IconNav icon="home" label="Home" route="/app" />
+          <IconNav icon="api" label="API" route="/app/api" />
         </template>
         <template #bottom>
-          <IconNav icon="logout" label="Logout" color="error" @click="appStore.logout"
-                   route="/login"/>
+          <IconNav icon="logout" label="Logout" color="error" @click="appStore.logout" route="/login" />
         </template>
       </SideNavBar>
     </template>
     <template #main>
-      <TransitionRouterView/>
+      <TransitionRouterView />
     </template>
 
   </SideNavLayout>
 </template>
 <script setup lang="ts">
-import {onBeforeMount, onMounted, ref} from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 
 
 import {
@@ -40,12 +39,14 @@ import {
   SideNavLayout,
   SideNavBar
 } from "@eveffer/easy-client"
-import {api} from "@/api/index.ts";
-import {useAppStore} from "@/stores/index.ts";
+import { api } from "@/api/index.ts";
+import { useAppStore } from "@/stores/index.ts";
+import { client } from '@/realtime/realtimeClient';
 
 const apiDocs = ref<string>('')
 const appStore = useAppStore();
 onMounted(async () => {
+  client.connect();
   const result = await api.call("app", "apiDocs")
   apiDocs.value = JSON.stringify(result, null, 2)
 });
