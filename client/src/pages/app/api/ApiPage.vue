@@ -1,25 +1,10 @@
 <template>
 
-  <Grid :columns="['1fr', '1fr']" padding>
-    <Grid row center>
-
-      <div class="text-center">
-        <div class="mb-3">
-
-          <img src="/vef-small.png" alt="Very Easy Framework"/>
-        </div>
-
-        <div class="color-white">
-          <h1>Very Easy Framework</h1>
-          <h2>{appName}</h2>
-
-        </div>
-      </div>
-    </Grid>
+  <div class="h-100 center" style="max-width: 1500px;">
 
     <APIExplorer :api="api"/>
 
-  </Grid>
+  </div>
 </template>
 
 <script setup lang="ts">

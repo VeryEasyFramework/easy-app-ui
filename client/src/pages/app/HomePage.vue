@@ -5,50 +5,85 @@
     <template #nav>
       <SideNavBar>
         <template #top>
-          <div class="logo">
+          <Popover text="Very Easy Framework">
 
-            <img src="/vef-small.png" alt="Very Easy Framework" />
-          </div>
+            <div class="logo pointer" @click="router.push('/app')">
+
+              <img src="/vef-small.png" alt="Very Easy Framework"/>
+            </div>
+          </Popover>
 
         </template>
         <template #middle>
-          <IconNav icon="home" label="Home" route="/app" />
-          <IconNav icon="api" label="API" route="/app/api" />
+          <IconNav color="info" icon="home" label="Home" route="/app"/>
+          <IconNav color="secondary" icon="api" label="API" route="/app/api"/>
+          <IconNav color="accent" icon="communication" label="Realtime" route="/app/realtime"/>
         </template>
         <template #bottom>
-          <IconNav icon="logout" label="Logout" color="error" @click="appStore.logout" route="/login" />
+          <IconNav icon="logout" label="Logout" color="error" @click="appStore.logout"
+                   route="/login"/>
         </template>
       </SideNavBar>
     </template>
     <template #main>
-      <TransitionRouterView />
+
+      <div class="position-fixed logo-page" :class="{
+        'faded': router.currentRoute.value.path !== '/app'
+      }">
+
+
+        <Grid row center>
+
+          <div class="text-center grid grid-gap-2">
+            <div class="mb-3">
+
+              <img src="/vef-small.png" alt="Very Easy Framework"/>
+            </div>
+
+            <div class="color-white mb-4 ">
+              <h1>Very Easy Framework</h1>
+              <h2>{appName}</h2>
+            </div>
+            <div class="grid row-gap-3">
+
+              <ButtonStandard @click="router.push('/app/api')">
+                API Explorer
+              </ButtonStandard>
+              <ButtonStandard @click="router.push('/app/realtime')">
+                Realtime Explorer
+              </ButtonStandard>
+            </div>
+          </div>
+        </Grid>
+
+      </div>
+      <TransitionRouterView/>
+
     </template>
 
   </SideNavLayout>
 </template>
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue';
+import {onBeforeMount, onMounted, ref} from 'vue';
 
 
 import {
-  InputData,
-  RootLayout,
-  APIExplorer,
-  TopNavLayout,
+  ButtonStandard,
   IconNav,
+  Popover,
   SideNavLayout,
   SideNavBar
 } from "@eveffer/easy-client"
-import { api } from "@/api/index.ts";
-import { useAppStore } from "@/stores/index.ts";
-import { client } from '@/realtime/realtimeClient';
+import {api} from "@/api/index.ts";
+import {useAppStore} from "@/stores/index.ts";
+import {realtimeClient} from '@/api';
+import {router} from "@/router/index.ts";
 
-const apiDocs = ref<string>('')
+
 const appStore = useAppStore();
 onMounted(async () => {
-  client.connect();
-  const result = await api.call("app", "apiDocs")
-  apiDocs.value = JSON.stringify(result, null, 2)
+  realtimeClient.connect();
+
 });
 </script>
 <style lang="scss" scoped>
@@ -64,6 +99,17 @@ onMounted(async () => {
 
 }
 
+.logo-page {
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  transition: opacity var(--snap-ease-slow);
+
+  &.faded {
+
+    opacity: 0;
+  }
+}
 
 .docs {
   background-color: #1a1a1a;

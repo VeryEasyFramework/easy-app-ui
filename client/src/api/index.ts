@@ -1,5 +1,5 @@
 import { notify } from "@eveffer/easy-client";
-import { EasyApi, WebSocketClient } from "@eveffer/easy-client";
+import { EasyApi, RealtimeClient } from "@eveffer/easy-client";
 
 export const api = new EasyApi();
 api.onNotify((info) => {
@@ -10,4 +10,4 @@ api.onNotify((info) => {
   });
 });
 
-export const websocket = new WebSocketClient();
+export const realtimeClient = new RealtimeClient();
