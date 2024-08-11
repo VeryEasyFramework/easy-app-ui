@@ -16,6 +16,8 @@
         </template>
         <template #middle>
           <IconNav color="info" icon="home" label="Home" route="/app"/>
+          <IconNav route="/app/entities" icon="person" label="Entities" color="primary"/>
+
           <IconNav color="secondary" icon="api" label="API" route="/app/api"/>
           <IconNav color="accent" icon="communication" label="Realtime" route="/app/realtime"/>
         </template>
@@ -83,7 +85,7 @@ import {router} from "@/router/index.ts";
 const appStore = useAppStore();
 onMounted(async () => {
   realtimeClient.connect();
-
+  await appStore.boot()
 });
 </script>
 <style lang="scss" scoped>

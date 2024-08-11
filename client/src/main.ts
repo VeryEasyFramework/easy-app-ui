@@ -11,8 +11,6 @@ import {useRouter} from "vue-router";
 const app = createApp(BasePage);
 app.use(router);
 app.use(easyLib);
-router.isReady().then(() => {
+app.use(createPinia());
 
-
-   app.mount("#app");
-});
+app.mount("#app");
