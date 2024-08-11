@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 
-import {api} from "@/api/index.ts";
+import {api} from "@/api";
 
 
 import {APIExplorer} from "@eveffer/easy-client";

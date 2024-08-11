@@ -9,7 +9,7 @@
 <script setup lang="ts">
 
 
-import {api, realtimeClient} from "@/api/index.ts";
+import {api, realtimeClient} from "@/api";
 import {SocketExplorer} from "@eveffer/easy-client";
 </script>
 

@@ -104,6 +104,7 @@ onMounted(async () => {
   height: 100vh;
   z-index: 1;
   transition: opacity var(--snap-ease-slow);
+  pointer-events: none;
 
   &.faded {
 
