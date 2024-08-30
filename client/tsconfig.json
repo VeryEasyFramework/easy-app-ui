@@ -29,19 +29,15 @@
       "@/*": [
         "src/*"
       ],
-      "#shared": [
-        "../sharedTypes/index.ts"
-      ],
-      "#shared/*": [
-        "../sharedTypes/*"
+      "@login/*": [
+        "login/*"
       ]
     }
   },
   "include": [
-    "srcbk/**/*.ts",
-    "srcbk/**/*.tsx",
-    "srcbk/**/*.vue",
-    "../sharedTypes/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
     "vite.config.ts"
   ]
 }

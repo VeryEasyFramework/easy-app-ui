@@ -1,7 +1,8 @@
+@import "customize";
+@import "variables";
 @import 'layout';
 @import 'color';
 @import 'typography';
-@import 'fonts';
 @import 'inputs';
 @import 'transition';
 @import 'widgets';
@@ -10,15 +11,10 @@
 @import 'icons';
 @import "grid";
 @import "widget";
+@import "color_2";
 
 :root {
-  --font-size: 16px;
-  --border-radius: 0.4rem;
-  --font-size-mobile: 18px;
-  font-size: var(--font-size);
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-
+  --border-radius: #{$border-radius};
 }
 
 @media (max-width: 768px) {
@@ -33,7 +29,7 @@ body,
 [name="app-root"] {
   background: var(--color-bg);
 
-  font-family: Urbanist, sans-serif;
+  font-family: var(--font-family), sans-serif;
   color: var(--color-text);
   margin: 0;
   width: 100vw;
@@ -75,4 +71,5 @@ body,
 .pointer {
   cursor: pointer;
 }
+
 

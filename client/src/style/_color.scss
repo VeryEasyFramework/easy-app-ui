@@ -1,41 +1,4 @@
-$primary: #2b97b5 !default;
-$accent: #ff9b70 !default;
-$secondary: #6aaa4b !default;
-$success: #75e5a9 !default;
-$error: #fc8172 !default;
-$warning: #ffbc1f !default;
-$info: #9985c0 !default;
-$bg-color: #e7ecee !default;
-$body-bg: #cccccc !default;
-$disabled: #c4c4c4 !default;
-$change-percent: 8% !default;
-$border-color: #c4c4c4 !default;
-$text: #273f49 !default;
-$shadow-color: rgba(0, 0, 0, 0.1) !default;
-$widget-bg-color: #ffffff !default;
-$input-bg: $widget-bg-color !default;
-$white: #ffffff !default;
-$dark: #000000 !default;
-
-$primary-dark: #3783b4 !default;
-$secondary-dark: #ffbd93 !default;
-$accent-dark: #d73eb4 !default;
-$success-dark: #1aab72 !default;
-$error-dark: #d25454 !default;
-$warning-dark: #f6b842 !default;
-$info-dark: #7166de !default;
-$white-dark: #000000 !default;
-$dark-dark: #ffffff !default;
-$bg-color-dark: #212529 !default;
-$body-bg-dark: #212529 !default;
-$disabled-dark: #c4c4c4 !default;
-$change-percent-dark: 5% !default;
-$input-bg-dark: darken($bg-color-dark, 5%) !default;
-$border-color-dark: #c4c4c4 !default;
-$text-dark: rgba(255, 255, 255, 0.87) !default;
-$shadow-color-dark: rgba(0, 0, 0, 0.4) !default;
-$widget-bg-color-dark: lighten($bg-color-dark, $change-percent-dark) !default;
-
+@import "variables";
 
 $schemes: [('name':'light',
             'colors':(

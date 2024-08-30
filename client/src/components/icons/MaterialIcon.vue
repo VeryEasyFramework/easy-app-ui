@@ -1,7 +1,6 @@
 <template>
   <div
       class="icon-font"
-      @touchstart.prevent
       :style="{
       fontSize: `${size || 1}rem`,
       '--color-icon': `var(--color-${color || 'icon'})`,

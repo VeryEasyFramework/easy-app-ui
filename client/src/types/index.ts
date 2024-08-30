@@ -57,6 +57,7 @@ export interface EntityHooks {
 }
 
 export interface EntityDefinition {
+   titleField: string;
    entityId: string;
    label: string;
    fields: EasyField[];

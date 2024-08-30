@@ -1,10 +1,11 @@
 <template>
   <ListDetailLayout>
-<template #list>
-<EntityList :entity="entity"/>
-</template>
+    <template #list>
+      <EntityList :entity="entity" :activeEntity="id"
+                  @select="(value)=>$router.push(`/entity/${entity}/${value}`)"/>
+    </template>
     <template #detail>
-<TransitionRouterView :key="props.entity"/>
+      <TransitionRouterView :key="props.entity"/>
     </template>
   </ListDetailLayout>
 </template>
@@ -13,21 +14,16 @@
 import {onBeforeMount, onBeforeUnmount, onMounted, reactive, ref} from "vue";
 import {entityStore} from "@/stores/entityStore.ts";
 import type {EasyField} from "@/types/easyField.ts";
-import ContainerPadded from "@/components/layout/ContainerPadded.vue";
-import Container from "@/components/layout/Container.vue";
-import Title from "@/components/text/Title.vue";
 import {Entity} from "@/types/index.ts";
-import CardWidget from "@/components/CardWidget.vue";
-import EasyInput from "@/components/inputs/EasyInput.vue";
-import MaterialIcon from "@/components/icons/MaterialIcon.vue";
-import {ListOptions} from "@/api/apiTypes.ts";
 import {easyApi} from "@/api/index.ts";
-import DisplayField from "@/components/displayFields/DisplayField.vue";
 import {listenForKeyPress, onEnter} from "@/utils/keyboard.ts";
 import ListDetailLayout from "@/components/layout/ListDetailLayout.vue";
 import EntityList from "@/components/entities/EntityList.vue";
+import TransitionRouterView from "@/components/transitions/TransitionRouterView.vue";
+
 const props = defineProps<{
   entity: string
+  id: string
 }>()
 let fields: EasyField[] = []
 let listFields: EasyField[] = []

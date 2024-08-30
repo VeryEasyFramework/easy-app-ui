@@ -1,35 +1,94 @@
 <template>
-  <Container>
-<div>
-  {{state.entityDef}}
-</div>
+  <Container class="entity-list-wrapper">
+    <Container class="list-header col align-items-center">
+      <div>
+
+        <InputData label="search"/>
+      </div>
+
+      <div>
+
+        <ButtonIcon icon="add" size="1"/>
+      </div>
+      <div>
+        <span>{{ state.currentCount }} of {{ state.totalCount }}</span>
+      </div>
+    </Container>
+    <Container class="list-container">
+      <EntityListItem v-for="item in entityList" :active="activeEntity==item.id" :key="item.id"
+                      :entityDef="state.entityDef"
+                      :record="<Entity>item" @select="(value)=>$emit('select',value)"/>
+
+    </Container>
   </Container>
 </template>
 
 <script setup lang="ts">
 import Container from "@/components/layout/Container.vue";
 import {entityStore} from "@/stores/entityStore.ts";
-import {EntityDefinition} from "@/types/index.ts";
-import {onBeforeMount} from "vue";
+import {EntityDefinition, Entity} from "@/types/index.ts";
+import {onBeforeMount, reactive, ref} from "vue";
+import CardWidget from "@/components/CardWidget.vue";
+import {easyApi} from "@/api/index.ts";
+import EntityListItem from "@/views/entity/EntityListItem.vue";
+import InputData from "@/components/inputs/InputData.vue";
+import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 
 const props = defineProps<{
-  entity: string
+  entity: string,
+  activeEntity?: string
 }>()
-
+const entityList = ref<Entity[]>([])
 const state = {
-  entityDef:{} as EntityDefinition
+  entityDef: {} as EntityDefinition,
+  loading: ref(true),
+  totalCount: ref(0),
+  currentCount: ref(0),
+  listOptions: reactive({
+    filter: {} as Record<string, string>,
+    orderBy: '',
+    order: 'asc' as 'asc' | 'desc',
+    limit: 50,
+    offset: 0
+  })
 }
 
-onBeforeMount(() => {
+const emit = defineEmits<{
+  select: (id: string) => void
+}>()
+
+async function loadList() {
+  const list = await easyApi.getList(props.entity, state.listOptions)
+  entityList.value = list.data
+  state.totalCount.value = list.totalCount
+  state.currentCount.value = list.rowCount
+}
+
+onBeforeMount(async () => {
   const entity = entityStore.entities.find(e => e.entityId === props.entity)
 
   if (!entity) {
     return
   }
   state.entityDef = entity
+  await loadList()
 })
 </script>
 
-<style scoped>
+<style lang="scss">
+.entity-list-wrapper {
+  grid-template-areas: "list-header" "list-container";
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content 1fr;
+
+  .list-header {
+    grid-area: list-header;
+  }
+
+  .list-container {
+    grid-area: list-container;
+    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+  }
+}
 
 </style>

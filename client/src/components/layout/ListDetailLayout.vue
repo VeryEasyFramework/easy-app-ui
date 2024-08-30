@@ -1,7 +1,12 @@
 <template>
   <Container class="list-detail">
-    <slot name="list">List</slot>
-    <slot name="detail">Detail</slot>
+    <Container>
+
+      <slot name="list">List</slot>
+    </Container>
+    <Container>
+      <slot name="detail">Detail</slot>
+    </Container>
   </Container>
 </template>
 
@@ -11,7 +16,7 @@ import Container from "@/components/layout/Container.vue";
 </script>
 
 <style>
-list-detail {
+.list-detail {
   grid-template-columns: 1fr 2fr;
 }
 </style>
