@@ -6,11 +6,19 @@ import {fileURLToPath} from "node:url";
 // https://vitejs.dev/config/
 export default defineConfig({
    plugins: [vue()],
+   appType: "mpa",
+   build: {
+      rollupOptions: {
+         input: {
+            main: fileURLToPath(new URL("./index.html", import.meta.url)),
+            login: fileURLToPath(new URL("./login.html", import.meta.url)),
+         },
+      }
+   },
    resolve: {
       alias: {
          "@": fileURLToPath(new URL("./src", import.meta.url)),
-         "#shared": fileURLToPath(new URL("../sharedTypes/index", import.meta.url)),
-         "#shared/": fileURLToPath(new URL("../sharedTypes", import.meta.url)),
+         "@login": fileURLToPath(new URL("./login", import.meta.url)),
 
       }
 
@@ -20,11 +28,7 @@ export default defineConfig({
       port: 5174,
       strictPort: true,
       origin: "http://localhost:5174",
-      open: "http://localhost:8000",
       hmr: {
-         //   host: "localhost",
-
-         // path: "/__vite_hmr",
          clientPort: 5174,
       },
       host: true,

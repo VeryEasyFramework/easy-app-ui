@@ -1,0 +1,26 @@
+/* width */
+::-webkit-scrollbar {
+  width: 0.3rem;
+  transform: translateX(1rem);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: var(--border-radius);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-bright);
+  border-radius: var(--border-radius);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-info);
+}
+
+.no-scroll {
+  overflow: hidden;
+}

@@ -1,0 +1,25 @@
+$color1: rgb(120, 185, 235);
+$color2: rgb(255, 159, 0);
+$color3: rgb(112, 218, 64);
+$color4: rgb(255, 108, 108);
+$color5: rgb(164, 82, 206);
+$color6: rgb(186, 186, 224);
+
+$darken: 30%;
+
+
+$baseColors: $color1, $color2, $color3, $color4, $color5, $color6;
+:root {
+
+  @for $c from 1 through 6 {
+    $color: darken(nth($baseColors, $c), $darken);
+    --color#{$c}: #{$color};
+    @for $i from 1 through 10 {
+
+      --color#{$c}-#{$i * 100}: #{lighten($color, $i * 5)};
+    }
+
+  }
+}
+
+

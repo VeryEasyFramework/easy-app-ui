@@ -1,0 +1,40 @@
+.widget-card {
+  width: max-content;
+  overflow: auto;
+  backdrop-filter: blur(5px);
+  background-color: var(--color-widget-bg);
+  box-sizing: border-box;
+
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+
+  &.full-height {
+    height: 100%;
+  }
+
+  &.full-width {
+    width: 100%;
+  }
+
+  &.title {
+    grid-template-rows: max-content 1fr;
+  }
+
+  &.flat {
+    box-shadow: none;
+  }
+
+  &.no-bg {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  &.no-padding {
+    padding: 0;
+  }
+
+  .content {
+
+  }
+}

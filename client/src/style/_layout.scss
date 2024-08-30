@@ -1,0 +1,256 @@
+
+.w-100 {
+  width: 100%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.vw-100 {
+  width: 100vw;
+}
+
+.vh-100 {
+  height: 100vh;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-start {
+  justify-content: start;
+}
+
+.justify-content-end {
+  justify-content: end;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-start {
+  align-items: start;
+}
+
+.align-items-end {
+  align-items: end;
+}
+
+.align-items-baseline {
+  align-items: baseline;
+}
+
+.align-items-stretch {
+  align-items: stretch;
+}
+
+.align-content-center {
+  align-content: center;
+}
+
+.align-content-start {
+  align-content: start;
+}
+
+.align-content-end {
+  align-content: end;
+}
+
+.align-content-between {
+  align-content: space-between;
+}
+
+.align-content-around {
+  align-content: space-around;
+}
+
+.align-content-stretch {
+  align-content: stretch;
+}
+
+
+.justify-self-center {
+  justify-self: center;
+}
+
+.justify-self-start {
+  justify-self: start;
+}
+
+.justify-self-end {
+  justify-self: end;
+}
+
+.justify-self-auto {
+  justify-self: auto;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-start {
+  align-self: start;
+}
+
+.align-self-end {
+  align-self: end;
+}
+
+.align-self-auto {
+  align-self: auto;
+}
+
+
+.fit-content {
+  width: fit-content;
+  height: fit-content;
+}
+
+.max-content {
+  width: max-content;
+  height: max-content;
+}
+
+.mc-w {
+  width: max-content;
+}
+
+.mc-h {
+  height: max-content;
+}
+
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+$spacers: (
+        0: 0 !important,
+        1: 0.25rem !important,
+        2: 0.5rem !important,
+        3: 1rem !important,
+        4: 1.5rem !important,
+        5: 3rem !important,
+);
+
+@each $key, $value in $spacers {
+  .p-#{$key} {
+    padding: $value;
+  }
+  .pt-#{$key} {
+    padding-top: $value;
+  }
+  .pb-#{$key} {
+    padding-bottom: $value;
+  }
+  .ps-#{$key} {
+    padding-inline-start: $value;
+  }
+  .pe-#{$key} {
+    padding-inline-end: $value;
+  }
+  .px-#{$key} {
+    padding-inline-start: $value;
+    padding-inline-end: $value;
+  }
+  .py-#{$key} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+  .m-#{$key} {
+    margin: $value;
+  }
+  .mt-#{$key} {
+    margin-top: $value;
+  }
+  .mb-#{$key} {
+    margin-bottom: $value;
+  }
+  .ms-#{$key} {
+    margin-inline-start: $value;
+  }
+  .me-#{$key} {
+    margin-inline-end: $value;
+  }
+  .mx-#{$key} {
+    margin-inline-start: $value;
+    margin-inline-end: $value;
+  }
+  .my-#{$key} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+}
+
+
+.center-items {
+  place-items: center;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+.position-sticky {
+  position: sticky;
+}
+
+.top {
+  top: 0;
+}
+
+.bottom {
+  bottom: 0;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+$overflows: (
+        visible: visible,
+        hidden: hidden,
+        scroll: scroll,
+        auto: auto,
+);
+@each $key, $value in $overflows {
+  .overflow-#{$key} {
+    overflow: $value !important;
+  }
+  .overflow-x-#{$key} {
+    overflow-x: $value !important;
+  }
+  .overflow-y-#{$key} {
+    overflow-y: $value !important;
+  }
+}
+
+.z-max {
+  z-index: 999;
+}

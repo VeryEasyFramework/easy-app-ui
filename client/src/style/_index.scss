@@ -1,0 +1,78 @@
+@import 'layout';
+@import 'color';
+@import 'typography';
+@import 'fonts';
+@import 'inputs';
+@import 'transition';
+@import 'widgets';
+@import 'scroll';
+@import "buttons";
+@import 'icons';
+@import "grid";
+@import "widget";
+
+:root {
+  --font-size: 16px;
+  --border-radius: 0.4rem;
+  --font-size-mobile: 18px;
+  font-size: var(--font-size);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size: var(--font-size-mobile);
+  }
+}
+
+
+html,
+body,
+[name="app-root"] {
+  background: var(--color-bg);
+
+  font-family: Urbanist, sans-serif;
+  color: var(--color-text);
+  margin: 0;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+
+}
+
+
+.disable-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+.list-item {
+  background-color: white;
+  color: var(--color-primary-darker);
+  border-radius: var(--border-radius);
+  transition: all var(--snap-ease);
+
+  &:hover {
+    background-color: var(--color-primary-brighter);
+    color: var(--color-secondary-brighter);
+  }
+
+  &.active {
+    background-color: var(--color-primary);
+    color: var(--color-secondary-brighter);
+  }
+
+}
+
+.pointer {
+  cursor: pointer;
+}
+
