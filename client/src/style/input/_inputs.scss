@@ -16,9 +16,14 @@
     }
   }
 
-  
+
   select {
     height: var(--line-height);
+  }
+
+  .description {
+    font-size: 0.7rem;
+    color: var(--color-text-brighter);
   }
 
   input, select {

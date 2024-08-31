@@ -4,11 +4,9 @@
       :error="error"
       :required="required"
       :read-only="readOnly">
-    <input
-        maxlength="255"
+    <textarea
         :name="name"
         ref="input"
-        type="text"
         v-model="inputValue"
         :disabled="readOnly"/>
   </InputWrapper>

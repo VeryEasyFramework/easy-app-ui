@@ -5,7 +5,6 @@
       :required="required"
       :read-only="readOnly">
     <input
-        maxlength="255"
         :name="name"
         ref="input"
         type="text"

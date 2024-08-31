@@ -74,6 +74,14 @@ export class EasyApi {
       return await this.call<GetListResult<T>>('entity', "getList", fullOptions);
    }
 
+   async createEntity<T extends Entity = Entity>(entity: string, data: Record<string, any>): Promise<T> {
+      return await this.call<T>('entity', "createEntity", {entity, data});
+   }
+
+   async getEntity<T extends Entity = Entity>(entity: string, id: string): Promise<T> {
+      return await this.call<T>('entity', "getEntity", {entity, id});
+   }
+
    private parseError(response: Response, errorContent: string) {
       const info = {} as ErrorInfo;
       info.statusCode = response.status;

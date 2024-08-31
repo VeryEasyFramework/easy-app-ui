@@ -7,7 +7,7 @@
       <NavItem icon="network_ping" to="/realtime" text="Realtime Explorer"/>
     </Container>
     <Container class="bottom">
-
+      <ThemeSwitcher/>
     </Container>
   </ContainerPadded>
 
@@ -21,6 +21,7 @@ import HeaderBrand from "@/components/HeaderBrand.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import NavItem from "@/components/navigation/NavItem.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
+import ThemeSwitcher from "@/components/buttons/ThemeSwitcher.vue";
 </script>
 
 <style>

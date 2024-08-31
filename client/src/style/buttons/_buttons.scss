@@ -43,7 +43,8 @@
     grid-gap: var(--grid-gap);
     align-items: center;
     justify-content: center;
-    height: 100%;
+    width: var(--line-height);
+    height: var(--line-height);
   }
 
   &.flat {

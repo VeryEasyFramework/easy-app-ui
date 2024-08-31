@@ -10,6 +10,7 @@ export interface DocsActionParam {
 
 export interface GetListResult<T extends BaseEntity = BaseEntity> {
    rowCount: number;
+   totalCount: number;
    data: T[];
    columns: string[];
 }

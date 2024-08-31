@@ -14,11 +14,7 @@
         <div class="title-6">
           {{ entity.description || 'No description available.' }}
         </div>
-        <!--      <Button @click="router.push(`/entity/${entity.entityId}`)" class="center-items"-->
-        <!--              v-for="entity in entityStore.entities"-->
-        <!--              :key="entity.entityId">-->
-        <!--        {{ entity.label }}-->
-        <!--      </Button>-->
+
       </WidgetTitled>
     </Container>
 

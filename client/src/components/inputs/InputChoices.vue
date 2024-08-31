@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
 import InputWrapper from "./InputWrapper.vue";
-import {Choice} from "@/types/easyField.ts";
+import type {Choice} from "@/types/easyField.ts";
 
 
 const props = defineProps<{

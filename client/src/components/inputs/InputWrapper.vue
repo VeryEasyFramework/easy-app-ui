@@ -8,7 +8,8 @@
       <span v-if="required" class="ps-1 text-error">*</span>
     </label>
     <slot></slot>
-    <div v-if="error" class="error-message">{{ error }}</div>
+    <div v-if="error" class="error-message bold italic">{{ error }}</div>
+    <div v-else-if="description" class="description italic bold">{{ description }}</div>
   </Container>
 </template>
 
@@ -22,5 +23,9 @@ const props = defineProps<{
   error?: string;
   required?: boolean;
   readOnly?: boolean;
+  description?: string;
 }>();
 </script>
+<style>
+
+</style>

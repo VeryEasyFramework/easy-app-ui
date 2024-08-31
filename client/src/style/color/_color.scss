@@ -186,6 +186,7 @@ $variations: ['bright','brighter','dark','darker'];
   border-style: solid;
   box-sizing: border-box;
   border-color: var(--color-border);
+  border-radius: var(--border-radius);
 
   &.none {
     border-color: transparent;

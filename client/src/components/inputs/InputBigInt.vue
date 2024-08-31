@@ -5,10 +5,9 @@
       :required="required"
       :read-only="readOnly">
     <input
-        maxlength="255"
         :name="name"
         ref="input"
-        type="text"
+        type="number"
         v-model="inputValue"
         :disabled="readOnly"/>
   </InputWrapper>

@@ -14,6 +14,7 @@ export interface EasyFieldTypeMap {
    JSONField: Record<string, any>;
    PhoneField: string;
    ConnectionField: string;
+   TimestampField: Date;
 }
 
 export  type EasyFieldType = keyof EasyFieldTypeMap;
@@ -22,7 +23,7 @@ export  type EasyFieldType = keyof EasyFieldTypeMap;
 /**
  * The choice definition for a field that's set to `ChoicesField` or `MultiChoiceField`.
  */
-interface Choice {
+export interface Choice {
    key: string;
    label: string;
 }

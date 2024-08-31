@@ -1,77 +1,65 @@
 <template>
 
-  <InputPassword v-if="field.fieldType==='PasswordField'" v-model="modelValue" :field="field"
-                 :label="noLabel?'':field.label"/>
-
-  <InputInt v-else-if="field.fieldType==='IntField'" v-model="modelValue" :field="field"
-            :label="noLabel?'':field.label"/>
-
-  <InputBigInt v-else-if="field.fieldType==='BigIntField'" v-model="modelValue"
-               :label="noLabel?'':field.label"
-               :name="field.key"
-               :required="required" :readOnly="readOnly"/>
-
-  <InputDate v-else-if="field.fieldType==='DateField'" v-model="modelValue"
-             :label="noLabel?'':field.label"
+  <component :is="fieldMap[props.field.fieldType]"
+             v-model="modelValue"
+             :field="props.field"
+             :required="field.required"
+             :label="field.label"
+             :readOnly="field.readOnly"
+             :error="props.error"
              :name="field.key"
-             :required="required" :readOnly="readOnly"/>
-
-  <InputBoolean v-else-if="field.fieldType==='BooleanField'" v-model="modelValue" :field="field"
-                :label="noLabel?'':field.label" :choices="field.choices||[]"/>
-
-  <InputChoices v-else-if="field.fieldType==='ChoicesField'" v-model="modelValue" :field="field"
-                :label="noLabel?'':field.label" :choices="field.choices||[]"/>
-
-  <InputMultiChoise v-else-if="field.fieldType==='MultiChoiceField'" v-model="modelValue"
-                    :field="field"
-                    :label="noLabel?'':field.label" :choices="field.choices||[]"/>
-
-  <InputText v-else-if="field.fieldType==='TextField'" v-model="modelValue"
-             :label="noLabel?'':field.label"
-             :name="field.key"
-             :required="required" :readOnly="readOnly"/>
-
-  <InputEmail v-else-if="field.fieldType==='EmailField'" v-model="modelValue" :field="field"
-              :label="noLabel?'':field.label" :choices="field.choices||[]"/>
-
-  <InputImage v-else-if="field.fieldType==='ImageField'" v-model="modelValue" :field="field"
-              :label="noLabel?'':field.label" :choices="field.choices||[]"/>
-
-  <InputJSON v-else-if="field.fieldType==='JSONField'" v-model="modelValue" :field="field"
-             :label="noLabel?'':field.label" :choices="field.choices||[]"/>
-
-  <InputPhone v-else-if="field.fieldType==='PhoneField'" v-model="modelValue" :field="field"
-              :label="noLabel?'':field.label" :choices="field.choices||[]"/>
-
-  <InputConnection v-else-if="field.fieldType==='ConnectionField'" v-model="modelValue"
-                   :field="field"
-                   :label="noLabel?'':field.label" :choices="field.choices||[]"/>
-
-  <InputData v-else v-model="modelValue" :label="noLabel?'':field.label" :name="field.key"
-             :required="required" :readOnly="readOnly"/>
+             :placeholder="placeholder"
+             :focus="props.focus"
+             :description="field.description"
+             :noLabel="props.noLabel"
+  >
+  </component>
 </template>
 
 <script setup lang="ts">
-import {EasyField} from "@/types/easyField.ts";
+import {EasyField, EasyFieldType} from "@/types/easyField.ts";
 import InputPassword from "@/components/inputs/InputPassword.vue";
 import InputData from "@/components/inputs/InputData.vue";
-import {computed} from "vue";
+import {type Component, computed} from "vue";
 import InputInt from "@/components/inputs/InputInt.vue";
 import InputChoices from "@/components/inputs/InputChoices.vue";
 import InputText from "@/components/inputs/InputText.vue";
 import InputDate from "@/components/inputs/InputDate.vue";
 import InputBigInt from "@/components/inputs/InputBigInt.vue";
 import InputBoolean from "@/components/inputs/InputBoolean.vue";
-import InputMultiChoise from "@/components/inputs/InputMultiChoise.vue";
+import InputMultiChoice from "@/components/inputs/InputMultiChoice.vue";
 import InputEmail from "@/components/inputs/InputEmail.vue";
 import InputImage from "@/components/inputs/InputImage.vue";
 import InputJSON from "@/components/inputs/InputJSON.vue";
 import InputPhone from "@/components/inputs/InputPhone.vue";
 import InputConnection from "@/components/inputs/InputConnection.vue";
+import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
+
+const fieldMap: Record<EasyFieldType, Component> = {
+  BigIntField: InputBigInt,
+  BooleanField: InputBoolean,
+  ChoicesField: InputChoices,
+  ConnectionField: InputConnection,
+  DateField: InputDate,
+  EmailField: InputEmail,
+  ImageField: InputImage,
+  IntField: InputInt,
+  JSONField: InputJSON,
+  MultiChoiceField: InputMultiChoice,
+  PasswordField: InputPassword,
+  PhoneField: InputPhone,
+  TextField: InputText,
+  DataField: InputData,
+  IDField: InputData,
+  TimestampField: InputTimestamp,
+}
 
 const props = defineProps<{
   modelValue?: any;
   field: EasyField
+  error?: string
+  focus?: boolean
+  placeholder?: string
   noLabel?: boolean
 }>()
 

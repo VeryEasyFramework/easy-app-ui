@@ -5,10 +5,9 @@
       :required="required"
       :read-only="readOnly">
     <input
-        maxlength="140"
         :name="name"
         ref="input"
-        type="password"
+        type="text"
         v-model="inputValue"
         :disabled="readOnly"/>
   </InputWrapper>

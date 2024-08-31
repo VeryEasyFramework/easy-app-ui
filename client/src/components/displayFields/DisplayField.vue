@@ -1,32 +1,11 @@
 <template>
-  <div>
-    {{ field.fieldType }}
-    {{ fetchValue }}
-    <DisplayData v-if="field.fieldType==='DataField'" :value="value" :field="field"/>
-
-    <DisplayInt v-else-if="field.fieldType==='IntField'" :value="value" :field="field"/>
-    <DisplayBigInt v-else-if="field.fieldType==='BigIntField'" :value="value" :field="field"/>
-    <DisplayDate v-else-if="field.fieldType==='DateField'" :value="value" :field="field"/>
-    <DisplayBoolean v-else-if="field.fieldType==='BooleanField'" :value="value" :field="field"/>
-
-    <DisplayPassword v-else-if="field.fieldType='PasswordField'" :value="value" :field="field"/>
-    <DisplayChoices v-else-if="field.fieldType='ChoicesField'" :value="value" :field="field"/>
-    <DisplayMultiChoice v-else-if="field.fieldType='MultiChoiceField'" :value="value"
-                        :field="field"/>
-    <DisplayText v-else-if="field.fieldType='TextField'" :value="value" :field="field"/>
-    <DisplayEmail v-else-if="field.fieldType='EmailField'" :value="value" :field="field"/>
-    <DisplayImage v-else-if="field.fieldType='ImageField'" :value="value" :field="field"/>
-    <DisplayJSON v-else-if="field.fieldType='JSONField'" :value="value" :field="field"/>
-    <DisplayPhone v-else-if="field.fieldType='PhoneField'" :value="value" :field="field"/>
-    <DisplayConnection v-else-if="field.fieldType='ConnectionField'" :value="value" :field="field"
-                       :titleValue="fetchValue"/>
-
-    <DisplayData v-else :value="value" :field="field"/>
-  </div>
+  <DisplayFieldWrapper :field="field" class="display-field">
+    <component :is="componentMap[props.field.fieldType]" v-bind="props"/>
+  </DisplayFieldWrapper>
 </template>
 
 <script setup lang="ts">
-import type {EasyField} from "@/types/easyField.ts";
+import type {EasyField, EasyFieldType} from "@/types/easyField.ts";
 import DisplayData from "@/components/displayFields/DisplayData.vue";
 import DisplayInt from "@/components/displayFields/DisplayInt.vue";
 import DisplayPassword from "@/components/displayFields/DisplayPassword.vue";
@@ -41,6 +20,28 @@ import DisplayImage from "@/components/displayFields/DisplayImage.vue";
 import DisplayJSON from "@/components/displayFields/DisplayJSON.vue";
 import DisplayPhone from "@/components/displayFields/DisplayPhone.vue";
 import DisplayConnection from "@/components/displayFields/DisplayConnection.vue";
+import {type Component} from "vue";
+import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
+import DisplayFieldWrapper from "@/components/displayFields/DisplayFieldWrapper.vue";
+
+const componentMap: Record<EasyFieldType, Component> = {
+  IDField: DisplayData,
+  DataField: DisplayData,
+  IntField: DisplayInt,
+  BigIntField: DisplayBigInt,
+  DateField: DisplayDate,
+  BooleanField: DisplayBoolean,
+  PasswordField: DisplayPassword,
+  ChoicesField: DisplayChoices,
+  MultiChoiceField: DisplayMultiChoice,
+  TextField: DisplayText,
+  EmailField: DisplayEmail,
+  ImageField: DisplayImage,
+  JSONField: DisplayJSON,
+  PhoneField: DisplayPhone,
+  ConnectionField: DisplayConnection,
+  TimestampField: InputTimestamp
+}
 
 const props = defineProps<{
   value: any;
@@ -50,6 +51,11 @@ const props = defineProps<{
 }>()
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.display-field {
+  
+  font-size: var(--text-body-size);
+}
 
 </style>

@@ -1,6 +1,7 @@
 <template>
   <TransitionFade v-if="!loaded">
-    <Container class="position-absolute top left vw-100 vh-100 center-items loader-overlay">
+    <Container
+        class="position-absolute top left w-100 h-100 horizontal-align-center vertical-align-center loader-overlay">
       <div class="loader">
         <div class="loader__spinner"></div>
       </div>
@@ -24,6 +25,7 @@ const emit = defineEmits(["close", "update:modelValue"]);
 .loader-overlay {
 
   background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
 
 }
 

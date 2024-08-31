@@ -14,7 +14,7 @@
 
         <div>
 
-          <ButtonIcon icon="add" size="1"/>
+          <ButtonIcon :label="`New ${entity}`" @click="openNewEntityModal" icon="add" size="1"/>
         </div>
 
       </Container>
@@ -25,6 +25,9 @@
                       :record="<Entity>item" @select="(value)=>$emit('select',value)"/>
 
     </Container>
+    <ModalView v-model="showNewEntityModal">
+      <NewEntityForm :entityDef="state.entityDef" @close="closeNewEntityModal"/>
+    </ModalView>
   </Container>
 </template>
 
@@ -39,11 +42,25 @@ import InputData from "@/components/inputs/InputData.vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
+import ModalView from "@/components/modal/ModalView.vue";
+import EasyInput from "@/components/inputs/EasyInput.vue";
+import NewEntityForm from "@/components/entities/NewEntityForm.vue";
 
 const props = defineProps<{
   entity: string,
   activeEntity?: string
 }>()
+
+function openNewEntityModal() {
+  showNewEntityModal.value = true
+}
+
+function closeNewEntityModal() {
+  showNewEntityModal.value = false
+}
+
+
+const showNewEntityModal = ref(false)
 const entityList = ref<Entity[]>([])
 const state = {
   entityDef: {} as EntityDefinition,
@@ -70,6 +87,7 @@ async function loadList() {
   state.currentCount.value = list.rowCount
 }
 
+
 onBeforeMount(async () => {
   const entity = entityStore.entities.find(e => e.entityId === props.entity)
 
@@ -77,6 +95,8 @@ onBeforeMount(async () => {
     return
   }
   state.entityDef = entity
+
+
   await loadList()
 })
 </script>
@@ -92,6 +112,7 @@ onBeforeMount(async () => {
   }
 
   .list-container {
+   
     grid-area: list-container;
     grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
   }

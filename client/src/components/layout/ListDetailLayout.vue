@@ -1,18 +1,19 @@
 <template>
   <Container class="list-detail">
-    <Container>
+    <ContainerPadded class="bg border">
 
       <slot name="list">List</slot>
-    </Container>
-    <Container>
+    </ContainerPadded>
+    <ContainerPadded class="bg border">
       <slot name="detail">Detail</slot>
-    </Container>
+    </ContainerPadded>
   </Container>
 </template>
 
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
+import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 </script>
 
 <style>
