@@ -1,0 +1,22 @@
+$overflows: (
+        hidden,
+        visible,
+        scroll,
+        auto
+);
+
+.grid {
+
+  @each $key in $overflows {
+    &.overflow-#{$key} {
+      overflow: $key !important;
+    }
+    &.overflow-x-#{$key} {
+      overflow-x: $key !important;
+    }
+    &.overflow-y-#{$key} {
+      overflow-y: $key !important;
+    }
+  }
+
+}

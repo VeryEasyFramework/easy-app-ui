@@ -9,6 +9,7 @@
         :name="name"
         ref="input"
         type="text"
+        :placeholder="placeholder"
         v-model="inputValue"
         :disabled="readOnly"/>
   </InputWrapper>
@@ -24,6 +25,7 @@ const props = defineProps<{
   label?: string;
   error?: string;
   name?: string;
+  placeholder?: string;
   required?: boolean;
   readOnly?: boolean;
   focus?: boolean;

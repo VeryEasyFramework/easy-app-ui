@@ -18,7 +18,7 @@
 
 
 import {useNotificationStore} from "./index";
-import CardWidget from "@/components/CardWidget.vue";
+import CardWidget from "@/components/widgets/CardWidget.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 
 

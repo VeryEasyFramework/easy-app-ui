@@ -1,0 +1,43 @@
+$scrolls: (
+        hide: hidden,
+        show: scroll,
+        overflow:visible,
+        auto: auto,
+);
+
+@each $key, $value in $scrolls {
+  .scroll-#{$key} {
+    overflow: $value;
+  }
+  .scroll-x-#{$key} {
+    overflow-x: $value;
+  }
+  .scroll-y-#{$key} {
+    overflow-y: $value;
+  }
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: var(--border-radius);
+  transform: translateX(var(--border-radius));
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: var(--border-radius);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-bright);
+  border-radius: var(--border-radius);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-info);
+}
+

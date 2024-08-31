@@ -1,0 +1,19 @@
+$max-z-index: 20;
+
+@for $i from 1 to $max-z-index {
+  .z-#{$i} {
+    z-index: $i;
+  }
+}
+
+.z-max {
+  z-index: var(--z-max);
+}
+
+:root {
+  --z-max: #{$max-z-index};
+  @for $i from 1 to $max-z-index {
+    --z-#{$i}: #{$i};
+  }
+}
+

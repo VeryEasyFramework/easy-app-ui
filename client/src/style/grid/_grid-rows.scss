@@ -1,0 +1,31 @@
+.grid {
+  &.row {
+    grid-auto-flow: row;
+
+    &.grow {
+      grid-auto-rows: minmax(0, 1fr);
+    }
+
+    &.shrink {
+      grid-auto-rows: max-content;
+    }
+  }
+}
+
+@for $i from 1 through 12 {
+  .row-#{$i} {
+    grid-template-rows: repeat(#{$i}, 1fr);
+
+    &.shrink {
+      grid-template-rows: repeat(#{$i}, max-content);
+    }
+  }
+}
+
+:root {
+  --grid-auto-row: 10rem;
+}
+
+.auto-row {
+  grid-template-rows: repeat(auto-fill, minmax(0, var(--grid-auto-row)));
+}

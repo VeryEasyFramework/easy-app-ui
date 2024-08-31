@@ -1,0 +1,24 @@
+.grid {
+  box-sizing: border-box;
+  display: grid;
+
+}
+
+.grid > * {
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+.standard-grid {
+  padding: var(--grid-gap);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.standard-grid-no-padding {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}

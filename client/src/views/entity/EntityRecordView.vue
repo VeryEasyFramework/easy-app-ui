@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 
-import CardWidget from "@/components/CardWidget.vue";
+import CardWidget from "@/components/widgets/CardWidget.vue";
 </script>
 
 <style scoped>

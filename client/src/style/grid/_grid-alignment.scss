@@ -1,0 +1,53 @@
+$shared: (
+        start: start,
+        end: end,
+        center: center,
+);
+
+
+$vertical: (
+        stretch: stretch,
+        baseline: baseline,
+        first: first baseline,
+        last: last baseline,
+);
+
+$horizontal: (
+        between: space-between,
+        around: space-around,
+);
+
+
+@each $key, $value in $shared {
+  .vertical-align-#{$key} {
+    align-items: $value;
+  }
+  .horizontal-align-#{$key} {
+    justify-content: $value;
+  }
+  .horizontal-align-self-#{$key} {
+    justify-self: $value;
+  }
+  .vertical-align-self-#{$key} {
+    align-self: $value;
+  }
+  .align-v-and-h-#{$key} {
+    place-items: $value;
+  }
+}
+
+@each $key, $value in $vertical {
+  .vertical-align-#{$key} {
+    align-items: $value;
+  }
+  .vertical-align-self-#{$key} {
+    align-self: $value;
+  }
+}
+
+@each $key, $value in $horizontal {
+  .horizontal-align-#{$key} {
+    justify-content: $value;
+  }
+}
+

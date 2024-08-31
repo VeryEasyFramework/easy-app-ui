@@ -1,16 +1,15 @@
 <template>
   <RootLayout>
-    <ContainerPadded>
-      <SidebarNavLayout>
-        <template #sidebar>
-          <NavigatorSide/>
-        </template>
-        <template #content>
-          <TransitionRouterView/>
-        </template>
-      </SidebarNavLayout>
-      <LoaderOverlay :loaded="appStore.booted"/>
-    </ContainerPadded>
+    <SidebarNavLayout>
+      <template #sidebar>
+        <NavigatorSide/>
+      </template>
+      <template #content>
+
+        <TransitionRouterView/>
+      </template>
+    </SidebarNavLayout>
+    <LoaderOverlay :loaded="appStore.booted"/>
   </RootLayout>
 </template>
 
@@ -53,8 +52,4 @@ onMounted(async () => {
 
 </script>
 
-<style>
-.main-container {
-  grid-template-rows: 2rem 1fr;
-}
-</style>
+

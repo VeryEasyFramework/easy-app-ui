@@ -71,7 +71,7 @@ import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import Container from "@/components/layout/Container.vue";
 import Title from "@/components/text/Title.vue";
 import {Entity} from "@/types/index.ts";
-import CardWidget from "@/components/CardWidget.vue";
+import CardWidget from "@/components/widgets/CardWidget.vue";
 import EasyInput from "@/components/inputs/EasyInput.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import {ListOptions} from "@/api/apiTypes.ts";

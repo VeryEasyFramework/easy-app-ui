@@ -7,7 +7,9 @@ import {fileURLToPath} from "node:url";
 export default defineConfig({
    plugins: [vue()],
    appType: "mpa",
+
    build: {
+
       rollupOptions: {
          input: {
             main: fileURLToPath(new URL("./index.html", import.meta.url)),

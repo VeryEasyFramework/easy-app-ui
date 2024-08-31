@@ -1,0 +1,33 @@
+.grid {
+  &.col {
+    grid-auto-flow: column;
+
+    &.grow {
+      grid-auto-columns: minmax(0, 1fr);
+    }
+
+    &.shrink {
+      grid-auto-columns: max-content;
+    }
+  }
+
+}
+
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    grid-template-columns: repeat(#{$i}, 1fr);
+
+    &.shrink {
+      grid-template-columns: repeat(#{$i}, max-content);
+    }
+  }
+}
+
+:root {
+  --grid-auto-col: 10rem;
+}
+
+.auto-col {
+  grid-template-columns: repeat(auto-fill, minmax(0, var(--grid-auto-col)));
+}

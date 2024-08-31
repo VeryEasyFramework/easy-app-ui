@@ -1,19 +1,24 @@
 <template>
   <Container class="entity-list-wrapper">
-    <Container class="list-header col align-items-center">
-      <div>
+    <div class="title-3">
+      {{ state.entityDef.label }}
+    </div>
+    <CardWidget>
 
-        <InputData label="search"/>
-      </div>
+      <Container class="list-header col horizontal-align-between">
+        <div class="position-relative">
 
-      <div>
+          <InputData name="search" placeholder="Search" focus/>
+          <MaterialIcon class="position-absolute right pe-2 center-y" size="1.2" icon="search"/>
+        </div>
 
-        <ButtonIcon icon="add" size="1"/>
-      </div>
-      <div>
-        <span>{{ state.currentCount }} of {{ state.totalCount }}</span>
-      </div>
-    </Container>
+        <div>
+
+          <ButtonIcon icon="add" size="1"/>
+        </div>
+
+      </Container>
+    </CardWidget>
     <Container class="list-container">
       <EntityListItem v-for="item in entityList" :active="activeEntity==item.id" :key="item.id"
                       :entityDef="state.entityDef"
@@ -28,11 +33,12 @@ import Container from "@/components/layout/Container.vue";
 import {entityStore} from "@/stores/entityStore.ts";
 import {EntityDefinition, Entity} from "@/types/index.ts";
 import {onBeforeMount, reactive, ref} from "vue";
-import CardWidget from "@/components/CardWidget.vue";
 import {easyApi} from "@/api/index.ts";
 import EntityListItem from "@/views/entity/EntityListItem.vue";
 import InputData from "@/components/inputs/InputData.vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
+import CardWidget from "@/components/widgets/CardWidget.vue";
+import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 
 const props = defineProps<{
   entity: string,
@@ -77,9 +83,9 @@ onBeforeMount(async () => {
 
 <style lang="scss">
 .entity-list-wrapper {
-  grid-template-areas: "list-header" "list-container";
+  grid-template-areas: "." "list-header" "list-container";
   grid-template-columns: 1fr;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: max-content max-content 1fr;
 
   .list-header {
     grid-area: list-header;

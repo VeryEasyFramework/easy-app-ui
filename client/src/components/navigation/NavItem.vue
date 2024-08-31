@@ -1,16 +1,18 @@
 <template>
-  <RouterLink :to="to" class="nav-item">
-    <ContainerPadded class="container">
+  <RouterLink :to="to" class="nav-item px-1">
+    <ContainerPadded class="col shrink horizontal-align-between">
 
-      <MaterialIcon :icon="icon" class="icon"/>
-      <div class="nav-label">{{ text }}</div>
+      <div class="nav-label pe-3">{{ text }}</div>
+      <div>
+
+        <MaterialIcon :icon="icon" class="icon"/>
+      </div>
     </ContainerPadded>
   </RouterLink>
 </template>
 
 <script setup lang="ts">
 
-import Container from "@/components/layout/Container.vue";
 import {MaterialIcons} from "@/components/icons/materialIcons";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
@@ -23,6 +25,8 @@ const props = defineProps<{
 </script>
 
 <style>
+
+
 .nav-item {
   border-radius: var(--border-radius);
   transition: all var(--snap-ease);
@@ -36,13 +40,6 @@ const props = defineProps<{
     }
   }
 
-  .container {
-
-    height: max-content;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr;
-    align-items: center;
-  }
 
   a {
     text-decoration: none;
@@ -51,6 +48,7 @@ const props = defineProps<{
   .icon {
     font-weight: bold;
     color: var(--color-text);
+
   }
 
   &.router-link-active {

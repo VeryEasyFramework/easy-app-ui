@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import {Entity, EntityDefinition} from "@/types/index.ts";
-import CardWidget from "@/components/CardWidget.vue";
+import CardWidget from "@/components/widgets/CardWidget.vue";
 import Container from "@/components/layout/Container.vue";
 
 const props = defineProps<{
@@ -27,18 +27,19 @@ const emit = defineEmits<{
 }>()
 </script>
 
-<style>
+<style lang="scss">
 .entity-list-item {
   cursor: pointer;
   transition: all var(--snap-ease);
+  border-inline-start: 0.2rem solid var(--color1-900);
 
-  &:hover, &.active {
-    background-color: var(--color-primary);
+  &:hover {
+    border-inline-start: 0.2rem solid var(--color2-900);
+  }
 
-    .item-label {
+  &.active {
+    border-inline-start: 0.2rem solid var(--color1);
 
-      color: var(--color-white);
-    }
   }
 }
 </style>

@@ -13,9 +13,12 @@ $success: #75e5a9;
 $error: #fc8172;
 $warning: #ffbc1f;
 $info: #9985c0;
-$bg-color: #e7ecee;
-$body-bg: #cccccc;
 $text: #273f49;
+$title: #273f49;
+$bg-color: #e7ecee;
+
+$body-bg: #cccccc;
+
 
 $primary-dark: $color1;
 $secondary-dark: $color2;
@@ -27,9 +30,11 @@ $info-dark: #7166de;
 $bg-color-dark: #212529;
 $body-bg-dark: #212529;
 $text-dark: rgba(255, 255, 255, 0.87);
+$title-dark: rgba(255, 255, 255, 0.87);
 
-$font-family: 'Nunito';
-$border-radius: 0.4rem;
+$font-family: 'Inter';
+$font-family-title: 'Roboto';
+$border-radius: 0.3rem;
 $font-size: 16px;
 $font-size-mobile: 14px;
 

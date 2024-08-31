@@ -3,7 +3,7 @@
       class="input grid-gap-0"
       :rows="['max-content', 'max-content', 'minmax(1rem,max-content)']"
       :class="{ readonly: readOnly }">
-    <label class="text-small pb-1">
+    <label v-if="label" class="text-small pb-1">
       <span>{{ label }}</span>
       <span v-if="required" class="ps-1 text-error">*</span>
     </label>
