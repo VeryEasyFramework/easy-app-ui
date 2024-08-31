@@ -1,5 +1,5 @@
 import {GetListResult, ListOptions} from "@/api/apiTypes.ts";
-import {BaseEntity, Entity} from "@/types/index.ts";
+import {Entity} from "@/types/index.ts";
 import {notify} from "@/notify/index.ts";
 
 export interface ErrorInfo {
@@ -61,9 +61,7 @@ export class EasyApi {
          });
          return {} as T;
       }
-      const responseContent = await response.json();
-
-      return responseContent;
+      return await response.json();
    }
 
    async getList<T extends Entity = Entity>(entity: string, options?: ListOptions): Promise<GetListResult<T>> {
@@ -80,6 +78,14 @@ export class EasyApi {
 
    async getEntity<T extends Entity = Entity>(entity: string, id: string): Promise<T> {
       return await this.call<T>('entity', "getEntity", {entity, id});
+   }
+
+   async updateEntity<T extends Entity = Entity>(entity: string, id: string, data: Record<string, any>): Promise<T> {
+      return await this.call<T>('entity', "updateEntity", {entity, id, data});
+   }
+
+   async deleteEntity(entity: string, id: string): Promise<void> {
+      await this.call('entity', "deleteEntity", {entity, id});
    }
 
    private parseError(response: Response, errorContent: string) {

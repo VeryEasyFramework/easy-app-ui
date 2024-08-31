@@ -1,5 +1,5 @@
 <template>
-  <ListDetailLayout>
+  <ListDetailLayout maxWidth="400px">
     <template #list>
       <EntityList :entity="entity" :activeEntity="id"
                   @select="(value)=>$router.push(`/entity/${entity}/${value}`)"/>

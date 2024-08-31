@@ -1,5 +1,7 @@
 <template>
-  <Container class="entity-fields">
+  <Container class="entity-fields" :class="{
+    edit: edit
+  }">
     <div v-for="field in entityDef.fields">
       <EasyInput v-if="edit" :field="field" v-model="record[field.key]"/>
       <DisplayField v-else :field="field" :value="record[field.key]"/>
@@ -20,11 +22,16 @@ const props = defineProps<{
 }>()
 </script>
 
-<style>
+<style lang="scss">
 
 .entity-fields {
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-auto-rows: max-content;
+  row-gap: 1rem;
+
+  &.edit {
+
+  }
 }
 
 </style>

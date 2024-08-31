@@ -1,5 +1,5 @@
 <template>
-  <Container class="side-nav-layout gap-2">
+  <Container class="side-nav-layout gap-0">
     <div class="side-bar">
 
       <slot name="sidebar"></slot>

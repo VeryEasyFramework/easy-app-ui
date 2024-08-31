@@ -1,5 +1,5 @@
 <template>
-  <Container class="list-detail">
+  <Container class="list-detail" :style="maxWidth?`--max-width:${maxWidth}`:``">
     <ContainerPadded class="bg border">
 
       <slot name="list">List</slot>
@@ -14,10 +14,15 @@
 
 import Container from "@/components/layout/Container.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
+
+defineProps<{
+  maxWidth?: string
+}>()
 </script>
 
 <style>
 .list-detail {
-  grid-template-columns: 1fr 2fr;
+  --max-width: 1fr;
+  grid-template-columns: minmax(min-content, var(--max-width) ) 1fr;
 }
 </style>

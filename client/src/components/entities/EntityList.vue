@@ -1,5 +1,5 @@
 <template>
-  <Container class="entity-list-wrapper">
+  <ContainerPadded class="entity-list-wrapper">
     <div class="title-3">
       {{ state.entityDef.label }}
     </div>
@@ -28,7 +28,7 @@
     <ModalView v-model="showNewEntityModal">
       <NewEntityForm :entityDef="state.entityDef" @close="closeNewEntityModal"/>
     </ModalView>
-  </Container>
+  </ContainerPadded>
 </template>
 
 <script setup lang="ts">
@@ -45,6 +45,7 @@ import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import ModalView from "@/components/modal/ModalView.vue";
 import EasyInput from "@/components/inputs/EasyInput.vue";
 import NewEntityForm from "@/components/entities/NewEntityForm.vue";
+import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 
 const props = defineProps<{
   entity: string,
@@ -112,7 +113,7 @@ onBeforeMount(async () => {
   }
 
   .list-container {
-   
+
     grid-area: list-container;
     grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
   }

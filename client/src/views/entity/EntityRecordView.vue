@@ -2,17 +2,17 @@
   <TransitionFade>
     <ContainerPadded v-if="state.loaded.value" class="position-relative entity-record-grid">
       <Container class="top-bar col shrink vertical-align-center horizontal-align-between">
-        <div class="title-4">
-          {{ record[entityDef.titleField || 'id'] }}
-        </div>
-        <Container class="toolbar col shrink">
-          <ButtonIcon @click="editMode = !editMode" :icon="editMode?'edit_off':'edit'"
-                      label="Edit Mode"
-                      color="warning" size="1"/>
-          <ButtonIcon v-if="editMode" icon="save" size="1" color="success"
-                      @click="editMode = false"/>
-          <ButtonIcon icon="delete" size="1" color="error" @click=""/>
+        <Container>
+
+          <div class="title-4">
+            {{ record[entityDef.titleField || 'id'] }}
+          </div>
+          <div class="text-small italic text-primary-bright">
+            {{ record.id }}
+          </div>
         </Container>
+        <EntityToolbar :editMode="editMode" @save="saveRecord" @delete=""
+                       @edit="(edit)=>editMode=edit"/>
       </Container>
 
       <CardWidget class="fields">
@@ -25,7 +25,7 @@
         <EntityActions :entityDef="entityDef" :record="record!"/>
       </Container>
 
-
+      <LoaderOverlay :loaded="!state.saving.value"/>
     </ContainerPadded>
   </TransitionFade>
 </template>
@@ -47,6 +47,9 @@ import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import EntityActions from "@/components/entities/entityRecord/EntityActions.vue";
 import EntityInfo from "@/components/entities/entityRecord/EntityInfo.vue";
+import EntityToolbar from "@/components/entities/entityRecord/EntityToolbar.vue";
+import Loader from "@/components/transitions/Loader.vue";
+import {notify} from "@/notify/index.ts";
 
 const props = defineProps<{
   entity: string
@@ -55,7 +58,8 @@ const props = defineProps<{
 let entityDef: EntityDefinition = {} as EntityDefinition
 const record = ref<Entity>()
 const state = {
-  loaded: ref(false)
+  loaded: ref(false),
+  saving: ref(false),
 }
 
 const editMode = ref(false)
@@ -67,6 +71,20 @@ async function loadRecord() {
   state.loaded.value = true
 }
 
+async function saveRecord() {
+  if (!record.value) {
+    return
+  }
+  state.saving.value = true
+  const entity = record.value
+  await easyApi.updateEntity(props.entity, entity.id, entity)
+  notify({
+    message: `${entityDef.label} ${record.value[entityDef.titleField || 'id']} saved!`,
+    title: 'Record Saved!',
+    type: 'success'
+  })
+  state.saving.value = false
+}
 
 onBeforeMount(() => {
   // load record

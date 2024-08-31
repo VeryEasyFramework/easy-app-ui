@@ -42,8 +42,10 @@ export interface EntityConfig {
    isSystem: boolean;
 }
 
-export interface BaseActions {
-   save: boolean;
+export interface EntityAction {
+   key: string;
+   label: string;
+   description: string;
 }
 
 
@@ -65,7 +67,7 @@ export interface EntityDefinition {
    hooks: EntityHooks;
    config: EntityConfig;
    tableName: string;
-   actions: BaseActions;
+   actions: EntityAction[]
 }
 
 
