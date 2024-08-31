@@ -50,6 +50,7 @@ import EntityInfo from "@/components/entities/entityRecord/EntityInfo.vue";
 import EntityToolbar from "@/components/entities/entityRecord/EntityToolbar.vue";
 import Loader from "@/components/transitions/Loader.vue";
 import {notify} from "@/notify/index.ts";
+import {listenForEntity} from "@/realtime/index.ts";
 
 const props = defineProps<{
   entity: string
@@ -78,13 +79,20 @@ async function saveRecord() {
   state.saving.value = true
   const entity = record.value
   await easyApi.updateEntity(props.entity, entity.id, entity)
-  notify({
-    message: `${entityDef.label} ${record.value[entityDef.titleField || 'id']} saved!`,
-    title: 'Record Saved!',
-    type: 'success'
-  })
+
   state.saving.value = false
 }
+
+listenForEntity(props.entity, 'update', async (data) => {
+  if (data.id === props.id) {
+    record.value = data
+    notify({
+      message: `${entityDef.label} ${record.value[entityDef.titleField || 'id']} was updated`,
+      title: `${entityDef.label} Updated`,
+      type: 'success'
+    })
+  }
+})
 
 onBeforeMount(() => {
   // load record

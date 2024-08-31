@@ -14,15 +14,15 @@ export class RealtimeClient {
    private manualClose = false;
 
    get connected() {
-      return this.socket.readyState === WebSocket.OPEN;
+      return this.socket?.readyState === WebSocket.OPEN;
    }
 
    get connecting() {
-      return this.socket.readyState === WebSocket.CONNECTING;
+      return this.socket?.readyState === WebSocket.CONNECTING;
    }
 
    get closed() {
-      return this.socket.readyState === WebSocket.CLOSED;
+      return this.socket?.readyState === WebSocket.CLOSED;
    }
 
    constructor(host?: string) {

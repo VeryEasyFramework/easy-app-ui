@@ -24,6 +24,7 @@ import {notify} from "@/notify/index.ts";
 import LoaderOverlay from "@/components/transitions/LoaderOverlay.vue";
 import SidebarNavLayout from "@/components/layout/SidebarNavLayout.vue";
 import NavigatorSide from "@/components/navigation/NavigatorSide.vue";
+import {realtime} from "@/realtime/index.ts";
 
 
 const appStore = useAppStore()
@@ -46,6 +47,7 @@ onMounted(async () => {
     })
   }
   await new Promise(resolve => setTimeout(resolve, 1000))
+  realtime.connect()
 
 
 })

@@ -35,7 +35,7 @@
 import Container from "@/components/layout/Container.vue";
 import {entityStore} from "@/stores/entityStore.ts";
 import {EntityDefinition, Entity} from "@/types/index.ts";
-import {onBeforeMount, reactive, ref} from "vue";
+import {onBeforeMount, onMounted, reactive, ref} from "vue";
 import {easyApi} from "@/api/index.ts";
 import EntityListItem from "@/views/entity/EntityListItem.vue";
 import InputData from "@/components/inputs/InputData.vue";
@@ -46,6 +46,7 @@ import ModalView from "@/components/modal/ModalView.vue";
 import EasyInput from "@/components/inputs/EasyInput.vue";
 import NewEntityForm from "@/components/entities/NewEntityForm.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
+import {listenForEntity, realtime} from "@/realtime/index.ts";
 
 const props = defineProps<{
   entity: string,
@@ -99,6 +100,16 @@ onBeforeMount(async () => {
 
 
   await loadList()
+})
+
+listenForEntity(props.entity, 'list', (data: Entity) => {
+  entityList.value.forEach((e, i) => {
+    if (e.id === data.id) {
+
+      entityList.value[i] = data
+    }
+  })
+
 })
 </script>
 

@@ -70,7 +70,9 @@ function getPrettyDate(value: string | number, options?: {
    format?: 'standard' | 'pretty',
    showSeconds?: boolean,
 }) {
-   const date = new Date(value);
+   const date = new Date(value)
+   // convert to local time
+   date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
    if (isNaN(date.getTime())) {
       return value;
    }

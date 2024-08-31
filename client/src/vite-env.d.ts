@@ -10,6 +10,7 @@ declare module '*.vue' {
 
 interface ImportMetaEnv {
    VITE_API: string
+   VITE_WS: string
    VITE_DEBUG: boolean
    VITE_GRID_DEBUG: boolean
 

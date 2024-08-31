@@ -2,7 +2,7 @@
   <Container>
     <Container class="col">
       <div class="label">Created At:</div>
-      <DisplayTimestamp class="label text-info-dark" :value="record.updatedAt"/>
+      <DisplayTimestamp class="label text-info-dark" :value="record.createdAt"/>
     </Container>
     <Container class="col">
       <div class="label">Last Updated:</div>
