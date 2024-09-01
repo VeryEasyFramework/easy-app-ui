@@ -97,10 +97,10 @@ $schemes: [('name':'light',
       color-scheme: #{$theme};
       @each $key in map-keys($colors) {
         --color-#{$key}: #{map-get($colors, $key)};
-        --color-#{$key}-bright: #{lighten(map-get($colors, $key), $percent)};
-        --color-#{$key}-brighter: #{lighten(map-get($colors, $key), $percent * 4)};
-        --color-#{$key}-dark: #{darken(map-get($colors, $key), $percent)};
-        --color-#{$key}-darker: #{darken(map-get($colors, $key), $percent * 4)};
+        --color-#{$key}-bright: #{mix(white,map-get($colors, $key), $percent)};
+        --color-#{$key}-brighter: #{mix(white,map-get($colors, $key), $percent * 4)};
+        --color-#{$key}-dark: #{mix(black,map-get($colors, $key), $percent)};
+        --color-#{$key}-darker: #{mix(black,map-get($colors, $key), $percent * 4)};
 
       }
       --color-input-bg: #{map-get($colors, 'input-bg')};
@@ -111,10 +111,10 @@ $schemes: [('name':'light',
 
       @each $key in map-keys($root-colors) {
         --color-card-bg-#{$key}: #{map-get($root-colors,$key)};
-        --color-card-bg-#{$key}-bright: #{lighten(map-get($root-colors,$key),$percent)};
-        --color-card-bg-#{$key}-brighter: #{lighten(map-get($root-colors,$key),$percent * 4)};
-        --color-card-bg-#{$key}-dark: #{darken(map-get($root-colors,$key),$percent)};
-        --color-card-bg-#{$key}-darker: #{darken(map-get($root-colors,$key),$percent * 4)};
+        --color-card-bg-#{$key}-bright: #{mix(white,map-get($root-colors,$key),$percent)};
+        --color-card-bg-#{$key}-brighter: #{mix(white,map-get($root-colors,$key),$percent * 4)};
+        --color-card-bg-#{$key}-dark: #{mix(black,map-get($root-colors,$key),$percent)};
+        --color-card-bg-#{$key}-darker: #{mix(black,map-get($root-colors,$key),$percent * 4)};
 
       }
 

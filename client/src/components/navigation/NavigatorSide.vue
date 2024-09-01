@@ -3,6 +3,8 @@
     <HeaderBrand class="brand"/>
     <Container class="nav row shrink">
       <NavItem icon="person" to="/entity" text="Entities"/>
+      <NavItem icon="format_paint" to="/theme" text="Theme"/>
+
       <NavItem icon="code" to="/api-explorer" text="API Explorer"/>
       <NavItem icon="network_ping" to="/realtime" text="Realtime Explorer"/>
     </Container>
