@@ -29,7 +29,6 @@ import InputDataField from "@/components/inputs/InputData.vue";
 import InputPasswordField from "@/components/inputs/InputPassword.vue";
 import Button from "@/components/buttons/Button.vue";
 import Form from "@/components/form/Form.vue";
-import HeaderLogo from "@/components/HeaderLogo.vue";
 import Logo from "@/components/Logo.vue";
 
 

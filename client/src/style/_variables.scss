@@ -5,15 +5,16 @@ $font-size-mobile: 14px !default;
 
 $border-radius: 0.5rem !default;
 
+$tint: #5d73ff !default;
 
-$primary: #2b97b5 !default;
+$primary: #1f4659 !default;
 $accent: #ff9b70 !default;
-$secondary: #6aaa4b !default;
+$secondary: #4b82aa !default;
 $success: #75e5a9 !default;
 $error: #fc8172 !default;
 $warning: #ffbc1f !default;
 $info: #9985c0 !default;
-$bg-color: #e7ecee !default;
+$bg-color: #fafafa !default;
 $body-bg: #cccccc !default;
 $disabled: #c4c4c4 !default;
 $change-percent: 8% !default;
@@ -36,10 +37,10 @@ $info-dark: #7166de !default;
 $white-dark: #000000 !default;
 $dark-dark: #ffffff !default;
 $bg-color-dark: #212529 !default;
-$body-bg-dark: #212529 !default;
+$body-bg-dark: mix(black, $bg-color-dark, 5%) !default;
 $disabled-dark: #c4c4c4 !default;
 $change-percent-dark: 5% !default;
-$input-bg-dark: darken($bg-color-dark, 5%) !default;
+$input-bg-dark: $bg-color-dark !default;
 $border-color-dark: #c4c4c4 !default;
 $text-dark: rgba(255, 255, 255, 0.87) !default;
 $title-dark: rgba(255, 255, 255, 0.87) !default;
@@ -47,9 +48,9 @@ $shadow-color-dark: rgba(0, 0, 0, 0.4) !default;
 $widget-bg-color-dark: lighten($bg-color-dark, $change-percent-dark) !default;
 
 
-$color1: rgb(120, 185, 235) !default;
-$color2: rgb(255, 159, 0) !default;
-$color3: rgb(112, 218, 64) !default;
-$color4: rgb(255, 108, 108) !default;
-$color5: rgb(164, 82, 206) !default;
-$color6: rgb(186, 186, 224) !default;
+$color1: $primary !default;
+$color2: $secondary !default;
+$color3: $accent !default;
+$color4: $info !default;
+$color5: $warning !default;
+$color6: $error !default;

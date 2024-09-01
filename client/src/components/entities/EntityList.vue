@@ -79,7 +79,7 @@ const state = {
 }
 
 const emit = defineEmits<{
-  select: (id: string) => void
+  select: [id: string]
 }>()
 
 async function loadList() {

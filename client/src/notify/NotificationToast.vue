@@ -7,8 +7,11 @@
           :class="item.type"
           v-for="item in store.notifications"
           :key="item.id">
-        <div>{{ item.title }}</div>
-        <div>{{ item.message }}</div>
+        <Container class="row shrink">
+
+          <div class="title-5">{{ item.title }}</div>
+          <div>{{ item.message }}</div>
+        </Container>
       </div>
     </TransitionGroup>
   </ContainerPadded>
@@ -20,6 +23,7 @@
 import {useNotificationStore} from "./index";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
+import Container from "@/components/layout/Container.vue";
 
 
 const store = useNotificationStore();

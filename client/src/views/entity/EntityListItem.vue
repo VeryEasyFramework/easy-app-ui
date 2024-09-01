@@ -23,7 +23,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  select: (id: string) => void
+  select: [id: string]
 }>()
 </script>
 
@@ -38,7 +38,7 @@ const emit = defineEmits<{
   }
 
   &.active {
-    border-inline-start: 0.2rem solid var(--color1);
+    border-inline-start: 0.2rem solid var(--color-secondary);
 
   }
 }
