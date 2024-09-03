@@ -13,9 +13,8 @@
 <script setup lang="ts">
 import {Entity, EntityDefinition} from "@/types/index.ts";
 import CardWidget from "@/components/widgets/CardWidget.vue";
-import Container from "@/components/layout/Container.vue";
 
-const props = defineProps<{
+defineProps<{
   entityDef: EntityDefinition,
   record: Entity,
   active?: boolean

@@ -17,7 +17,7 @@
                   modifier
                 }}
               </div>
-              <div :class="`bg-${color}-${modifier} text-${color}-${modifier}`"
+              <div :class="`bg-${color}-${modifier} text-white`"
                    class="text-center py-1 label color-sample">
                 {{ color }}-{{ modifier }}
               </div>
@@ -26,7 +26,6 @@
         </Container>
       </CardWidget>
     </Container>
-
   </Container>
 </template>
 
@@ -34,8 +33,7 @@
 
 import Container from "@/components/layout/Container.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
-import ContainerPadded from "@/components/layout/ContainerPadded.vue";
-import Title from "@/components/text/Title.vue";
+
 
 const colors = [
   'primary',
