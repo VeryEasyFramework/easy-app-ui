@@ -130,4 +130,6 @@ export interface EasyField {
     * Set to true if the field should be unique.
     */
    unique?: boolean;
+
+   group?: string;
 }

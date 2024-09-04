@@ -102,14 +102,15 @@ onBeforeMount(async () => {
   await loadList()
 })
 
-listenForEntity(props.entity, 'list', (data: Entity) => {
+listenForEntity(props.entity, 'list', async (data: Entity) => {
+  let inList = false
   entityList.value.forEach((e, i) => {
     if (e.id === data.id) {
-
+      inList = true
       entityList.value[i] = data
     }
   })
-
+  await loadList()
 })
 </script>
 

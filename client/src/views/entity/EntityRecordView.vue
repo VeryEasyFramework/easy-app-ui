@@ -57,7 +57,7 @@ const props = defineProps<{
   id: string
 }>()
 let entityDef: EntityDefinition = {} as EntityDefinition
-const record = ref<Entity>()
+const record = ref<Entity>({} as Entity)
 const state = {
   loaded: ref(false),
   saving: ref(false),

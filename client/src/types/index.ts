@@ -58,12 +58,21 @@ export interface EntityHooks {
    afterDelete?: (entity: Entity) => void;
 }
 
+
+export interface FieldGroup {
+   key: string;
+   title: string;
+   fields: FetchedField[];
+}
+
 export interface EntityDefinition {
    titleField: string;
    description?: string;
    entityId: string;
    label: string;
    fields: EasyField[];
+   listFields: string[];
+   groups: FieldGroup[];
    hooks: EntityHooks;
    config: EntityConfig;
    tableName: string;
