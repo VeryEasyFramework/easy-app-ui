@@ -10,9 +10,9 @@
 
       <WidgetTitled @click="$router.push(`/entity/${entity.entityId}`)"
                     v-for="entity in entityStore.entities" :key="entity.entityId"
-                    :title="entity.label" class="entity-card cursor-pointer disable-select">
+                    :title="entity.config.label" class="entity-card cursor-pointer disable-select">
         <div class="title-6">
-          {{ entity.description || 'No description available.' }}
+          {{ entity.config.description || 'No description available.' }}
         </div>
 
       </WidgetTitled>

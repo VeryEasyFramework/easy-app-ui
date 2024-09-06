@@ -4,19 +4,19 @@
   }" @click="$emit('select', record.id)">
     <div class="text-small text-primary bold item-label">
 
-      {{ record[entityDef.titleField || 'id'] }}
+      {{ record[entityDef.config.titleField || 'id'] }}
     </div>
 
   </CardWidget>
 </template>
 
 <script setup lang="ts">
-import {Entity, EntityDefinition} from "@/types/index.ts";
+import {EntityRecord, EntityDefinition} from "@/types/index.ts";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 
 defineProps<{
   entityDef: EntityDefinition,
-  record: Entity,
+  record: EntityRecord,
   active?: boolean
 
 }>()

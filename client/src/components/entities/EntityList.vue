@@ -1,7 +1,7 @@
 <template>
   <ContainerPadded class="entity-list-wrapper">
     <div class="title-3">
-      {{ state.entityDef.label }}
+      {{ state.entityDef.config.label }}
     </div>
     <CardWidget>
 
@@ -22,7 +22,7 @@
     <Container class="list-container">
       <EntityListItem v-for="item in entityList" :active="activeEntity==item.id" :key="item.id"
                       :entityDef="state.entityDef"
-                      :record="<Entity>item" @select="(value)=>$emit('select',value)"/>
+                      :record="<EntityRecord>item" @select="(value)=>$emit('select',value)"/>
 
     </Container>
     <ModalView v-model="showNewEntityModal">
@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import Container from "@/components/layout/Container.vue";
 import {entityStore} from "@/stores/entityStore.ts";
-import {EntityDefinition, Entity} from "@/types/index.ts";
+import {EntityDefinition, EntityRecord} from "@/types/index.ts";
 import {onBeforeMount, onMounted, reactive, ref} from "vue";
 import {easyApi} from "@/api/index.ts";
 import EntityListItem from "@/views/entity/EntityListItem.vue";
@@ -63,7 +63,7 @@ function closeNewEntityModal() {
 
 
 const showNewEntityModal = ref(false)
-const entityList = ref<Entity[]>([])
+const entityList = ref<EntityRecord[]>([])
 const state = {
   entityDef: {} as EntityDefinition,
   loading: ref(true),
@@ -102,7 +102,7 @@ onBeforeMount(async () => {
   await loadList()
 })
 
-listenForEntity(props.entity, 'list', async (data: Entity) => {
+listenForEntity(props.entity, 'list', async (data: EntityRecord) => {
   let inList = false
   entityList.value.forEach((e, i) => {
     if (e.id === data.id) {

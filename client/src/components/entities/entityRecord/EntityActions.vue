@@ -25,16 +25,18 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import type {Entity, EntityAction, EntityDefinition} from "@/types/index.ts";
+import type {EntityRecord, EntityAction, EntityDefinition} from "@/types/index.ts";
 import {onMounted, ref} from "vue";
 import Button from "@/components/buttons/Button.vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
+import {easyApi} from "@/api/index.ts";
+import {notify} from "@/notify/index.ts";
 
 const props = defineProps<{
   entityDef: EntityDefinition
-  record: Entity
+  record: EntityRecord
 }>()
 
 const actions = ref<EntityAction[]>([])
@@ -43,8 +45,13 @@ onMounted(() => {
   actions.value = props.entityDef.actions
 })
 
-function handleAction(action: EntityAction) {
-  console.log('handle action', action)
+async function handleAction(action: EntityAction) {
+  const response = await easyApi.runEntityAction(props.entityDef.entityId, props.record.id, action.key, {})
+  notify({
+    title: `Action ${action.label || action.key} completed`,
+    message: response,
+    type: 'success'
+  })
 }
 </script>
 

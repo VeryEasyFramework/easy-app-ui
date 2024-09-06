@@ -5,7 +5,7 @@
         <Container>
 
           <div class="title-4">
-            {{ record[entityDef.titleField || 'id'] }}
+            {{ record[entityDef.config.titleField || 'id'] }}
           </div>
           <div class="text-small italic text-primary-bright">
             {{ record.id }}
@@ -34,7 +34,7 @@
 
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import {onBeforeMount, onMounted, ref} from "vue";
-import type {Entity, EntityDefinition} from "@/types/index.ts";
+import type {EntityRecord, EntityDefinition} from "@/types/index.ts";
 import Container from "@/components/layout/Container.vue";
 import LoaderOverlay from "@/components/transitions/LoaderOverlay.vue";
 import {router} from "@/router/index.ts";
@@ -57,7 +57,7 @@ const props = defineProps<{
   id: string
 }>()
 let entityDef: EntityDefinition = {} as EntityDefinition
-const record = ref<Entity>({} as Entity)
+const record = ref<EntityRecord>({} as EntityRecord)
 const state = {
   loaded: ref(false),
   saving: ref(false),
@@ -87,8 +87,8 @@ listenForEntity(props.entity, 'update', async (data) => {
   if (data.id === props.id) {
     record.value = data
     notify({
-      message: `${entityDef.label} ${record.value[entityDef.titleField || 'id']} was updated`,
-      title: `${entityDef.label} Updated`,
+      message: `${entityDef.config.label} ${record.value[entityDef.config.titleField || 'id']} was updated`,
+      title: `${entityDef.config.label} Updated`,
       type: 'success'
     })
   }

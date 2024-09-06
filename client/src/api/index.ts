@@ -1,5 +1,5 @@
 import {GetListResult, ListOptions} from "@/api/apiTypes.ts";
-import {Entity} from "@/types/index.ts";
+import {EntityRecord} from "@/types/index.ts";
 import {notify} from "@/notify/index.ts";
 
 export interface ErrorInfo {
@@ -64,7 +64,7 @@ export class EasyApi {
       return await response.json();
    }
 
-   async getList<T extends Entity = Entity>(entity: string, options?: ListOptions): Promise<GetListResult<T>> {
+   async getList<T extends EntityRecord = EntityRecord>(entity: string, options?: ListOptions): Promise<GetListResult<T>> {
       const fullOptions = {
          ...options,
          entity
@@ -72,20 +72,25 @@ export class EasyApi {
       return await this.call<GetListResult<T>>('entity', "getList", fullOptions);
    }
 
-   async createEntity<T extends Entity = Entity>(entity: string, data: Record<string, any>): Promise<T> {
+   async createEntity<T extends EntityRecord = EntityRecord>(entity: string, data: Record<string, any>): Promise<T> {
       return await this.call<T>('entity', "createEntity", {entity, data});
    }
 
-   async getEntity<T extends Entity = Entity>(entity: string, id: string): Promise<T> {
+   async getEntity<T extends EntityRecord = EntityRecord>(entity: string, id: string): Promise<T> {
       return await this.call<T>('entity', "getEntity", {entity, id});
    }
 
-   async updateEntity<T extends Entity = Entity>(entity: string, id: string, data: Record<string, any>): Promise<T> {
+   async updateEntity<T extends EntityRecord = EntityRecord>(entity: string, id: string, data: Record<string, any>): Promise<T> {
       return await this.call<T>('entity', "updateEntity", {entity, id, data});
    }
 
    async deleteEntity(entity: string, id: string): Promise<void> {
       await this.call('entity', "deleteEntity", {entity, id});
+   }
+
+   async runEntityAction(entity: string, id: string, action: string, data?: Record<string, any>): Promise<any> {
+
+      return await this.call('entity', "runEntityAction", {entity, id, action, data});
    }
 
    private parseError(response: Response, errorContent: string) {
