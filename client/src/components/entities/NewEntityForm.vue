@@ -33,6 +33,7 @@ import {easyApi} from "@/api/index.ts";
 import {onMounted, ref} from "vue";
 import {EasyField} from "@/types/easyField.ts";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
+import {listenForKeyPress} from "@/utils/keyboard.ts";
 
 function close() {
   emit('close')
@@ -48,7 +49,7 @@ async function createEntity() {
   }
 }
 
-let requiredFields = []
+let requiredFields: EasyField[] = []
 
 function validate() {
   let validated = true
@@ -70,8 +71,17 @@ const newEntity = ref<Record<string, any>>({})
 const errors = ref<Record<string, string>>({})
 
 const emit = defineEmits<{
-  close: () => void
+  close: []
 }>()
+
+listenForKeyPress((e) => {
+  if (e.key === 'Escape') {
+    close()
+  }
+  if (e.key === 'Enter') {
+    createEntity()
+  }
+})
 
 onMounted(() => {
   requiredFields = props.entityDef.fields.filter((f: EasyField) => f.required)

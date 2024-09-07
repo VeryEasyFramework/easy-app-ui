@@ -14,6 +14,7 @@
 import ListDetailLayout from "@/components/layout/ListDetailLayout.vue";
 import EntityList from "@/components/entities/EntityList.vue";
 import TransitionRouterView from "@/components/transitions/TransitionRouterView.vue";
+import {listenForKeyPress, onControlN} from "@/utils/keyboard.ts";
 
 const props = defineProps<{
   entity: string
