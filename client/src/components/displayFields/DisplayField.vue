@@ -1,5 +1,5 @@
 <template>
-  <DisplayFieldWrapper :field="field" class="display-field">
+  <DisplayFieldWrapper :field="field" class="display-field" :direction="direction">
     <component :is="componentMap[props.field.fieldType]" v-bind="props"/>
   </DisplayFieldWrapper>
 </template>
@@ -46,6 +46,7 @@ const componentMap: Record<EasyFieldType, Component> = {
 const props = defineProps<{
   value: any;
   field: EasyField;
+  direction?: 'horizontal' | 'vertical';
   fetchField?: EasyField
   fetchValue?: any
 }>()
@@ -54,7 +55,7 @@ const props = defineProps<{
 <style lang="scss">
 
 .display-field {
-  
+
   font-size: var(--text-body-size);
 }
 

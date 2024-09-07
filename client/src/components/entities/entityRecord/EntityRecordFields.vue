@@ -10,13 +10,13 @@
 </template>
 
 <script setup lang="ts">
-import type {Entity, EntityDefinition} from "@/types/index.ts";
+import type {EntityRecord, EntityDefinition} from "@/types/index.ts";
 import EasyInput from "@/components/inputs/EasyInput.vue";
 import DisplayField from "@/components/displayFields/DisplayField.vue";
 import Container from "@/components/layout/Container.vue";
 
 const props = defineProps<{
-  record: Entity,
+  record: EntityRecord,
   entityDef: EntityDefinition
   edit?: boolean
 }>()

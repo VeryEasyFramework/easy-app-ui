@@ -67,5 +67,9 @@ export interface EntityDefinition {
 
 
 export interface EntityRecord {
+   id: string;
+   createdAt: EasyFieldTypeMap["TimestampField"];
+   updatedAt: EasyFieldTypeMap["TimestampField"];
+
    [key: string]: any;
 }

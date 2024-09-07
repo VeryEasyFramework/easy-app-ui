@@ -66,8 +66,22 @@ function padZeros(number: number, length?: number) {
    return number.toString().padStart(length || 2, '0');
 }
 
+export type DateFormat = 'standard' | 'pretty' | 'time' | 'date' | 'datetime' | 'compact'
+
+
+function isToday(date: Date, now?: Date) {
+   const today = now || new Date()
+   return date.getDate() == today.getDate() && date.getMonth() == today.getMonth() && date.getFullYear() == today.getFullYear()
+}
+
+function isYesterday(date: Date, now?: Date) {
+   const yesterday = now || new Date()
+   yesterday.setDate(yesterday.getDate() - 1)
+   return date.getDate() == yesterday.getDate() && date.getMonth() == yesterday.getMonth() && date.getFullYear() == yesterday.getFullYear()
+}
+
 function getPrettyDate(value: string | number, options?: {
-   format?: 'standard' | 'pretty',
+   format?: DateFormat
    showSeconds?: boolean,
 }) {
    const date = new Date(value)
@@ -113,10 +127,52 @@ function getPrettyDate(value: string | number, options?: {
       }
       return response
    }
+   const formatDate = (date: Date) => {
+      const day = padZeros(date.getDate());
+      const month = padZeros(date.getMonth() + 1);
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+   }
+   const formatCompact = (date: Date) => {
+      const now = new Date()
+      const currentYear = now.getFullYear()
+      const currentMonth = now.getMonth()
+      const currentDay = now.getDate()
+
+      const year = date.getFullYear()
+      const month = date.getMonth()
+      const day = date.getDate()
+
+
+      let title = `${padZeros(day)}/${padZeros(month + 1)}`
+
+      if (currentYear != year) {
+         title = `${title}/${year}`
+      }
+      if (isToday(date, now)) {
+         title = date.toLocaleTimeString(undefined, {
+            hour: 'numeric',
+            hour12: false,
+            minute: 'numeric'
+         })
+      }
+      if (isYesterday(date, now)) {
+         title = 'Yesterday'
+      }
+
+      return title
+
+   }
    const format = options?.format || 'standard'
    switch (format) {
       case 'pretty':
          return formatPretty(date)
+      case 'date':
+         return formatDate(date)
+      case 'compact':
+         return formatCompact(date)
+      case 'time':
+         return date.toLocaleTimeString()
       default: {
 
          const day = padZeros(date.getDate());

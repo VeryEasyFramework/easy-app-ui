@@ -93,16 +93,24 @@ h6 {
   padding: 0;
 }
 
+.text-tiny {
+  font-size: 0.5rem;
+}
+
 .text-small {
   font-size: 0.7rem;
 }
 
 .text-medium {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .text-large {
   font-size: 1.5rem;
+}
+
+.text-x-large {
+  font-size: 2rem;
 }
 
 .italic {

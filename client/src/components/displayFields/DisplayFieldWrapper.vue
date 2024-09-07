@@ -1,7 +1,13 @@
 <template>
-  <Container>
+  <Container :class="{
+    horizontal: direction === 'horizontal',
+    vertical: direction === 'vertical'
+  }">
     <div class="label">{{ field.label }}</div>
-    <slot></slot>
+    <div>
+
+      <slot></slot>
+    </div>
   </Container>
 </template>
 
@@ -12,9 +18,20 @@ import Container from "@/components/layout/Container.vue";
 
 const props = defineProps<{
   field: EasyField
+  direction?: 'horizontal' | 'vertical'
 }>()
 </script>
 
-<style scoped>
+<style lang="scss">
 
+.display-field {
+
+  &.horizontal {
+    grid-template-columns: 150px 1fr;
+  }
+
+  &.vertical {
+    grid-template-rows: auto auto;
+  }
+}
 </style>

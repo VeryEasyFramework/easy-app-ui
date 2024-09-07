@@ -1,29 +1,60 @@
 <template>
-  <CardWidget class="full-width entity-list-item" :class="{
+  <CardWidget class="full-width entity-list-item position-relative" :class="{
     active
   }" @click="$emit('select', record.id)">
-    <div class="text-small text-primary bold item-label">
+    <Container class="row shrink">
+      <Container class="col shrink horizontal-align-between ">
 
-      {{ record[entityDef.config.titleField || 'id'] }}
-    </div>
+        <div class="text-small text-primary bold item-label">
 
+          {{ record[entityDef.config.titleField || 'id'] }}
+        </div>
+
+      </Container>
+      <Container class="col shrink">
+        <div v-for="field in fields" :key="field">
+
+          <div class="text-small italic text-primary-bright">
+            {{ record[field] }}
+          </div>
+        </div>
+      </Container>
+    </Container>
+    <Container class="gap-2 pe-2 pt-1 dates col shrink position-absolute top right">
+
+      <Container class="col shrink text-tiny italic overflow-visible">
+        <MaterialIcon icon="add" size="0.6"/>
+        <DisplayTimestamp :value="record.createdAt" format="compact"/>
+      </Container>
+      <Container class="col shrink text-tiny italic overflow-visible">
+        <MaterialIcon icon="update" size="0.6"/>
+
+        <DisplayTimestamp :value="record.updatedAt" format="compact"/>
+      </Container>
+    </Container>
   </CardWidget>
 </template>
 
 <script setup lang="ts">
 import {EntityRecord, EntityDefinition} from "@/types/index.ts";
 import CardWidget from "@/components/widgets/CardWidget.vue";
+import Container from "@/components/layout/Container.vue";
+import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
+import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 
 defineProps<{
   entityDef: EntityDefinition,
   record: EntityRecord,
   active?: boolean
+  fields?: string[]
 
 }>()
 
 const emit = defineEmits<{
   select: [id: string]
 }>()
+
+
 </script>
 
 <style lang="scss">
@@ -39,6 +70,10 @@ const emit = defineEmits<{
   &.active {
     border-inline-start: 0.2rem solid var(--color-secondary);
 
+  }
+
+  .dates {
+    width: max-content;
   }
 }
 </style>

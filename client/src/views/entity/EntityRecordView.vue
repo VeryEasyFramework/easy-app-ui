@@ -15,9 +15,18 @@
                        @edit="(edit)=>editMode=edit"/>
       </Container>
 
-      <CardWidget class="fields">
-        <EntityRecordFields :edit="editMode" :record="record!" :entityDef="entityDef"/>
-      </CardWidget>
+      <ContainerPadded class="fields">
+        <!--        <EntityRecordFields :edit="editMode" :record="record!" :entityDef="entityDef"/>-->
+        <Container class="row shrink ">
+
+          <EntityFieldGroup v-for="group in entityDef.fieldGroups.filter(g=>g.key!=='default')"
+                            :group="group" :record="record"
+                            :key="group.key"/>
+          <EntityFieldGroup v-for="group in entityDef.fieldGroups.filter(g=>g.key ==='default')"
+                            :group="group" :record="record"
+                            :key="group.key"/>
+        </Container>
+      </ContainerPadded>
       <Container class="info">
         <EntityInfo :entityDef="entityDef" :record="record!"/>
       </Container>
@@ -51,6 +60,7 @@ import EntityToolbar from "@/components/entities/entityRecord/EntityToolbar.vue"
 import Loader from "@/components/transitions/Loader.vue";
 import {notify} from "@/notify/index.ts";
 import {listenForEntity} from "@/realtime/index.ts";
+import EntityFieldGroup from "@/components/entities/entityRecord/EntityFieldGroup.vue";
 
 const props = defineProps<{
   entity: string
@@ -122,6 +132,7 @@ onMounted(async () => {
 
   .fields {
     grid-area: fields;
+    grid-template-columns: max-content;;
 
   }
 

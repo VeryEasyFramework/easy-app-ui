@@ -132,4 +132,6 @@ export interface EasyField {
    unique?: boolean;
 
    group?: string;
+
+   hidden?: boolean;
 }

@@ -22,6 +22,7 @@
     <Container class="list-container">
       <EntityListItem v-for="item in entityList" :active="activeEntity==item.id" :key="item.id"
                       :entityDef="state.entityDef"
+                      :fields="state.filteredListFields"
                       :record="<EntityRecord>item" @select="(value)=>$emit('select',value)"/>
 
     </Container>
@@ -69,6 +70,7 @@ const state = {
   loading: ref(true),
   totalCount: ref(0),
   currentCount: ref(0),
+  filteredListFields: [] as string[],
   listOptions: reactive({
     filter: {} as Record<string, string>,
     orderBy: '',
@@ -97,6 +99,8 @@ onBeforeMount(async () => {
     return
   }
   state.entityDef = entity
+
+  state.filteredListFields = entity.listFields.filter(f => !['id', 'createdAt', 'updatedAt', entity.config.titleField].includes(f))
 
 
   await loadList()
@@ -127,7 +131,7 @@ listenForEntity(props.entity, 'list', async (data: EntityRecord) => {
   .list-container {
 
     grid-area: list-container;
-    grid-template-rows: repeat(auto-fill, minmax(50px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(60px, 1fr));
   }
 }
 
