@@ -60,6 +60,14 @@ export class EntityListLoader {
       }
    }
 
+   reset() {
+      this.entityList.value = []
+      this.listInfo.totalCount.value = 0
+      this.listInfo.itemsLoaded.value = 0
+      this.listInfo.currentPage = 1
+      this.listInfo.limitStart = 0
+   }
+
    async loadList() {
       if (!this.isListLoading) {
          this.isListLoading = true
