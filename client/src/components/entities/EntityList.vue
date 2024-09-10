@@ -6,11 +6,7 @@
     <CardWidget>
 
       <Container class="list-header col horizontal-align-between">
-        <div class="position-relative">
-
-          <InputData name="search" placeholder="Search" focus/>
-          <MaterialIcon class="position-absolute right pe-2 center-y" size="1.2" icon="search"/>
-        </div>
+        <EntitySearchInput :entity="entityDef" @search="handleSearch"/>
 
         <div>
 
@@ -68,13 +64,15 @@ import {listenForEntity, realtime} from "@/realtime/index.ts";
 import {listenForKeyPress, onControlN} from "@/utils/keyboard.ts";
 import {EntityListLoader} from "@/components/entities/listLoader.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
+import EntitySearchInput from "@/components/entities/EntitySearchInput.vue";
+import {AdvancedFilter} from "@/api/apiTypes.ts";
 
 const loader = new EntityListLoader()
 const props = defineProps<{
   entity: string,
   activeEntity?: string
 }>()
-const entityDef = ref<EntityDefinition | null>(null)
+let entityDef = ref<EntityDefinition>()
 
 function openNewEntityModal() {
   showNewEntityModal.value = true
@@ -84,6 +82,11 @@ function closeNewEntityModal() {
   showNewEntityModal.value = false
 }
 
+function handleSearch(filter: Record<string, AdvancedFilter>) {
+  loader.listOptions.orFilter = filter
+  loader.loadList()
+
+}
 
 const showNewEntityModal = ref(false)
 

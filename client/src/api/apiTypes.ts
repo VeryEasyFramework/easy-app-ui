@@ -1,5 +1,5 @@
 import {EasyFieldType} from "../types/easyField";
-import {BaseEntity} from "@/types/index.ts";
+import {EntityRecord} from "@/types/index.ts";
 
 export interface DocsActionParam {
    paramName: string;
@@ -8,7 +8,7 @@ export interface DocsActionParam {
 }
 
 
-export interface GetListResult<T extends BaseEntity = BaseEntity> {
+export interface GetListResult<T extends EntityRecord = EntityRecord> {
    rowCount: number;
    totalCount: number;
    data: T[];
@@ -42,13 +42,18 @@ export interface AdvancedFilter {
       | ">"
       | "<"
       | ">="
-      | "<=";
+      | "<="
+      | "="
+      | "starts with"
+      | "ends with";
+
    value: any;
 }
 
 export interface ListOptions {
    columns?: string[];
    filter?: Record<string, string | number | AdvancedFilter>;
+   orFilter?: Record<string, string | number | AdvancedFilter>;
    limit?: number;
    offset?: number;
    orderBy?: string;
