@@ -47,6 +47,8 @@ export interface EntityActionParam {
 export interface EntityActionDefinition {
    label?: string;
    description?: string;
+   private?: boolean;
+   global?: boolean;
 
    action(params?: Record<string, any>): Promise<void> | void;
 

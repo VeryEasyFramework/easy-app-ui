@@ -5,12 +5,16 @@ async function copyToClipboard(text: string) {
 
 function formatString(
    inputString: string,
-   type: "titleCase" | "camelCase" | "snakeCase" | "pascal" | "initials"
+   type: "titleCase" | "camelCase" | "snakeCase" | "pascal" | "initials",
+   fromType?: "camelCase" | "snakeCase" | "pascal" | "initials"
 ) {
    if (!inputString) {
       return "";
    }
    let formattedString = "";
+   if (fromType === "camelCase") {
+      inputString = camelToSnakeCase(inputString);
+   }
    const delimiter = getDelimiter(inputString);
    // format the inputString to title case
    if (type === "titleCase") {
@@ -37,7 +41,13 @@ function formatString(
    return formattedString;
 }
 
+function camelToSnakeCase(inputString: string) {
+   return inputString.replace(/([A-Z])/g, (match) => `_${match.toLowerCase()}`);
+}
+
+
 type delimiter = " " | "-" | "_";
+
 
 function getDelimiter(inputString: string): delimiter {
    const delimiters: delimiter[] = [" ", "-", "_"];

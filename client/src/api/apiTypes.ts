@@ -21,6 +21,7 @@ export interface DocsAction {
    params?: Array<DocsActionParam>;
    response?: string;
    public?: boolean;
+   system?: boolean;
 }
 
 export interface DocsActionGroup {

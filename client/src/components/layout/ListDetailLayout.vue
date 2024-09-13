@@ -1,10 +1,14 @@
 <template>
   <Container class="list-detail" :style="maxWidth?`--max-width:${maxWidth}`:``">
-    <ContainerPadded class="bg border">
+    <ContainerPadded :class="{
+      bg: !noBg
+    }">
 
       <slot name="list">List</slot>
     </ContainerPadded>
-    <ContainerPadded class="bg border">
+    <ContainerPadded :class="{
+      bg: !noBg
+    }">
       <slot name="detail">Detail</slot>
     </ContainerPadded>
   </Container>
@@ -17,6 +21,7 @@ import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 
 defineProps<{
   maxWidth?: string
+  noBg?: boolean
 }>()
 </script>
 

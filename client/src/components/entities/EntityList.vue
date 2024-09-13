@@ -112,12 +112,6 @@ onBeforeMount(async () => {
 })
 
 
-listenForKeyPress((e) => {
-  if (e.key === 'n') {
-    e.preventDefault()
-    openNewEntityModal()
-  }
-})
 listenForEntity(props.entity, 'list', async (data: EntityRecord) => {
   let inList = false
   loader.entityList.value.forEach((e, i) => {

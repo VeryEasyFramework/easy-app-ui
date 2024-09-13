@@ -21,7 +21,6 @@ const props = defineProps<{
 let fields: EasyField[] = []
 const searchableTypes: EasyFieldType[] = ["DataField", "EmailField", "TextField", "IntField", "PhoneField"]
 onMounted(() => {
-  console.log(props.entity)
   if (!props.entity) {
     throw new Error("EntitySearchInput requires an entity prop")
   }

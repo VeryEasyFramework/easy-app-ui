@@ -28,7 +28,7 @@ export class EasyApi {
       const url = `${this.host}?group=${group as string}&action=${action}`;
       const response = await fetch(url, {
          method: "POST",
-         // credentials: "include",
+         credentials: "include",
          headers: {
             "Content-Type": "application/json",
          },

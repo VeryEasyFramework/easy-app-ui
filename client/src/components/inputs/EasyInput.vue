@@ -1,6 +1,6 @@
 <template>
 
-  <component :is="fieldMap[props.field.fieldType]"
+  <component :is="inputFieldMap[props.field.fieldType]"
              v-model="modelValue"
              :field="props.field"
              :required="field.required"
@@ -34,25 +34,8 @@ import InputJSON from "@/components/inputs/InputJSON.vue";
 import InputPhone from "@/components/inputs/InputPhone.vue";
 import InputConnection from "@/components/inputs/InputConnection.vue";
 import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
+import {inputFieldMap} from "@/components/inputs/index.ts";
 
-const fieldMap: Record<EasyFieldType, Component> = {
-  BigIntField: InputBigInt,
-  BooleanField: InputBoolean,
-  ChoicesField: InputChoices,
-  ConnectionField: InputConnection,
-  DateField: InputDate,
-  EmailField: InputEmail,
-  ImageField: InputImage,
-  IntField: InputInt,
-  JSONField: InputJSON,
-  MultiChoiceField: InputMultiChoice,
-  PasswordField: InputPassword,
-  PhoneField: InputPhone,
-  TextField: InputText,
-  DataField: InputData,
-  IDField: InputData,
-  TimestampField: InputTimestamp,
-}
 
 const props = defineProps<{
   modelValue?: any;
