@@ -1,5 +1,6 @@
 <template>
-  <BasicForm :name="action.actionName" @cancel="$emit('cancel')" @submitted="handleSubmit">
+  <BasicForm :columns="action.params.length > 3? 2:1" :name="action.actionName"
+             @cancel="$emit('cancel')" @submitted="handleSubmit">
     <component :is="inputFieldMap[param.type]" v-for="(param,index) in action.params"
                :key="param.paramName"
                v-model="data[param.paramName].value"

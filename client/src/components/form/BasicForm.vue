@@ -27,7 +27,10 @@
         <div>
 
           <slot name="submit">
-            <Button @submit="handleSubmit" type="submit">{{ submitText || 'Submit' }}</Button>
+            <Button @submit="handleSubmit" color="success" type="submit">{{
+                submitText || 'Submit'
+              }}
+            </Button>
           </slot>
         </div>
       </Container>

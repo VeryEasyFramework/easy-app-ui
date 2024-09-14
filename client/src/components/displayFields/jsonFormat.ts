@@ -2,19 +2,15 @@ const colon = '<span class="json-colon">: </span>';
 
 
 export function formatJson(contentRow: string) {
+
    let content = contentRow;
    const keyRegex = /"([^"]+)":/g;
    const valueRegex = /:\s+(.*$)/g;
-   const openBracketRegex = /(^\s+{*|^{)/g;
-   const closeBracketRegex = /(^\s+}*|^})/g;
+
    const keyResult = keyRegex.exec(content);
    if (!keyResult) {
-      if (openBracketRegex.test(content)) {
-         return `<div class="foldable json-row"><span>${content}</span><br>`;
-      }
-      if (closeBracketRegex.test(content)) {
-         return `<div class="json-row"><span>${content}</span></div></div>`;
-      }
+
+
       return `<div class="json-row">${formatValue(content)}</div>`;
    }
    const valueResult = valueRegex.exec(content);
@@ -35,7 +31,6 @@ export function formatJson(contentRow: string) {
 
 
 function formatValue(value: string) {
-
    const stringRegex = /"([^"]+)"/g;
    const numberRegex = /(\d+)/g;
    const booleanRegex = /(true|false)/g;
