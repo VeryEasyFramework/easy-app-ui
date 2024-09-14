@@ -28,7 +28,7 @@ import CardWidget from "@/components/widgets/CardWidget.vue";
 import InputDataField from "@/components/inputs/InputData.vue";
 import InputPasswordField from "@/components/inputs/InputPassword.vue";
 import Button from "@/components/buttons/Button.vue";
-import Form from "@/components/form/Form.vue";
+import Form from "@/components/form/FormBase.vue";
 import Logo from "@/components/Logo.vue";
 
 

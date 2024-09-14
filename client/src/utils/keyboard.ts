@@ -65,6 +65,24 @@ const onControlK = (e: KeyboardEvent, callback: () => void) => {
    }
 };
 
+const onCopy = (e: KeyboardEvent, callback: () => void) => {
+   if (isControlPressed(e)) {
+      if (e.key === "c") {
+         e.preventDefault();
+         callback();
+      }
+   }
+};
+
+const onPaste = (e: KeyboardEvent, callback: () => void) => {
+   if (isControlPressed(e)) {
+      if (e.key === "v") {
+         e.preventDefault();
+         callback();
+      }
+   }
+};
+
 type KeyPressCallback = {
    (e: KeyboardEvent): void;
 }
@@ -98,4 +116,6 @@ export {
    onControlZ,
    onControlK,
    onControlEnter,
+   onCopy,
+   onPaste
 };

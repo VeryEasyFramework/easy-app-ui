@@ -62,7 +62,7 @@ import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import {easyApi} from "@/api/index.ts";
 import {notify} from "@/notify/index.ts";
 import ModalView from "@/components/modal/ModalView.vue";
-import Form from "@/components/form/Form.vue";
+import Form from "@/components/form/FormBase.vue";
 import {inputFieldMap} from "@/components/inputs/index.ts";
 
 const props = defineProps<{

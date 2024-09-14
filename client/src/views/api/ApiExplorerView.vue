@@ -21,7 +21,7 @@
     <template #detail>
       <TransitionFade appear speed="fast">
 
-        <Container v-if="activeGroup" class="action-detail" :key="activeGroup.groupName">
+        <Container v-if="activeGroup" class="group-detail" :key="activeGroup.groupName">
           <div class="title-3">
             {{ formatString(activeGroup?.groupName || "", "titleCase", "camelCase") }}
           </div>
@@ -80,7 +80,7 @@ onMounted(async () => {
 
 }
 
-.action-detail {
+.group-detail {
   grid-template-rows: auto 1fr;
 }
 </style>

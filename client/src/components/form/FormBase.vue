@@ -1,5 +1,6 @@
 <template>
-  <form class="form" :name="name" @submit.stop.prevent="$emit('submitted')">
+  <form class="form" :name="name"
+        @submit.stop.prevent="$emit('submitted')">
     <slot>
       Form
     </slot>
@@ -13,6 +14,8 @@ const emits = defineEmits(['submitted'])
 const props = defineProps<{
   name?: string
 }>()
+
+
 </script>
 
 <style scoped>

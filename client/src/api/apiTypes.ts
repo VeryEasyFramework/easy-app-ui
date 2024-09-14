@@ -18,7 +18,7 @@ export interface GetListResult<T extends EntityRecord = EntityRecord> {
 export interface DocsAction {
    actionName: string;
    description: string;
-   params?: Array<DocsActionParam>;
+   params: Array<DocsActionParam>;
    response?: string;
    public?: boolean;
    system?: boolean;
