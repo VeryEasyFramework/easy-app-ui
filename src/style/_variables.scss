@@ -1,0 +1,56 @@
+$font-family: 'Nunito' !default;
+$font-family-title: 'Nunito' !default;
+$font-size: 16px !default;
+$font-size-mobile: 14px !default;
+
+$border-radius: 0.5rem !default;
+
+$tint: #5d73ff !default;
+
+$primary: #1f4659 !default;
+$secondary: #ff8a65 !default;
+$accent: #ff3e6c !default;
+$success: #75e5a9 !default;
+$error: #fc8172 !default;
+$warning: #ffbc1f !default;
+$info: #9985c0 !default;
+$body-bg: mix($tint, #cccccc, 5%) !default;
+$bg-color: mix(white, $body-bg, 50%) !default;
+$disabled: #c4c4c4 !default;
+$change-percent: 10% !default;
+$border-color: #c4c4c4 !default;
+$text: #273f49 !default;
+$title: #273f49 !default;
+$shadow-color: rgba(0, 0, 0, 0.1) !default;
+$widget-bg-color: mix(white, $bg-color, 50%) !default;
+$input-bg: $bg-color !default;
+$white: #ffffff !default;
+$dark: #000000 !default;
+
+$primary-dark: #215267 !default;
+$secondary-dark: #ffbd93 !default;
+$accent-dark: #d73eb4 !default;
+$success-dark: #1aab72 !default;
+$error-dark: #d25454 !default;
+$warning-dark: #f6b842 !default;
+$info-dark: #7166de !default;
+$white-dark: #000000 !default;
+$dark-dark: #ffffff !default;
+$body-bg-dark: mix($tint, #1f1f1f, 5%) !default;
+$bg-color-dark: mix(white, $body-bg-dark, 5%) !default;
+$disabled-dark: #c4c4c4 !default;
+$change-percent-dark: 10% !default;
+$input-bg-dark: $bg-color-dark !default;
+$border-color-dark: mix(white, $bg-color-dark, 10%) !default;
+$text-dark: rgba(255, 255, 255, 0.87) !default;
+$title-dark: rgba(255, 255, 255, 0.87) !default;
+$shadow-color-dark: rgba(0, 0, 0, 0.4) !default;
+$widget-bg-color-dark: lighten($bg-color-dark, $change-percent-dark) !default;
+
+
+$color1: $primary !default;
+$color2: $secondary !default;
+$color3: $accent !default;
+$color4: $info !default;
+$color5: $warning !default;
+$color6: $error !default;

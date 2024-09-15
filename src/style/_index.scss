@@ -1,0 +1,40 @@
+@import "customize";
+@import "variables";
+@import "layout";
+@import "color";
+@import "typography";
+@import "input";
+@import "animation";
+@import "widgets";
+@import "buttons";
+@import "grid";
+@import "cursor";
+
+:root {
+  --border-radius: #{$border-radius};
+
+}
+
+@media (max-width: 768px) {
+  :root {
+    --font-size: var(--font-size-mobile);
+  }
+}
+
+
+html,
+body,
+[name="app-root"] {
+  background: var(--color-body-bg);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+
+
+

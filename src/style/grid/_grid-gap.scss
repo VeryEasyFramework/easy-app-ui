@@ -1,0 +1,39 @@
+$gaps: (
+        0: 0,
+        1: 0.25rem,
+        2: 0.5rem,
+        3: 1rem,
+        4: 1.5rem,
+        5: 3rem
+);
+
+:root {
+  --grid-gap: var(--border-radius)
+}
+
+.grid {
+  row-gap: var(--grid-gap);
+  column-gap: var(--grid-gap);
+
+  &.gap {
+    row-gap: var(--grid-gap);
+    column-gap: var(--grid-gap);
+  }
+
+  @each $key, $value in $gaps {
+    &.gap-#{$key} {
+      row-gap: $value;
+      column-gap: $value;
+    }
+
+    &.row-gap-#{$key} {
+      row-gap: $value;
+    }
+
+    &.column-gap-#{$key} {
+      column-gap: $value;
+    }
+  }
+
+
+}

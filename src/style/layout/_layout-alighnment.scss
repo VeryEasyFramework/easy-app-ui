@@ -1,0 +1,17 @@
+$content: (
+        start: start,
+        end: end,
+        center: center,
+        between: space-between,
+        around: space-around,
+);
+
+
+@each $key, $value in $content {
+  .align-content-#{$key} {
+    align-content: $value;
+  }
+  .justify-content-#{$key} {
+    justify-content: $value;
+  }
+}

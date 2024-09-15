@@ -1,0 +1,34 @@
+$spacers: (
+        0: 0 !important,
+        1: 0.25rem !important,
+        2: 0.5rem !important,
+        3: 1rem !important,
+        4: 1.5rem !important,
+        5: 3rem !important,
+);
+
+$sides: (
+        t: top,
+        b: bottom,
+        s: inline-start,
+        e: inline-end,
+        x: inline,
+        y: block,
+);
+
+@each $key, $value in $spacers {
+  .p-#{$key} {
+    padding: $value;
+  }
+  .m-#{$key} {
+    margin: $value;
+  }
+  @each $side, $direction in $sides {
+    .p#{$side}-#{$key} {
+      padding-#{$direction}: $value;
+    }
+    .m#{$side}-#{$key} {
+      margin-#{$direction}: $value;
+    }
+  }
+}

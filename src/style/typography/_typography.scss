@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=block');
+
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=block');
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=block');
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=block');
+@import "../variables";
+
+:root {
+  --font-size: #{$font-size};
+  --font-size-mobile: #{$font-size-mobile};
+  --font-family: #{$font-family};
+  --font-family-title: #{$font-family-title};
+  --text-body-size: 0.875rem;
+  font-size: var(--font-size);
+  font-family: var(--font-family), sans-serif;
+  color: var(--text);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  padding: 0;
+  margin: 0;
+  line-height: 1.1;
+  font-size: var(--text-body-size);
+}
+
+.text-start {
+  text-align: left;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.text-decoration-underline {
+  text-decoration: underline;
+}
+
+.text-decoration-line-through {
+  text-decoration: line-through;
+}
+
+.text-decoration-underline-line-through {
+  text-decoration: underline line-through;
+}
+
+.text-wrap {
+  white-space: normal;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+.text-tiny {
+  font-size: 0.5rem;
+}
+
+.text-small {
+  font-size: 0.7rem;
+}
+
+.text-medium {
+  font-size: 0.9rem;
+}
+
+.text-large {
+  font-size: 1.5rem;
+}
+
+.text-x-large {
+  font-size: 2rem;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.bolder {
+  font-weight: 700;
+}
+
+small {
+  font-size: 0.7rem;
+}
+
+.label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-title-bright);
+  font-family: var(--font-family-title), sans-serif;
+}
+
+$title-sizes: (
+        1: 2rem,
+        2: 1.75rem,
+        3: 1.5rem,
+        4: 1.25rem,
+        5: 1rem,
+        6: 0.75rem
+);
+
+@each $key, $value in $title-sizes {
+  .h#{$key} {
+    font-size: $value;
+  }
+  h#{$key} {
+    font-size: $value;
+  }
+  .title-#{$key} {
+    font-size: $value;
+    font-weight: 700;
+    color: var(--color-title);
+    font-family: var(--font-family-title), sans-serif;
+  }
+}
+
+:root {
+  @each $key, $value in $title-sizes {
+    --h#{$key}: #{$value};
+  }
+}
+
+

@@ -1,0 +1,44 @@
+.disable-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+$cursors: (
+        auto,
+        alias,
+        all-scroll,
+        cell,
+        context-menu,
+        copy,
+        crosshair,
+        default,
+        grab,
+        grabbing,
+        help,
+        move,
+        no-drop,
+        none,
+        not-allowed,
+        pointer,
+        progress,
+        row-resize,
+        text,
+);
+
+$resizes: (e, ew, n, ne, ns, nw, s, se, sw, w, row, col, nesw, nwse);
+
+@each $value in $cursors {
+  .cursor-#{$value} {
+    cursor: $value;
+  }
+}
+
+@each $value in $resizes {
+  .cursor-resize-#{$value} {
+    cursor: #{$value}-resize;
+  }
+}
