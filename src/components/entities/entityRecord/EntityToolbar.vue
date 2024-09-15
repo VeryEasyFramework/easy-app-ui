@@ -24,9 +24,9 @@ import {listenForKeyPress, onControlS} from "@/utils/keyboard.ts";
 import TransitionFade from "@/components/transitions/TransitionFade.vue";
 
 const emit = defineEmits<{
-  edit: (editMode: boolean) => void
-  save: () => void
-  delete: () => void
+  (e: 'edit', editMode: boolean): void
+  (e: 'save'): void
+  (e: 'delete'): void
 }>()
 
 const props = defineProps<{

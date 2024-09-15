@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
-import {EntityDefinition, UserSession} from "../types/index";
+import {EntityDefinition, UserSession} from "@/types/index";
 
-import {notify} from "../notify/index";
+import {notify} from "@/notify/index";
 import {easyApi} from "@/api/index.ts";
 import {entityStore} from "@/stores/entityStore.ts";
 
@@ -77,7 +77,7 @@ export const useAppStore = defineStore('app', {
             return;
          }
          // this.session = response;
-         this.isAuthenticated = this.session.session_id != null;
+         this.isAuthenticated = this.session.sessionId != null;
          if (this.isAuthenticated) {
             await this.boot();
             notify({

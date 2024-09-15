@@ -12,13 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import {Entity, EntityDefinition} from "@/types/index.ts";
+import {EntityRecord, EntityDefinition} from "@/types/index.ts";
 import Container from "@/components/layout/Container.vue";
 import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
 
 const props = defineProps<{
   entityDef: EntityDefinition
-  record: Entity
+  record: EntityRecord
 }>()
 </script>
 

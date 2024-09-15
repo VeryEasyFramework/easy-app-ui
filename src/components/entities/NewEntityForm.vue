@@ -1,7 +1,7 @@
 <template>
   <ContainerPadded class="row-gap-4">
     <div class="title-3">
-      New {{ entityDef.label }}
+      New {{ entityDef.config.label }}
     </div>
     <form @submit.prevent>
 

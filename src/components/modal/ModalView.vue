@@ -40,9 +40,10 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  'update:modelValue': (value: boolean) => void
-  'close': () => void
+  (e: 'update:modelValue', value: boolean): void
+  (e: 'close'): void
 }>()
+
 
 const show = computed({
   get: () => {

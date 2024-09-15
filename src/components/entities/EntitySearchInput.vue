@@ -29,10 +29,11 @@ onMounted(() => {
 })
 
 const emit = defineEmits<{
-  (event: "search"): (filter: Record<string, AdvancedFilter>) => void
+  (e: 'search', filter: Record<string, any>): void
 }>()
 
-function handleInput(event: InputEvent) {
+
+function handleInput(event: Event) {
   const value = (event.target as HTMLInputElement).value
   const filter: Record<string, AdvancedFilter> = {}
   fields.forEach(f => {
