@@ -2,7 +2,7 @@ import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 import {useAppStore} from "@/stores/appStore.ts";
 
 export const router = createRouter({
-   history: createWebHashHistory(),
+   history: createWebHistory(),
 
    routes: [{
       name: "home",

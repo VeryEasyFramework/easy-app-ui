@@ -38,6 +38,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "login/**/*.ts",
+    "login/**/*.vue",
     "vite.config.ts"
   ]
 }
