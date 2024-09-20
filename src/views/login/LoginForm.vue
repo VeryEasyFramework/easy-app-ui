@@ -33,27 +33,26 @@ import Container from "@/components/layout/Container.vue";
 import InputDataField from "@/components/inputs/InputData.vue";
 import InputPasswordField from "@/components/inputs/InputPassword.vue";
 import Button from "@/components/buttons/Button.vue";
-import Form from "@/components/form/Form.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
-import {easyApi} from "@/api/index.ts";
 import FormBase from "@/components/form/FormBase.vue";
+import {reactive} from "vue";
+import {useAppStore} from "@/stores/appStore.ts";
+import {router} from "@/router/index.ts";
 
-
-const credentials = {
+const appStore = useAppStore()
+const credentials = reactive({
   email: '',
   password: ''
-}
+})
 
 async function handleSubmit() {
   if (!credentials.email || !credentials.password) {
     return
   }
-  console.log('submitted')
-  const result = await easyApi.login(credentials)
-  if ('sessionId' in result) {
-    window.location.href = '/v2'
+  await appStore.login(credentials.email, credentials.password)
+  if (appStore.isAuthenticated) {
+    await router.push({name: 'home'})
   }
-  console.log(result)
 }
 </script>
 

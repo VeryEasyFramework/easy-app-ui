@@ -1,13 +1,57 @@
 <template>
-  <div>
-    home view
-  </div>
+  <RootLayout>
+    <SidebarNavLayout>
+      <template #sidebar>
+        <NavigatorSide/>
+      </template>
+      <template #content>
+
+        <TransitionRouterView/>
+      </template>
+    </SidebarNavLayout>
+    <LoaderOverlay :loaded="appStore.booted"/>
+  </RootLayout>
 </template>
 
 <script setup lang="ts">
 
+import {onMounted} from "vue";
+import {useAppStore} from "@/stores/appStore.ts";
+import RootLayout from "@/components/layout/RootLayout.vue";
+import ContainerPadded from "@/components/layout/ContainerPadded.vue";
+import TransitionRouterView from "@/components/transitions/TransitionRouterView.vue";
+import {notify} from "@/notify/index.ts";
+import LoaderOverlay from "@/components/transitions/LoaderOverlay.vue";
+import SidebarNavLayout from "@/components/layout/SidebarNavLayout.vue";
+import NavigatorSide from "@/components/navigation/NavigatorSide.vue";
+import {realtime} from "@/realtime/index.ts";
+
+
+const appStore = useAppStore()
+onMounted(async () => {
+  if (import.meta.env.VITE_DEBUG) {
+    document.title = 'DEBUG - ' + document.title
+    document.body.classList.add('debug')
+    notify({
+      title: 'Dev Mode',
+      message: 'Debug is enabled',
+      type: 'warning'
+    })
+  }
+  if (import.meta.env.VITE_GRID_DEBUG) {
+    document.body.classList.add('grid-debug')
+    notify({
+      title: 'Dev Mode',
+      message: 'Grid Debug is enabled',
+      type: 'warning'
+    })
+  }
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  realtime.connect()
+
+
+})
+
 </script>
 
-<style scoped>
 
-</style>

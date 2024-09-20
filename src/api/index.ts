@@ -1,5 +1,5 @@
 import {GetListResult, ListOptions} from "@/api/apiTypes.ts";
-import {EntityRecord} from "@/types/index.ts";
+import {EntityRecord, UserSession} from "@/types/index.ts";
 import {notify} from "@/notify/index.ts";
 
 export interface ErrorInfo {
@@ -91,6 +91,19 @@ export class EasyApi {
    async runEntityAction(entity: string, id: string, action: string, data?: Record<string, any>): Promise<any> {
 
       return await this.call('entity', "runEntityAction", {entity, id, action, data});
+   }
+
+   async login(email: string, password: string): Promise<UserSession> {
+      return await this.call('auth', "login", {email, password});
+   }
+
+
+   async logout(): Promise<void> {
+      await this.call('auth', "logout");
+   }
+
+   async authCheck(): Promise<UserSession> {
+      return await this.call('auth', "authCheck");
    }
 
    private parseError(response: Response, errorContent: string) {

@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {EntityDefinition, UserSession} from "@/types/index";
+import {UserSession} from "@/types/index";
 
 import {notify} from "@/notify/index";
 import {easyApi} from "@/api/index.ts";
@@ -21,11 +21,11 @@ export const useAppStore = defineStore('app', {
       async init() {
          if (this.initialized) return;
          this.initTheme()
-         // const response = await easyApi.call("auth", "check");
-         // this.isAuthenticated = this.session.session_id != null;
-         // if (this.isAuthenticated) {
-         await this.boot();
-         // }
+         this.session = await easyApi.authCheck();
+         this.isAuthenticated = this.session.sessionId != null;
+         if (this.isAuthenticated) {
+            await this.boot();
+         }
          this.initialized = true;
       },
       async boot() {
@@ -63,12 +63,9 @@ export const useAppStore = defineStore('app', {
          }
          this.setTheme(this.theme);
       },
-      async login(user: string, password: string) {
-         const response = await easyApi.call("auth", "login", {
-            user,
-            password
-         });
-         if (response.session_id == null) {
+      async login(email: string, password: string) {
+         const response = await easyApi.login(email, password);
+         if (response.sessionId == null) {
             notify({
                message: "Login failed",
                title: "Login failed",
@@ -76,7 +73,7 @@ export const useAppStore = defineStore('app', {
             });
             return;
          }
-         // this.session = response;
+         this.session = response;
          this.isAuthenticated = this.session.sessionId != null;
          if (this.isAuthenticated) {
             await this.boot();
