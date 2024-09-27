@@ -1,12 +1,12 @@
 <template>
   <Container class="list-detail" :style="maxWidth?`--max-width:${maxWidth}`:``">
-    <ContainerPadded :class="{
+    <ContainerPadded class="list" :class="{
       bg: !noBg
     }">
 
       <slot name="list">List</slot>
     </ContainerPadded>
-    <ContainerPadded :class="{
+    <ContainerPadded class="detail" :class="{
       bg: !noBg
     }">
       <slot name="detail">Detail</slot>
@@ -29,5 +29,8 @@ defineProps<{
 .list-detail {
   --max-width: 1fr;
   grid-template-columns: minmax(min-content, var(--max-width) ) 1fr;
+  .list, .detail {
+    border-radius: var(--border-radius);
+  }
 }
 </style>
