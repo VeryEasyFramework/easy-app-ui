@@ -33,6 +33,12 @@
       <Container class="actions">
         <EntityActions :entityDef="entityDef" :record="record!"/>
       </Container>
+      <Container class="editLog">
+        <CardWidget>
+
+        <EntityEditLog :edit-log="recordInfo.editLog"/>
+        </CardWidget>
+      </Container>
 
       <LoaderOverlay :loaded="!state.saving.value"/>
     </ContainerPadded>
@@ -61,6 +67,8 @@ import Loader from "@/components/transitions/Loader.vue";
 import {notify} from "@/notify/index.ts";
 import {listenForEntity} from "@/realtime/index.ts";
 import EntityFieldGroup from "@/components/entities/entityRecord/EntityFieldGroup.vue";
+import EntityEditLog from "@/components/entities/entityRecord/EntityEditLog.vue";
+import {RecordInfo} from "@/api/apiTypes.ts";
 
 const props = defineProps<{
   entity: string
@@ -68,6 +76,9 @@ const props = defineProps<{
 }>()
 let entityDef: EntityDefinition = {} as EntityDefinition
 const record = ref<EntityRecord>({} as EntityRecord)
+const recordInfo = ref<RecordInfo>({
+  editLog: [],
+})
 const state = {
   loaded: ref(false),
   saving: ref(false),
@@ -80,6 +91,10 @@ async function loadRecord() {
 
   record.value = await easyApi.getEntity(props.entity, props.id)
   state.loaded.value = true
+}
+
+async function loadRecordInfo(){
+  recordInfo.value = await easyApi.getRecordInfo(props.entity, props.id)
 }
 
 async function saveRecord() {
@@ -120,6 +135,7 @@ onBeforeMount(() => {
 onMounted(async () => {
   // load record
   await loadRecord()
+  await loadRecordInfo()
 })
 </script>
 
@@ -127,8 +143,13 @@ onMounted(async () => {
 
 .entity-record-grid {
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: max-content max-content 1fr;
-  grid-template-areas: "top-bar top-bar" "fields info" "fields actions";
+  grid-template-rows: max-content max-content  1fr max-content;
+  grid-template-areas:
+  "top-bar top-bar"
+  "fields info"
+  "fields actions"
+  "editLog editLog"
+;
 
   .fields {
     grid-area: fields;
@@ -149,6 +170,9 @@ onMounted(async () => {
 
   .actions {
     grid-area: actions;
+  }
+  .editLog {
+    grid-area: editLog;
   }
 }
 

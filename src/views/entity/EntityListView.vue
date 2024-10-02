@@ -1,8 +1,8 @@
 <template>
-  <ListDetailLayout maxWidth="400px">
+  <ListDetailLayout maxWidth="300px">
     <template #list>
       <EntityList :entity="entity" :activeEntity="id"
-                  @select="(value)=>$router.push(`/entity/${entity}/${value}`)"/>
+                  @select="(value)=>$router.push(`/entity/${entity}/${value}`)" :key="entity"/>
     </template>
     <template #detail>
       <TransitionRouterView :key="props.id"/>

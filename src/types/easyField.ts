@@ -14,7 +14,7 @@ export interface EasyFieldTypeMap {
    JSONField: Record<string, any>;
    PhoneField: string;
    ConnectionField: string;
-   TimestampField: Date;
+   TimestampField: number;
 }
 
 export  type EasyFieldType = keyof EasyFieldTypeMap;

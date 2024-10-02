@@ -80,6 +80,10 @@ export class EasyApi {
       return await this.call<T>('entity', "getEntity", {entity, id});
    }
 
+   async getRecordInfo(entity:string,id:string):Promise<any>{
+      return await this.call('entity','getRecordInfo',{entity,id})
+   }
+
    async updateEntity<T extends EntityRecord = EntityRecord>(entity: string, id: string, data: Record<string, any>): Promise<T> {
       return await this.call<T>('entity', "updateEntity", {entity, id, data});
    }
