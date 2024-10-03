@@ -1,18 +1,93 @@
 <template>
-  <div>
-    {{ props.value }}
+  <div class="choices-field">
+    <div :class="{
+    [color]: true
+  }">
+
+      {{ label }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import {EasyField} from "@/types/easyField.ts";
+import {computed} from "vue";
 
 const props = defineProps<{
   value: any;
   field?: EasyField
 }>()
+const color = computed(() => {
+
+  return props.field?.choices?.find((choice) => choice.key == props.value)?.color || ''
+});
+const label = computed(() => {
+  return props.field?.choices?.find((choice) => choice.key == props.value)?.label || props.value
+})
 </script>
 
-<style scoped>
+<style lang="scss">
+@import "@/style/customize";
+@import "@/style/variables";
+
+.choices-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  & > div {
+
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+    line-height: 1.5;
+    font-size: 0.7rem;
+    border-radius: var(--border-radius);
+    color: white;
+    font-weight: bold;
+
+    &.primary {
+      background-color: var(--color-primary-brighter);
+      color: var(--color-primary-darker);
+    }
+
+    &.secondary {
+      background-color: var(--color-secondary-brighter);
+      color: var(--color-secondary-darker);
+    }
+
+    &.success {
+      background-color: var(--color-success-brighter);
+      color: var(--color-success-darker);
+    }
+
+    &.error {
+      background-color: var(--color-error-brighter);
+      color: var(--color-error-darker);
+    }
+
+    &.warning {
+      background-color: var(--color-warning-brighter);
+      color: var(--color-warning-darker);
+    }
+
+    &.info {
+      background-color: var(--color-info-brighter);
+      color: var(--color-info-darker);
+    }
+
+    &.accent {
+      background-color: var(--color-accent-brighter);
+      color: var(--color-accent-darker);
+    }
+
+    &.muted {
+      background-color: #979797;
+      color: #dfdfdf;
+    }
+  }
+
+}
 
 </style>

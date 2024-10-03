@@ -72,16 +72,16 @@ export interface EntityDefinition {
 
 export interface EntityRecord {
    id: string;
-   createdAt: EasyFieldTypeMap["TimestampField"];
-   updatedAt: EasyFieldTypeMap["TimestampField"];
+   createdAt: EasyFieldTypeMap["TimeStampField"];
+   updatedAt: EasyFieldTypeMap["TimeStampField"];
 
    [key: string]: any;
 }
 
 export interface UserSession {
    sessionId: string;
-    userId: string;
-    email: string;
-    userName: string;
-    systemAdmin: boolean;
+   userId: string;
+   email: string;
+   userName: string;
+   systemAdmin: boolean;
 }

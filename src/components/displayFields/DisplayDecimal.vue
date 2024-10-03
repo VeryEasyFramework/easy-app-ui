@@ -1,5 +1,5 @@
 <template>
-  <div class="int-field">
+  <div class="decimal-field">
     {{ formattedValue }}
   </div>
 </template>
@@ -17,13 +17,14 @@ const formattedValue = computed(() => {
   if (props.value == null) {
     return ''
   }
-  return props.value
+  return parseFloat(props.value).toFixed(2)
 })
 </script>
 
 <style lang="scss">
-.int-field {
+.decimal-field {
   font-family: var(--mono-font), monospace;
   color: var(--text-color);
 }
+
 </style>

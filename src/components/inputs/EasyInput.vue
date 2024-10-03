@@ -1,6 +1,6 @@
 <template>
 
-  <component :is="inputFieldMap[props.field.fieldType]"
+  <component :is="fieldMap[props.field.fieldType]"
              v-model="modelValue"
              :field="props.field"
              :required="field.required"
@@ -17,24 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import {EasyField, EasyFieldType} from "@/types/easyField.ts";
-import InputPassword from "@/components/inputs/InputPassword.vue";
-import InputData from "@/components/inputs/InputData.vue";
-import {type Component, computed} from "vue";
-import InputInt from "@/components/inputs/InputInt.vue";
-import InputChoices from "@/components/inputs/InputChoices.vue";
-import InputText from "@/components/inputs/InputText.vue";
-import InputDate from "@/components/inputs/InputDate.vue";
-import InputBigInt from "@/components/inputs/InputBigInt.vue";
-import InputBoolean from "@/components/inputs/InputBoolean.vue";
-import InputMultiChoice from "@/components/inputs/InputMultiChoice.vue";
-import InputEmail from "@/components/inputs/InputEmail.vue";
-import InputImage from "@/components/inputs/InputImage.vue";
-import InputJSON from "@/components/inputs/InputJSON.vue";
-import InputPhone from "@/components/inputs/InputPhone.vue";
-import InputConnection from "@/components/inputs/InputConnection.vue";
-import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
-import {inputFieldMap} from "@/components/inputs/index.ts";
+import type {EasyField} from "@/types/easyField.ts";
+import {computed} from "vue";
+import {fieldMap} from "@/components/inputs/index.ts";
 
 
 const props = defineProps<{
@@ -46,16 +31,6 @@ const props = defineProps<{
   noLabel?: boolean
 }>()
 
-const required = computed(() => {
-  if ("required" in props.field) {
-    return props.field.required
-  }
-})
-const readOnly = computed(() => {
-  if ("readOnly" in props.field) {
-    return props.field.readOnly
-  }
-})
 
 const emit = defineEmits(["update:modelValue"])
 const modelValue = computed({

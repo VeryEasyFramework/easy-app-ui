@@ -66,6 +66,7 @@ import {EntityListLoader} from "@/components/entities/listLoader.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
 import EntitySearchInput from "@/components/entities/EntitySearchInput.vue";
 import {AdvancedFilter} from "@/api/apiTypes.ts";
+import {EasyField} from "@/types/easyField.ts";
 
 const loader = new EntityListLoader()
 const props = defineProps<{
@@ -91,7 +92,7 @@ function handleSearch(filter: Record<string, AdvancedFilter>) {
 const showNewEntityModal = ref(false)
 
 
-let filteredListFields: string[] = []
+let filteredListFields: EasyField[] = []
 const emit = defineEmits<{
   select: [id: string]
 }>()
@@ -106,8 +107,13 @@ onBeforeMount(async () => {
   }
   entityDef.value = entity
   loader.entity = entity
-
-  filteredListFields = entity.listFields.filter(f => !['id', 'createdAt', 'updatedAt', entity.config.titleField].includes(f))
+  const connectionTitleFields = entity.fields.filter(f => f.connectionTitleField).map(f => f.connectionTitleField)
+  filteredListFields = entity.fields.filter(f => {
+    if (['id', 'createdAt', 'updatedAt', entity.config.titleField].includes(f.key)) {
+      return false
+    }
+    return !connectionTitleFields.includes(f.key)
+  })
 
 })
 listenForList(props.entity, async (action, record) => {

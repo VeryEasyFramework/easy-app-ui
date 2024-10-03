@@ -5,9 +5,10 @@
       :required="required"
       :read-only="readOnly">
     <input
+        maxlength="255"
         :name="name"
         ref="input"
-        type="date"
+        type="datetime-local"
         v-model="inputValue"
         :disabled="readOnly"/>
   </InputWrapper>

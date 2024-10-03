@@ -30,7 +30,7 @@
                class="position-absolute w-100 h-100 top left row shrink ">
       <MaterialIcon class="cursor-pointer horizontal-align-self-end" icon="close"
                     @click="showLog=false"/>
-      <DisplayJSON :value="currentLog"/>
+      <DisplayJSON :value="currentLog?.editData"/>
     </Container>
   </Container>
 </template>

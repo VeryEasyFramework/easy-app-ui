@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-field">
     {{ props.value }}
   </div>
 </template>
@@ -13,6 +13,13 @@ const props = defineProps<{
 }>()
 </script>
 
-<style scoped>
+<style lang="scss">
+.text-field {
+  white-space: break-spaces;
+  word-wrap: break-word;
+  word-break: break-all;
+  max-width: 100px;
+  height: max-content;
 
+}
 </style>

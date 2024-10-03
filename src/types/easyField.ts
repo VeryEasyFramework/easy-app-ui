@@ -3,7 +3,9 @@ export interface EasyFieldTypeMap {
    DataField: string;
    IntField: number;
    BigIntField: bigint;
+   DecimalField: number;
    DateField: Date;
+   TimeStampField: number;
    BooleanField: boolean;
    PasswordField: string;
    ChoicesField: string;
@@ -14,7 +16,6 @@ export interface EasyFieldTypeMap {
    JSONField: Record<string, any>;
    PhoneField: string;
    ConnectionField: string;
-   TimestampField: number;
 }
 
 export  type EasyFieldType = keyof EasyFieldTypeMap;
@@ -26,6 +27,7 @@ export  type EasyFieldType = keyof EasyFieldTypeMap;
 export interface Choice {
    key: string;
    label: string;
+   color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info' | 'accent' | 'muted';
 }
 
 /**

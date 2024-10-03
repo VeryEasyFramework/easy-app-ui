@@ -29,7 +29,7 @@
             <Container>
 
               <div v-for="param in currentAction.params" :key="param.key">
-                <component :is="inputFieldMap[param.fieldType]" :label="param.key"
+                <component :is="fieldMap[param.fieldType]" :label="param.key"
                            :required="param.required"
                            :error="currentActionParams[param.key].error"
                            v-model="currentActionParams[param.key].value"></component>
@@ -63,7 +63,7 @@ import {easyApi} from "@/api/index.ts";
 import {notify} from "@/notify/index.ts";
 import ModalView from "@/components/modal/ModalView.vue";
 import Form from "@/components/form/FormBase.vue";
-import {inputFieldMap} from "@/components/inputs/index.ts";
+import {fieldMap} from "@/components/inputs/index.ts";
 
 const props = defineProps<{
   entityDef: EntityDefinition

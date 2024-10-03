@@ -5,11 +5,9 @@
       :required="required"
       :read-only="readOnly">
     <input
-        maxlength="140"
         :name="name"
         ref="input"
-        :placeholder="placeholder"
-        type="password"
+        type="number"
         v-model="inputValue"
         :disabled="readOnly"/>
   </InputWrapper>
@@ -26,7 +24,6 @@ const props = defineProps<{
   error?: string;
   name?: string;
   required?: boolean;
-  placeholder?: string;
   readOnly?: boolean;
   focus?: boolean;
 }>();

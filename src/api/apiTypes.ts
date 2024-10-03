@@ -29,6 +29,13 @@ export interface DocsActionGroup {
    actions: Array<DocsAction>;
 }
 
+export interface GetListResult<T extends EntityRecord = EntityRecord> {
+   rowCount: number;
+   totalCount: number;
+   data: T[];
+   columns: string[];
+}
+
 export interface EditLog extends EntityRecord {
    entity: string;
    recordId: string;
@@ -46,27 +53,35 @@ export interface RecordInfo {
 export interface AdvancedFilter {
    op:
       | "contains"
-      | "not contains"
-      | "in list"
-      | "not in list"
+      | "notContains"
+      | "inList"
+      | "notInList"
       | "between"
-      | "not between"
+      | "notBetween"
       | "is"
-      | "is not"
+      | "isNot"
+      | "isEmpty"
+      | "isNotEmpty"
+      | "startsWith"
+      | "endsWith"
+      | "greaterThan"
+      | "lessThan"
+      | "greaterThanOrEqual"
+      | "lessThanOrEqual"
+      | "equal"
       | ">"
       | "<"
       | ">="
       | "<="
       | "="
-      | "starts with"
-      | "ends with";
+      | "!=";
 
    value: any;
 }
 
 export interface ListOptions {
    columns?: string[];
-   filter?: Record<string, string | number | AdvancedFilter>;
+   filter?: Record<string, AdvancedFilter>;
    orFilter?: Record<string, string | number | AdvancedFilter>;
    limit?: number;
    offset?: number;

@@ -14,7 +14,8 @@ import DisplayImage from "@/components/displayFields/DisplayImage.vue";
 import DisplayJSON from "@/components/displayFields/DisplayJSON.vue";
 import DisplayPhone from "@/components/displayFields/DisplayPhone.vue";
 import DisplayConnection from "@/components/displayFields/DisplayConnection.vue";
-import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
+import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
+import DisplayDecimal from "@/components/displayFields/DisplayDecimal.vue";
 
 export const displayFieldsMap: Record<EasyFieldType, Component> = {
    IDField: DisplayData,
@@ -32,5 +33,6 @@ export const displayFieldsMap: Record<EasyFieldType, Component> = {
    JSONField: DisplayJSON,
    PhoneField: DisplayPhone,
    ConnectionField: DisplayConnection,
-   TimestampField: InputTimestamp
+   TimeStampField: DisplayTimestamp,
+   DecimalField: DisplayDecimal
 }

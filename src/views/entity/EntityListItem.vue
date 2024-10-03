@@ -12,10 +12,15 @@
 
       </Container>
       <Container class="col shrink">
-        <div v-for="field in fields" :key="field">
-
+        <div v-for="field in fields" :key="field.key">
           <div class="text-small italic text-primary-bright">
-            {{ record[field] }}
+            <component :is="displayFieldsMap[field.fieldType]"
+                       :field="field"
+                       format="date"
+                       :routePrefix="`/entity/${field.connectionEntity}`"
+                       :value="record[field.key]"
+                       :titleValue="field.connectionTitleField? record[field.connectionTitleField]:''"
+            />
           </div>
         </div>
       </Container>
@@ -41,12 +46,14 @@ import CardWidget from "@/components/widgets/CardWidget.vue";
 import Container from "@/components/layout/Container.vue";
 import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
+import {displayFieldsMap} from "@/components/displayFields/index.ts";
+import {EasyField} from "@/types/easyField.ts";
 
 defineProps<{
   entityDef: EntityDefinition,
   record: EntityRecord,
   active?: boolean
-  fields?: string[]
+  fields?: EasyField[]
 
 }>()
 

@@ -1,7 +1,7 @@
 <template>
   <BasicForm :columns="action.params.length > 3? 2:1" :name="action.actionName"
              @cancel="$emit('cancel')" @submitted="handleSubmit">
-    <component :is="inputFieldMap[param.type]" v-for="(param,index) in action.params"
+    <component :is="fieldMap[param.type]" v-for="(param,index) in action.params"
                :key="param.paramName"
                v-model="data[param.paramName].value"
                :error="data[param.paramName].error"
@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import {DocsAction} from "@/api/apiTypes.ts";
-import {inputFieldMap} from "@/components/inputs/index.ts";
+import {fieldMap} from "@/components/inputs/index.ts";
 import {formatString} from "@/utils/index.ts";
 import BasicForm from "@/components/form/BasicForm.vue";
 import {onBeforeMount, onMounted, ref} from "vue";

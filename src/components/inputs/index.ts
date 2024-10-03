@@ -1,4 +1,4 @@
-import {EasyFieldType} from "@/types/easyField.ts";
+import type {EasyFieldType} from "@/types/easyField.ts";
 import type {Component} from "vue";
 import InputBigInt from "@/components/inputs/InputBigInt.vue";
 import InputBoolean from "@/components/inputs/InputBoolean.vue";
@@ -15,13 +15,15 @@ import InputPhone from "@/components/inputs/InputPhone.vue";
 import InputText from "@/components/inputs/InputText.vue";
 import InputData from "@/components/inputs/InputData.vue";
 import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
+import InputDecimal from "@/components/inputs/InputDecimal.vue";
 
-export const inputFieldMap: Record<EasyFieldType, Component> = {
+export const fieldMap: Record<EasyFieldType, Component> = {
    BigIntField: InputBigInt,
    BooleanField: InputBoolean,
    ChoicesField: InputChoices,
    ConnectionField: InputConnection,
    DateField: InputDate,
+   DecimalField: InputDecimal,
    EmailField: InputEmail,
    ImageField: InputImage,
    IntField: InputInt,
@@ -32,5 +34,5 @@ export const inputFieldMap: Record<EasyFieldType, Component> = {
    TextField: InputText,
    DataField: InputData,
    IDField: InputData,
-   TimestampField: InputTimestamp,
+   TimeStampField: InputTimestamp,
 }

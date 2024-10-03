@@ -19,6 +19,9 @@ const props = defineProps<{
 }>()
 
 const time = computed(() => {
+  if (!props.value) {
+    return ''
+  }
   return getPrettyDate(props.value, {
     format: props.format || 'pretty',
     showSeconds: props.showSeconds || false

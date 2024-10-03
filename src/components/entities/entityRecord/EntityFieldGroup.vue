@@ -1,29 +1,27 @@
 <template>
-  <CardWidget>
+  <CardWidget class="">
 
     <Container class="row shrink">
       <div class="title-4 text-primary">{{ group.title }}</div>
-      <ContainerPadded class="group-fields column-gap-3" :class="{
+      <Container class="group-fields col shrink column-gap-3 overflow-hidden" :class="{
     edit: edit
   }">
-        <Container class="field-names">
 
-          <div class="text-small align-content-center bold"
-               v-for="field in group.fields.filter(f=>!f.hidden)">
-
-            {{ field.label }}
-          </div>
-        </Container>
-        <Container class="row field-values">
-          <div class="text-medium align-content-center" v-for="field in group.fields">
-
-
-            <component v-if="!edit" :is="displayFieldsMap[field.fieldType]" :field="field"
+        <Container class="col-2 field-values">
+          <Container v-for="field in filteredFields"
+                     :key="`${field.key}value`">
+            <div class="label">{{ field.label }}</div>
+            <component v-if="edit" :is="fieldMap[field.fieldType]" :field="field"
+                       v-model="record[field.key]"
+            />
+            <component v-else :is=" displayFieldsMap[field.fieldType]" :field="field"
+                       :titleValue="field.connectionTitleField? record[field.connectionTitleField]:''"
+                       format="date"
+                       :routePrefix="`/entity/${field.connectionEntity}`"
                        :value="record[field.key]"/>
-            
-          </div>
+          </Container>
         </Container>
-      </ContainerPadded>
+      </Container>
     </Container>
   </CardWidget>
 </template>
@@ -31,32 +29,40 @@
 <script setup lang="ts">
 import {EntityRecord, FieldGroup} from "@/types/index.ts";
 import Container from "@/components/layout/Container.vue";
-import DisplayField from "@/components/displayFields/DisplayField.vue";
-import EasyInput from "@/components/inputs/EasyInput.vue";
 import {displayFieldsMap} from "@/components/displayFields/index.ts";
-import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
+import {computed} from "vue";
+import {fieldMap} from "@/components/inputs/index.ts";
 
 const props = defineProps<{
   group: FieldGroup
   edit?: boolean
   record: EntityRecord
 }>()
+
+const filteredFields = computed(() => {
+  return props.group.fields.filter(f => {
+    if (f.hidden) {
+
+      return false;
+    }
+    if (f.fetchOptions?.thisIdKey) {
+
+      return false;
+    }
+    return true;
+  })
+})
 </script>
 
 <style lang="scss">
 .group-fields {
-  --row-height: 1.2rem;
-  grid-template-columns: max-content 1fr;
+  --row-height: max-content;
 
-  .field-names {
-    grid-template-columns: 1fr;
-    grid-auto-rows: var(--row-height);
-  }
 
   .field-values {
-    grid-template-columns: 1fr;
-    grid-auto-rows: var(--row-height);
+    grid-auto-rows: minmax(1rem, max-content);
+    font-size: 0.8rem;
   }
 
   &.edit {
