@@ -22,8 +22,11 @@ import ContainerPadded from "@/components/layout/ContainerPadded.vue";
   grid-template-areas: "side-bar content";
   grid-template-columns: max-content 1fr;
 
+
   .side-bar {
     grid-area: side-bar;
+    width: max-content;
+
   }
 
   .content {

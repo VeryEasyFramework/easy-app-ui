@@ -2,7 +2,7 @@
   <RouterLink :to="to" class="nav-item px-1">
     <ContainerPadded class="col shrink horizontal-align-between">
 
-      <div class="nav-label pe-3">{{ text }}</div>
+      <div v-if="!collapse" class="nav-label pe-3">{{ text }}</div>
       <div>
 
         <MaterialIcon :icon="icon" class="icon"/>
@@ -21,6 +21,7 @@ const props = defineProps<{
   to: string
   icon: MaterialIcons
   text: string
+  collapse?: boolean
 }>()
 </script>
 

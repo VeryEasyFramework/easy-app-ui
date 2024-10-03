@@ -18,8 +18,9 @@
           <div class="text-medium align-content-center" v-for="field in group.fields">
 
 
-            <component :is="displayFieldsMap[field.fieldType]" :field="field"
+            <component v-if="!edit" :is="displayFieldsMap[field.fieldType]" :field="field"
                        :value="record[field.key]"/>
+            
           </div>
         </Container>
       </ContainerPadded>

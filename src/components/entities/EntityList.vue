@@ -60,7 +60,7 @@ import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import ModalView from "@/components/modal/ModalView.vue";
 import NewEntityForm from "@/components/entities/NewEntityForm.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
-import {listenForEntity, realtime} from "@/realtime/index.ts";
+import {listenForEntity, listenForList, realtime} from "@/realtime/index.ts";
 import {listenForKeyPress, onControlN} from "@/utils/keyboard.ts";
 import {EntityListLoader} from "@/components/entities/listLoader.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
@@ -110,17 +110,27 @@ onBeforeMount(async () => {
   filteredListFields = entity.listFields.filter(f => !['id', 'createdAt', 'updatedAt', entity.config.titleField].includes(f))
 
 })
-
-
-listenForEntity(props.entity, 'list', async (data: EntityRecord) => {
-  let inList = false
-  loader.entityList.value.forEach((e, i) => {
-    if (e.id === data.id) {
-      inList = true
-      loader.entityList.value[i] = data
-    }
-  })
-
+listenForList(props.entity, async (action, record) => {
+  switch (action) {
+    case 'create':
+      await handleResize()
+      break
+    case 'update':
+      let inList = false
+      loader.entityList.value.forEach((e, i) => {
+        if (e.id === record.id) {
+          inList = true
+          loader.entityList.value[i] = record
+        }
+      })
+      if (!inList) {
+        await handleResize()
+      }
+      break
+    case 'delete':
+      loader.entityList.value = loader.entityList.value.filter(e => e.id !== record.id)
+      break
+  }
 })
 
 

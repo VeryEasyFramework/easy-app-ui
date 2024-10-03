@@ -11,7 +11,7 @@
             {{ record.id }}
           </div>
         </Container>
-        <EntityToolbar :editMode="editMode" @save="saveRecord" @delete=""
+        <EntityToolbar :editMode="editMode" @save="saveRecord" @delete="deleteRecord"
                        @edit="(edit)=>editMode=edit"/>
       </Container>
 
@@ -20,9 +20,11 @@
         <Container class="row shrink ">
 
           <EntityFieldGroup v-for="group in entityDef.fieldGroups.filter(g=>g.key!=='default')"
+                            :edit="editMode"
                             :group="group" :record="record"
                             :key="group.key"/>
           <EntityFieldGroup v-for="group in entityDef.fieldGroups.filter(g=>g.key ==='default')"
+                            :edit="editMode"
                             :group="group" :record="record"
                             :key="group.key"/>
         </Container>
@@ -33,10 +35,10 @@
       <Container class="actions">
         <EntityActions :entityDef="entityDef" :record="record!"/>
       </Container>
-      <Container class="editLog">
-        <CardWidget>
+      <Container class="editLog vertical-align-end">
+        <CardWidget class="h-100">
 
-        <EntityEditLog :edit-log="recordInfo.editLog"/>
+          <EntityEditLog :edit-log="recordInfo.editLog"/>
         </CardWidget>
       </Container>
 
@@ -93,7 +95,7 @@ async function loadRecord() {
   state.loaded.value = true
 }
 
-async function loadRecordInfo(){
+async function loadRecordInfo() {
   recordInfo.value = await easyApi.getRecordInfo(props.entity, props.id)
 }
 
@@ -106,6 +108,16 @@ async function saveRecord() {
   await easyApi.updateEntity(props.entity, entity.id, entity)
 
   state.saving.value = false
+}
+
+async function deleteRecord() {
+  if (!record.value) {
+    return
+  }
+  state.saving.value = true
+  await easyApi.deleteEntity(props.entity, record.value.id)
+  state.saving.value = false
+  await router.push(`/entity/${props.entity}`)
 }
 
 listenForEntity(props.entity, 'update', async (data) => {
@@ -143,13 +155,12 @@ onMounted(async () => {
 
 .entity-record-grid {
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: max-content max-content  1fr max-content;
+  grid-template-rows: max-content max-content  max-content 1fr;
   grid-template-areas:
   "top-bar top-bar"
   "fields info"
   "fields actions"
-  "editLog editLog"
-;
+  "editLog editLog";
 
   .fields {
     grid-area: fields;
@@ -171,8 +182,14 @@ onMounted(async () => {
   .actions {
     grid-area: actions;
   }
+
   .editLog {
     grid-area: editLog;
+
+    .card {
+      max-height: 300px;
+      width: max-content;
+    }
   }
 }
 

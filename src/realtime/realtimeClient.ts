@@ -32,6 +32,9 @@ export class RealtimeClient {
 
 
    onMessage(callback: (room: string, event: string, data: Record<string, any>) => void) {
+      if (this.messageListeners.includes(callback)) {
+         return;
+      }
       this.messageListeners.push(callback);
    }
 

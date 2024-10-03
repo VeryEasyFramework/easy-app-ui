@@ -33,8 +33,7 @@ onMounted(async () => {
       type: 'warning'
     })
   }
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  realtime.connect()
+
 
 
 })

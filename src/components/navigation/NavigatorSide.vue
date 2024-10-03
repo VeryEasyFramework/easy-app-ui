@@ -1,12 +1,21 @@
 <template>
   <ContainerPadded class="vh-100 navigator-side shadow-small">
-    <HeaderBrand class="brand"/>
-    <Container class="nav row shrink">
-      <NavItem icon="person" to="/entity" text="Entities"/>
-      <NavItem icon="format_paint" to="/theme" text="Theme"/>
+    <Container class="brand" :class="{
+      col: !collapse,
+      'horizontal-align-center': collapse,
+    }">
 
-      <NavItem icon="code" to="/api-explorer" text="API Explorer"/>
-      <NavItem icon="network_ping" to="/realtime" text="Realtime Explorer"/>
+
+      <HeaderBrand :collapse="collapse"/>
+      <MaterialIcon :icon="collapse? 'left_panel_open':'left_panel_close'"
+                    @click="collapse=!collapse" class="flat"/>
+    </Container>
+    <Container class="nav row shrink">
+      <NavItem :collapse="collapse" icon="person" to="/entity" text="Entities"/>
+      <NavItem :collapse="collapse" icon="format_paint" to="/theme" text="Theme"/>
+
+      <NavItem :collapse="collapse" icon="code" to="/api-explorer" text="API Explorer"/>
+      <NavItem :collapse="collapse" icon="network_ping" to="/realtime" text="Realtime Explorer"/>
     </Container>
     <Container class="bottom">
       <ThemeSwitcher/>
@@ -24,6 +33,10 @@ import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import NavItem from "@/components/navigation/NavItem.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import ThemeSwitcher from "@/components/buttons/ThemeSwitcher.vue";
+import {ref} from "vue";
+import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
+
+const collapse = ref(false)
 </script>
 
 <style>

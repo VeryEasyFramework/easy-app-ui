@@ -30,16 +30,17 @@ export interface DocsActionGroup {
 }
 
 export interface EditLog extends EntityRecord {
-    entity: string;
-    recordId: number;
-    user:string;
-    userFullName:string;
-    action:"create"|"update"|"delete";
-    editData:Record<string,any>;
+   entity: string;
+   recordId: string;
+   recordTitle: string;
+   user: string;
+   userFullName: string;
+   action: "create" | "update" | "delete";
+   editData: Record<string, any>;
 }
 
-export interface RecordInfo{
-   editLog:EditLog[];
+export interface RecordInfo {
+   editLog: EditLog[];
 }
 
 export interface AdvancedFilter {

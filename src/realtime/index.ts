@@ -24,3 +24,23 @@ export function listenForEntity(entity: string, event: 'list' | 'update' | 'crea
    })
 
 }
+
+export function listenForList(entity: string, callback: (event: "create" | "update" | "delete", record: EntityRecord) => void) {
+   const listener = (room: string, e: string, message: any) => {
+      if (room === `entity:${entity}` && e === "list") {
+         const record = message.data
+         const action = message.action
+         callback(action, record)
+      }
+   }
+   onMounted(() => {
+      realtime.onMessage(listener)
+      realtime.join(`entity:${entity}`, "list")
+   })
+
+   onBeforeUnmount(() => {
+      realtime.removeMessageListener(listener)
+      realtime.leave(`entity:${entity}`, "list")
+   })
+
+}

@@ -1,17 +1,17 @@
 <template>
-  <ContainerPadded class="col shrink vertical-align-center cursor-pointer">
+  <Container class="col shrink vertical-align-center cursor-pointer">
 
     <div class="header-logo">
 
 
     </div>
-    <div class="title-5">
+    <div v-if="!collapse" class="title-5">
 
       <slot>
         Easy App
       </slot>
     </div>
-  </ContainerPadded>
+  </Container>
 </template>
 
 <style lang="scss">
@@ -24,6 +24,10 @@
 }
 </style>
 <script setup lang="ts">
-import Container from "@/components/layout/Container.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
+import Container from "@/components/layout/Container.vue";
+
+const props = defineProps<{
+  collapse?: boolean
+}>()
 </script>
