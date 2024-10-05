@@ -2,12 +2,12 @@
   <div class="boolean-field" :class="{
     'true': value,
   }">
-    <MaterialIcon class="icon" :icon="value?'check':'close'" size="1"/>
+    <MaterialIcon class="icon" :icon="value?'check':'close'" size="0.6"/>
   </div>
 </template>
 
 <script setup lang="ts">
-import {EasyField} from "@/types/easyField.ts";
+import type {EasyField} from "@vef/easy-api";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 
 const props = defineProps<{
@@ -28,7 +28,7 @@ const props = defineProps<{
   .icon {
     color: white;
     border-radius: 50%;
-    padding: 0.2rem;
+    padding: 0.1rem;
     width: fit-content;
     font-weight: bold;
 

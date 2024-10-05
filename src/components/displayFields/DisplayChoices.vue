@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import {EasyField} from "@/types/easyField.ts";
+import type {EasyField} from "@vef/easy-api";
 import {computed} from "vue";
 
 const props = defineProps<{
@@ -31,18 +31,14 @@ const label = computed(() => {
 @import "@/style/variables";
 
 .choices-field {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  width: fit-content;
 
   & > div {
 
     width: fit-content;
-    padding: 0.25rem 0.5rem;
-    line-height: 1.5;
-    font-size: 0.7rem;
+    padding: 0.14rem 0.3rem;
+    line-height: 1;
+    font-size: 0.5rem;
     border-radius: var(--border-radius);
     color: white;
     font-weight: bold;

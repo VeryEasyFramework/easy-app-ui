@@ -8,11 +8,8 @@
 
 <script setup lang="ts">
 
-import InputData from "@/components/inputs/InputData.vue";
-import MaterialIcon from "@/components/icons/MaterialIcon.vue";
-import {EntityDefinition} from "@/types/index.ts";
+import {EasyField, EasyFieldType, EntityDefinition} from "@vef/easy-api";
 import {onMounted} from "vue";
-import {EasyField, EasyFieldType} from "@/types/easyField.ts";
 import {AdvancedFilter} from "@/api/apiTypes.ts";
 
 const props = defineProps<{

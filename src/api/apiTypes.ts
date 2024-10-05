@@ -1,5 +1,5 @@
-import {EasyFieldType} from "../types/easyField";
-import {EntityRecord} from "@/types/index.ts";
+import type {EntityRecord} from "@vef/easy-api";
+import {EasyFieldType} from "@vef/easy-api";
 
 export interface DocsActionParam {
    paramName: string;

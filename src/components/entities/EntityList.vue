@@ -44,29 +44,20 @@
 <script setup lang="ts">
 import Container from "@/components/layout/Container.vue";
 import {entityStore} from "@/stores/entityStore.ts";
-import {EntityDefinition, EntityRecord} from "@/types/index.ts";
-import {
-  onBeforeMount,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  useTemplateRef
-} from "vue";
+import type {EasyField} from "@vef/easy-api";
+import {EntityDefinition, EntityRecord} from "@vef/easy-api";
+import {onBeforeMount, onBeforeUnmount, onMounted, ref, useTemplateRef} from "vue";
 import EntityListItem from "@/views/entity/EntityListItem.vue";
-import InputData from "@/components/inputs/InputData.vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
-import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import ModalView from "@/components/modal/ModalView.vue";
 import NewEntityForm from "@/components/entities/NewEntityForm.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
-import {listenForEntity, listenForList, realtime} from "@/realtime/index.ts";
-import {listenForKeyPress, onControlN} from "@/utils/keyboard.ts";
+import {listenForList} from "@/realtime/index.ts";
 import {EntityListLoader} from "@/components/entities/listLoader.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
 import EntitySearchInput from "@/components/entities/EntitySearchInput.vue";
 import {AdvancedFilter} from "@/api/apiTypes.ts";
-import {EasyField} from "@/types/easyField.ts";
 
 const loader = new EntityListLoader()
 const props = defineProps<{
@@ -109,6 +100,9 @@ onBeforeMount(async () => {
   loader.entity = entity
   const connectionTitleFields = entity.fields.filter(f => f.connectionTitleField).map(f => f.connectionTitleField)
   filteredListFields = entity.fields.filter(f => {
+    if (!entity.listFields.includes(f.key)) {
+      return false
+    }
     if (['id', 'createdAt', 'updatedAt', entity.config.titleField].includes(f.key)) {
       return false
     }

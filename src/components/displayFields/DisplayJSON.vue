@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import {EasyField} from "@/types/easyField.ts";
+import type {EasyField} from "@vef/easy-api";
 import {computed, onMounted, ref} from "vue";
 import {formatJson} from "@/components/displayFields/jsonFormat.ts";
 import Container from "@/components/layout/Container.vue";

@@ -30,9 +30,8 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
 import InputWrapper from "./InputWrapper.vue";
-import {EasyField} from "@/types/easyField.ts";
+import type {EasyField, EntityRecord} from "@vef/easy-api";
 import {easyApi} from "@/api/index.ts";
-import {EntityRecord} from "@/types/index.ts";
 import {entityStore} from "@/stores/entityStore.ts";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import Container from "@/components/layout/Container.vue";

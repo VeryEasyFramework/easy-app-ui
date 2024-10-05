@@ -105,8 +105,8 @@ $schemes: [('name':'light',
       }
       --color-input-bg: #{map-get($colors, 'input-bg')};
       --color-card-bg: #{map-get($colors, 'widget-bg')};
-      --shadow: 0 0 5px 1px #{map-get($colors, 'shadow')};
-      --shadow-small: 0 0 3px 1px #{map-get($colors, 'shadow')};
+      --shadow: 0.5px 0.5px 3px 1px #{map-get($colors, 'shadow')};
+      --shadow-small: 0.5px 0.5px 1px 1px #{map-get($colors, 'shadow')};
       --shadow-inset: inset 0 0 3px 1px #{map-get($colors, 'shadow')};
 
       @each $key in map-keys($root-colors) {

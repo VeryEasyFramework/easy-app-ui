@@ -1,4 +1,4 @@
-import {EntityDefinition} from "@/types/index.ts";
+import type {EntityDefinition} from "@vef/easy-api";
 
 export const entityStore = {
    entities: [] as EntityDefinition[],

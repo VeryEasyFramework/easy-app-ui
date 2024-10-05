@@ -10,15 +10,11 @@
         <Container class="col-2 field-values">
           <Container v-for="field in filteredFields"
                      :key="`${field.key}value`">
-            <div class="label">{{ field.label }}</div>
-            <component v-if="edit" :is="fieldMap[field.fieldType]" :field="field"
-                       v-model="record[field.key]"
-            />
-            <component v-else :is=" displayFieldsMap[field.fieldType]" :field="field"
-                       :titleValue="field.connectionTitleField? record[field.connectionTitleField]:''"
-                       format="date"
-                       :routePrefix="`/entity/${field.connectionEntity}`"
-                       :value="record[field.key]"/>
+            <EasyInput v-if="edit" :field="field" v-model="record[field.key]"/>
+            <DisplayField :value="record[field.key]" v-else :field="field"
+                          format="date"
+                          :routePrefix="`/entity/${field.connectionEntity}`"/>
+
           </Container>
         </Container>
       </Container>
@@ -27,12 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import {EntityRecord, FieldGroup} from "@/types/index.ts";
+import {EntityRecord, FieldGroup} from "@vef/easy-api";
 import Container from "@/components/layout/Container.vue";
-import {displayFieldsMap} from "@/components/displayFields/index.ts";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import {computed} from "vue";
-import {fieldMap} from "@/components/inputs/index.ts";
+import DisplayField from "@/components/displayFields/DisplayField.vue";
+import EasyInput from "@/components/inputs/EasyInput.vue";
 
 const props = defineProps<{
   group: FieldGroup

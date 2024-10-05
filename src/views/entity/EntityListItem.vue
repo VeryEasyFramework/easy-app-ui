@@ -41,13 +41,12 @@
 </template>
 
 <script setup lang="ts">
-import {EntityRecord, EntityDefinition} from "@/types/index.ts";
+import type {EasyField, EntityDefinition, EntityRecord} from "@vef/easy-api";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import Container from "@/components/layout/Container.vue";
 import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import {displayFieldsMap} from "@/components/displayFields/index.ts";
-import {EasyField} from "@/types/easyField.ts";
 
 defineProps<{
   entityDef: EntityDefinition,

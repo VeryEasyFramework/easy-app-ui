@@ -1,29 +1,31 @@
 <template>
-  <div
-      ref="container"
-      class="popover-container"
-      @mouseenter="handleEnter"
-      @mouseleave="handleLeave">
-    <Teleport to="#popovers">
-      <div ref="popover" class="popover">
 
-        <div class="text-dark">
+
+  <div style="display: contents" @mouseenter="handleEnter"
+       @mouseleave="handleLeave">
+    <slot name="default"></slot>
+
+  </div>
+  <div ref="popover" class="popover" popover>
+
+
+    <slot name="popover">
+
+      <CardWidget class="shadow">
+        <div class="label">
+
           {{ text }}
         </div>
+      </CardWidget>
+    </slot>
 
-
-      </div>
-
-    </Teleport>
-    <div class="content">
-      <slot></slot>
-    </div>
 
   </div>
 </template>
 
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
+import CardWidget from "@/components/widgets/CardWidget.vue";
 
 const props = defineProps<{
   text?: string;
@@ -31,13 +33,11 @@ const props = defineProps<{
   position?: "top" | "bottom" | "left" | "right";
 }>();
 
-const showPopover = ref(false);
 const top = ref("0px");
 const left = ref("0px");
-const opacity = computed(() => (showPopover.value ? (props.text ? 1 : 0) : 0));
 
 const container = ref<HTMLElement | null>(null);
-const popover = ref<HTMLElement | null>(null);
+const popover = ref<HTMLElement>();
 
 
 onMounted(() => {
@@ -45,67 +45,84 @@ onMounted(() => {
 
 const isIntersecting = ref(false);
 
+function showPopover() {
+  popover.value?.showPopover();
+}
+
+
+function hidePopover() {
+  popover.value?.hidePopover();
+}
+
 function handleEnter(event: MouseEvent) {
   isIntersecting.value = true;
-  setPosition();
+  setPosition((event.target as HTMLElement)?.firstElementChild?.getBoundingClientRect(), popover.value!);
   setTimeout(() => {
     if (!isIntersecting.value) return;
-    showPopover.value = true;
+    showPopover();
   }, props.wait ?? 300);
 }
 
 function handleLeave() {
   isIntersecting.value = false;
-  showPopover.value = false;
+  setTimeout(() => {
+    hidePopover();
+  }, props.wait ?? 300);
 }
 
-function setPosition() {
-  const containerPosition = container.value?.getBoundingClientRect();
-  const popoverHeight = popover.value?.offsetHeight;
-  const popoverWidth = popover.value?.offsetWidth;
+function setPosition(rect: DOMRect | undefined, popoverElement: HTMLElement) {
+  if (!rect) return;
+  const popoverHeight = popoverElement.offsetHeight;
+  const popoverWidth = popoverElement.offsetWidth;
   let positionX;
   let positionY;
 
-  if (window.innerHeight - containerPosition?.top! < popoverHeight!) {
-    positionY = containerPosition?.top! - popoverHeight!;
+  if (window.innerHeight - rect?.top < popoverHeight!) {
+    positionY = rect?.top - popoverHeight!;
   } else {
-    positionY = containerPosition?.top;
+    positionY = rect?.top
   }
 
-  if (window.innerWidth - containerPosition?.left! < popoverWidth!) {
-    positionX = containerPosition?.left! + popoverWidth! + 5;
+  if (window.innerWidth - rect?.left < popoverWidth!) {
+    positionX = rect?.left + popoverWidth! + 5;
   } else {
-    positionX = containerPosition?.left! + containerPosition?.width! + 5;
+    positionX = rect?.left + rect?.width + 5;
   }
-
+  popoverElement.style.top = `${positionY}px`;
+  popoverElement.style.left = `${positionX}px`;
   top.value = `${positionY}px`;
   left.value = `${positionX}px`;
 }
 </script>
 
-<style scoped>
-.popover-container {
-  position: relative;
-  display: inline-block;
-  width: max-content;
+<style lang="scss">
+.popover {
+
+
+  &[popover] {
+    position: fixed;
+    inset: 0;
+    width: fit-content;
+    height: fit-content;
+    top: var(--popover-top);
+    left: var(--popover-left);
+    margin: 0;
+    border: none;
+    padding: 0;
+    overflow: auto;
+    color: unset;
+    background-color: unset;
+  }
 }
 
 .popover {
-  position: fixed;
-  top: v-bind(top);
-  left: v-bind(left);
-  width: max-content;
-  background-color: var(--color-bg-brighter);
 
-  border-radius: var(--border-radius);
-  padding: 8px;
-
-  opacity: v-bind(opacity);
-  transition: all var(--snap-ease);
-  box-shadow: var(--shadow);
 }
 
-.popover-container:hover .popover {
-  display: block;
+.popover {
+  --popover-top: 0;
+  --popover-left: 0;
 }
+
 </style>
+

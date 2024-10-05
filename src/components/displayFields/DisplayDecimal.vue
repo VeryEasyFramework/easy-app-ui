@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import {EasyField} from "@/types/easyField.ts";
+import type {EasyField} from "@vef/easy-api";
 import {computed} from "vue";
 
 const props = defineProps<{

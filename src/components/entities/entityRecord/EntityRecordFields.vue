@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type {EntityRecord, EntityDefinition} from "@/types/index.ts";
+import type {EntityDefinition, EntityRecord} from "@vef/easy-api";
 import EasyInput from "@/components/inputs/EasyInput.vue";
 import DisplayField from "@/components/displayFields/DisplayField.vue";
 import Container from "@/components/layout/Container.vue";

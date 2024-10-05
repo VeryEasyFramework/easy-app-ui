@@ -1,6 +1,5 @@
-import {easyApi, EasyApi} from "@/api/index.ts";
-import {ListOptions} from "@/api/apiTypes.ts";
-import {EntityDefinition, EntityRecord} from "@/types/index.ts";
+import {easyApi} from "@/api/index.ts";
+import type {EasyApi, EntityDefinition, EntityRecord, ListOptions} from "@vef/easy-api";
 import {Ref, ref} from "vue";
 
 interface ListInfo {

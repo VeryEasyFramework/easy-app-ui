@@ -1,4 +1,4 @@
-import type {EasyFieldType} from "@/types/easyField.ts";
+import type {EasyFieldType} from "@vef/easy-api";
 import type {Component} from "vue";
 import DisplayData from "@/components/displayFields/DisplayData.vue";
 import DisplayInt from "@/components/displayFields/DisplayInt.vue";
@@ -16,6 +16,8 @@ import DisplayPhone from "@/components/displayFields/DisplayPhone.vue";
 import DisplayConnection from "@/components/displayFields/DisplayConnection.vue";
 import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
 import DisplayDecimal from "@/components/displayFields/DisplayDecimal.vue";
+import DisplayURL from "@/components/displayFields/DisplayURL.vue";
+import DisplayRichText from "@/components/displayFields/DisplayRichText.vue";
 
 export const displayFieldsMap: Record<EasyFieldType, Component> = {
    IDField: DisplayData,
@@ -34,5 +36,7 @@ export const displayFieldsMap: Record<EasyFieldType, Component> = {
    PhoneField: DisplayPhone,
    ConnectionField: DisplayConnection,
    TimeStampField: DisplayTimestamp,
-   DecimalField: DisplayDecimal
+   DecimalField: DisplayDecimal,
+   URLField: DisplayURL,
+   RichTextField: DisplayRichText
 }

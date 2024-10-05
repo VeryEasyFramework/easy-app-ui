@@ -51,21 +51,17 @@
 
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import {onBeforeMount, onMounted, ref} from "vue";
-import type {EntityRecord, EntityDefinition} from "@/types/index.ts";
+import type {EntityDefinition, EntityRecord} from "@vef/easy-api";
 import Container from "@/components/layout/Container.vue";
 import LoaderOverlay from "@/components/transitions/LoaderOverlay.vue";
 import {router} from "@/router/index.ts";
 import {easyApi} from "@/api/index.ts";
 import TransitionFade from "@/components/transitions/TransitionFade.vue";
 import {entityStore} from "@/stores/entityStore.ts";
-import EasyInput from "@/components/inputs/EasyInput.vue";
-import EntityRecordFields from "@/components/entities/entityRecord/EntityRecordFields.vue";
-import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import EntityActions from "@/components/entities/entityRecord/EntityActions.vue";
 import EntityInfo from "@/components/entities/entityRecord/EntityInfo.vue";
 import EntityToolbar from "@/components/entities/entityRecord/EntityToolbar.vue";
-import Loader from "@/components/transitions/Loader.vue";
 import {notify} from "@/notify/index.ts";
 import {listenForEntity} from "@/realtime/index.ts";
 import EntityFieldGroup from "@/components/entities/entityRecord/EntityFieldGroup.vue";

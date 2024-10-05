@@ -4,20 +4,19 @@
              v-model="modelValue"
              :field="props.field"
              :required="field.required"
-             :label="field.label"
+             :label=" noLabel?'':field.label"
              :readOnly="field.readOnly"
              :error="props.error"
              :name="field.key"
              :placeholder="placeholder"
              :focus="props.focus"
              :description="field.description"
-             :noLabel="props.noLabel"
   >
   </component>
 </template>
 
 <script setup lang="ts">
-import type {EasyField} from "@/types/easyField.ts";
+import type {EasyField} from "@vef/easy-api";
 import {computed} from "vue";
 import {fieldMap} from "@/components/inputs/index.ts";
 

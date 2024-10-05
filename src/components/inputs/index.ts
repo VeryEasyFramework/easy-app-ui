@@ -1,4 +1,4 @@
-import type {EasyFieldType} from "@/types/easyField.ts";
+import type {EasyFieldType} from "@vef/easy-api";
 import type {Component} from "vue";
 import InputBigInt from "@/components/inputs/InputBigInt.vue";
 import InputBoolean from "@/components/inputs/InputBoolean.vue";
@@ -16,6 +16,8 @@ import InputText from "@/components/inputs/InputText.vue";
 import InputData from "@/components/inputs/InputData.vue";
 import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
 import InputDecimal from "@/components/inputs/InputDecimal.vue";
+import InputRichText from "@/components/inputs/InputRichText.vue";
+import InputURL from "@/components/inputs/InputURL.vue";
 
 export const fieldMap: Record<EasyFieldType, Component> = {
    BigIntField: InputBigInt,
@@ -35,4 +37,6 @@ export const fieldMap: Record<EasyFieldType, Component> = {
    DataField: InputData,
    IDField: InputData,
    TimeStampField: InputTimestamp,
+   RichTextField: InputRichText,
+   URLField: InputURL
 }

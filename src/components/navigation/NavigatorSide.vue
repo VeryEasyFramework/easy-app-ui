@@ -18,7 +18,12 @@
       <NavItem :collapse="collapse" icon="network_ping" to="/realtime" text="Realtime Explorer"/>
     </Container>
     <Container class="bottom">
-      <ThemeSwitcher/>
+      <Container class="col shrink horizontal-align-between">
+
+        <ThemeSwitcher/>
+        <ButtonIcon color="error" class="flat" icon="logout" label="Logout"
+                    @click="appStore.logout"/>
+      </Container>
     </Container>
   </ContainerPadded>
 
@@ -27,7 +32,6 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import CardWidget from "@/components/widgets/CardWidget.vue";
 import HeaderBrand from "@/components/HeaderBrand.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import NavItem from "@/components/navigation/NavItem.vue";
@@ -35,8 +39,11 @@ import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import ThemeSwitcher from "@/components/buttons/ThemeSwitcher.vue";
 import {ref} from "vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
+import {useAppStore} from "@/stores/appStore.ts";
 
 const collapse = ref(false)
+
+const appStore = useAppStore()
 </script>
 
 <style>

@@ -1,13 +1,13 @@
 <template>
   <div>
     {{
-      time
+    time
     }}
   </div>
 </template>
 
 <script setup lang="ts">
-import {EasyField} from "@/types/easyField.ts";
+import type {EasyField} from "@vef/easy-api";
 import {DateFormat, getPrettyDate} from "@/utils/index.ts";
 import {computed} from "vue";
 

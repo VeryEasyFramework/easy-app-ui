@@ -1,6 +1,6 @@
 import {RealtimeClient} from "@/realtime/realtimeClient.ts";
 import {onBeforeUnmount, onMounted} from "vue";
-import {EntityRecord} from "@/types/index.ts";
+import type {EntityRecord} from "@vef/easy-api";
 
 const host = import.meta.env.VITE_WS
 export const realtime = new RealtimeClient(

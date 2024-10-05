@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import {EntityRecord, EntityDefinition} from "@/types/index.ts";
+import type {EntityDefinition, EntityRecord} from "@vef/easy-api";
 import Container from "@/components/layout/Container.vue";
 import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
 
