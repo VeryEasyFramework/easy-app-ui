@@ -37,13 +37,11 @@ import {formatString} from "@/utils/index.ts";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import Container from "@/components/layout/Container.vue";
 import ModalView from "@/components/modal/ModalView.vue";
-import CardWidget from "@/components/widgets/CardWidget.vue";
 import ActionInputForm from "@/views/api/ActionInputForm.vue";
-import {DocsAction} from "@/api/apiTypes.ts";
+import {DocsAction} from "@vef/easy-api/src/types.ts";
 import {ref} from "vue";
 import {easyApi} from "@/api/index.ts";
 import DisplayJSON from "@/components/displayFields/DisplayJSON.vue";
-import {formatJson} from "@/components/displayFields/jsonFormat.ts";
 
 const showActionForm = ref(false)
 const runningAction = ref(false)

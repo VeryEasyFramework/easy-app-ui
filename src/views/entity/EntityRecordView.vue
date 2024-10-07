@@ -51,7 +51,8 @@
 
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import {onBeforeMount, onMounted, ref} from "vue";
-import type {EntityDefinition, EntityRecord} from "@vef/easy-api";
+import type {EntityDefinition, EntityRecord} from "@vef/easy-api/src/types.ts";
+import {RecordInfo} from "@vef/easy-api/src/types.ts";
 import Container from "@/components/layout/Container.vue";
 import LoaderOverlay from "@/components/transitions/LoaderOverlay.vue";
 import {router} from "@/router/index.ts";
@@ -66,7 +67,6 @@ import {notify} from "@/notify/index.ts";
 import {listenForEntity} from "@/realtime/index.ts";
 import EntityFieldGroup from "@/components/entities/entityRecord/EntityFieldGroup.vue";
 import EntityEditLog from "@/components/entities/entityRecord/EntityEditLog.vue";
-import {RecordInfo} from "@/api/apiTypes.ts";
 
 const props = defineProps<{
   entity: string

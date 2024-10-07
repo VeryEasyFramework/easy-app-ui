@@ -13,7 +13,7 @@
 import Container from "@/components/layout/Container.vue";
 import type {EasyField} from "@vef/easy-api";
 import DatePicker from "@/components/datePicker/DatePicker.vue";
-import {AdvancedFilter} from "@/api/apiTypes.ts";
+import {AdvancedFilter} from "@vef/easy-api/src/types.ts";
 import {ref} from "vue";
 
 const props = defineProps<{

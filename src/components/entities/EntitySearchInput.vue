@@ -10,7 +10,7 @@
 
 import {EasyField, EasyFieldType, EntityDefinition} from "@vef/easy-api";
 import {onMounted} from "vue";
-import {AdvancedFilter} from "@/api/apiTypes.ts";
+import {AdvancedFilter} from "@vef/easy-api/src/types.ts";
 
 const props = defineProps<{
   entity?: EntityDefinition

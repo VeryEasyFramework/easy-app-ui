@@ -7,11 +7,9 @@
 
 <script setup lang="ts">
 
-import type {RichText} from "@vef/easy-api";
-import PopoverNative from "@/components/modal/Popover.vue";
 
 const props = defineProps<{
-  value?: RichText
+  value?: any;
 }>()
 </script>
 

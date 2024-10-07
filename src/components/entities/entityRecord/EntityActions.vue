@@ -54,7 +54,7 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import type {EntityAction, EntityDefinition, EntityRecord} from "@vef/easy-api";
+import type {EntityAction, EntityDefinition, EntityRecord} from "@vef/easy-api/src/types.ts";
 import {onMounted, ref} from "vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
@@ -87,7 +87,7 @@ const currentActionParams = ref<Record<string, {
 }>>({})
 const showActionParams = ref(false)
 onMounted(() => {
-  actions.value = props.entityDef.actions.filter(a => !a.private)
+  actions.value = props.entityDef.actions.filter(a => !a.private) as EntityAction[]
 })
 
 async function handleAction(action: EntityAction) {

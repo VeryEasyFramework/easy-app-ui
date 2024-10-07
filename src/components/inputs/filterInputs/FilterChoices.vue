@@ -27,9 +27,8 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import {Choice, EasyField} from "@vef/easy-api";
+import {EasyField} from "@vef/easy-api/src/types.ts";
 import {computed, onMounted, ref} from "vue";
-import TransitionList from "@/components/transitions/TransitionList.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 
 const props = defineProps<{
@@ -40,7 +39,7 @@ const props = defineProps<{
 const input = ref<HTMLInputElement>()
 const searchValue = ref('')
 const filteredChoices = computed(() => {
-  return props.field.choices?.filter((choice: Choice) => {
+  return props.field.choices?.filter((choice) => {
     if (props.values.map(v => v.id).includes(choice.key)) {
       return false
     }
@@ -62,7 +61,7 @@ const emit = defineEmits<{
   (event: 'remove', item: { id: string | number, label: string }): void
 }>()
 
-function handleSelect(choice: Choice) {
+function handleSelect(choice: any) {
   emit('selected', {
     id: choice.key,
     label: choice.label

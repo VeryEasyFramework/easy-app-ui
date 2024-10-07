@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
 import InputWrapper from "./InputWrapper.vue";
-import type {Choice, EasyField} from "@vef/easy-api";
+import type {EasyField} from "@vef/easy-api/src/types.ts";
 import ButtonDropdown from "@/components/buttons/ButtonDropdown.vue";
 
 const open = ref(false);
@@ -53,21 +53,21 @@ const props = defineProps<{
   readOnly?: boolean;
   focus?: boolean;
   field: EasyField;
-  choices?: Choice[];
+  choices?: EasyField['choices'];
 }>();
 const emit = defineEmits(["update:modelValue"]);
-const choices: Choice[] = props.choices || props.field.choices || [];
+const choices = props.choices || props.field.choices || [];
 const selectedChoice = computed({
   get: () => {
     return choices.find((c) => c.key === props.modelValue);
   },
-  set: (choice: Choice) => {
+  set: (choice: any) => {
     emit("update:modelValue", choice.key);
 
   },
 })
 
-function handleChoice(choice: Choice) {
+function handleChoice(choice: any) {
   selectedChoice.value = choice;
   open.value = !open.value;
 }

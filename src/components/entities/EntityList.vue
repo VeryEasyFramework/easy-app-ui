@@ -57,7 +57,7 @@ import {listenForList} from "@/realtime/index.ts";
 import {EntityListLoader} from "@/components/entities/listLoader.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
 import EntitySearchInput from "@/components/entities/EntitySearchInput.vue";
-import {AdvancedFilter} from "@/api/apiTypes.ts";
+import {AdvancedFilter} from "@vef/easy-api/src/types.ts";
 
 const loader = new EntityListLoader()
 const props = defineProps<{

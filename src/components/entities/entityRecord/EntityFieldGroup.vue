@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import {EntityRecord, FieldGroup} from "@vef/easy-api";
+import {EntityRecord, FieldGroup} from "@vef/easy-api/src/types.ts";
 import Container from "@/components/layout/Container.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import {computed} from "vue";

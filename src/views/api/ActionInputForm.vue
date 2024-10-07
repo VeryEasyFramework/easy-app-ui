@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import {DocsAction} from "@/api/apiTypes.ts";
+import {DocsAction} from "@vef/easy-api/src/types.ts";
 import {fieldMap} from "@/components/inputs/index.ts";
 import {formatString} from "@/utils/index.ts";
 import BasicForm from "@/components/form/BasicForm.vue";
-import {onBeforeMount, onMounted, ref} from "vue";
+import {onBeforeMount, ref} from "vue";
 
 const props = defineProps<{
   action: DocsAction
