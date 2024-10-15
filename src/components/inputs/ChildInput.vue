@@ -7,7 +7,7 @@
              :editable="props.editable"
              :placeholder="placeholder "
              :focus="props.focus"
-             :noLabel="props.noLabel"
+             :noLabel="true"
              @selected="$emit('selected',$event)"
              v-model:titleValue="titleValue"
 
@@ -30,7 +30,6 @@ const props = defineProps<{
   error?: string
   focus?: boolean
   placeholder?: string
-  noLabel?: boolean
 }>()
 
 const emit = defineEmits<{
