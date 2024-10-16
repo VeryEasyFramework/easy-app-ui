@@ -11,14 +11,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vef/easy-api": "npm:@jsr/vef__easy-api@^0.2.7",
+    "@vef/easy-api": "npm:@jsr/vef__easy-api@^0.2.8",
     "pinia": "^2.2.4",
     "vue": "^3.5.11",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@types/node": "^22.7.4",
-    "@vef/types": "npm:@jsr/vef__types@^0.1.2",
+    "@vef/types": "npm:@jsr/vef__types@^0.1.3",
     "@vitejs/plugin-vue": "^5.1.4",
     "sass": "^1.79.4",
     "typescript": "^5.6.2",
