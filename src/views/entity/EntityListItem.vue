@@ -41,7 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import type {EasyField, EntityDefinition, EntityRecord} from "@vef/easy-api";
+import type {EasyField, EntityDefinition, EntityRecord} from "@vef/types";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import Container from "@/components/layout/Container.vue";
 import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";

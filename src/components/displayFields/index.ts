@@ -1,4 +1,4 @@
-import type {EasyFieldType} from "@vef/easy-api";
+import type {EasyFieldType} from "@vef/types";
 import type {Component} from "vue";
 import DisplayData from "@/components/displayFields/DisplayData.vue";
 import DisplayInt from "@/components/displayFields/DisplayInt.vue";

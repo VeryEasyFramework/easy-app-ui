@@ -1,4 +1,4 @@
-import type {EasyFieldType} from "@vef/easy-api";
+import type {EasyFieldType} from "@vef/types";
 import type {Component} from "vue";
 import InputBigInt from "@/components/inputs/InputBigInt.vue";
 import InputBoolean from "@/components/inputs/InputBoolean.vue";

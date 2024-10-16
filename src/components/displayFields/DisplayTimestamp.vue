@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import type {EasyField} from "@vef/easy-api";
+import type {EasyField} from "@vef/types";
 import {DateFormat, getPrettyDate} from "@/utils/index.ts";
 import {computed} from "vue";
 

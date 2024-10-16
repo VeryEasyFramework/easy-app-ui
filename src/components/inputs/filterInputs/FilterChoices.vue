@@ -27,7 +27,7 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import {EasyField} from "@vef/easy-api/src/types.ts";
+import {EasyField} from "@vef/types";
 import {computed, onMounted, ref} from "vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 

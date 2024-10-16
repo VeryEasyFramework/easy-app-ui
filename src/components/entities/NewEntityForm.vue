@@ -28,7 +28,7 @@
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import EasyInput from "@/components/inputs/EasyInput.vue";
 import Container from "@/components/layout/Container.vue";
-import type {EasyField, EntityDefinition} from "@vef/easy-api";
+import type {EasyField, EntityDefinition} from "@vef/types";
 import {easyApi} from "@/api/index.ts";
 import {onMounted, ref} from "vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";

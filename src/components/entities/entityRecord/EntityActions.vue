@@ -54,7 +54,7 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import type {EntityAction, EntityDefinition, EntityRecord} from "@vef/easy-api/src/types.ts";
+import type {EntityAction, EntityDefinition, EntityRecord} from "@vef/types";
 import {onMounted, ref} from "vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";

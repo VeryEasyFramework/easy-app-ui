@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 
-import type {EasyField} from "@vef/easy-api";
+import type {EasyField} from "@vef/types";
 import Container from "@/components/layout/Container.vue";
 
 const props = defineProps<{

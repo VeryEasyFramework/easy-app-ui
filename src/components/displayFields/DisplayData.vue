@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type {EasyField} from "@vef/easy-api";
+import type {EasyField} from "@vef/types";
 
 const props = defineProps<{
   value: any;

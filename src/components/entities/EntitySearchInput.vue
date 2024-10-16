@@ -8,9 +8,8 @@
 
 <script setup lang="ts">
 
-import {EasyField, EasyFieldType, EntityDefinition} from "@vef/easy-api";
+import {AdvancedFilter, EasyField, EasyFieldType, EntityDefinition} from "@vef/types";
 import {onMounted} from "vue";
-import {AdvancedFilter} from "@vef/easy-api/src/types.ts";
 
 const props = defineProps<{
   entity?: EntityDefinition

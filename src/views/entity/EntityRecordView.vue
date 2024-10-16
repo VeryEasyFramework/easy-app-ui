@@ -56,7 +56,7 @@
 
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import {onBeforeMount, onMounted, ref} from "vue";
-import {EasyField, EntityDefinition, EntityRecord, RecordInfo} from "@vef/easy-api/src/types.ts";
+import {EasyField, EntityDefinition, EntityRecord, RecordInfo} from "@vef/types";
 import Container from "@/components/layout/Container.vue";
 import LoaderOverlay from "@/components/transitions/LoaderOverlay.vue";
 import {router} from "@/router/index.ts";

@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {UserSession} from "@vef/easy-api";
+import {UserSession} from "@vef/types";
 
 import {notify} from "@/notify/index";
 import {easyApi} from "@/api/index.ts";

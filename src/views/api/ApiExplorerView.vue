@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import {DocsActionGroup} from "@vef/easy-api/src/types.ts";
+import {DocsActionGroup} from "@vef/types";
 import {easyApi} from "@/api/index.ts";
 import ListDetailLayout from "@/components/layout/ListDetailLayout.vue";
 import Container from "@/components/layout/Container.vue";

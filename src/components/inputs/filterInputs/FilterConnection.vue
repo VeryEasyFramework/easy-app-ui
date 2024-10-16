@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import type {EasyField, EntityRecord} from "@vef/easy-api";
+import type {EasyField, EntityRecord} from "@vef/types";
 import {easyApi} from "@/api/index.ts";
 import {entityStore} from "@/stores/entityStore.ts";
 import Container from "@/components/layout/Container.vue";

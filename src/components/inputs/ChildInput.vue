@@ -19,7 +19,7 @@
 
 import {computed, onMounted} from "vue";
 import {fieldMap} from "@/components/inputs/index.ts";
-import {EasyField} from "@vef/easy-api/src/types.ts";
+import {EasyField} from "@vef/types";
 
 
 const props = defineProps<{

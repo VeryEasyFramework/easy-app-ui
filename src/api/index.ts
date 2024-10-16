@@ -1,5 +1,5 @@
 import {notify} from "@/notify/index.ts";
-import {EasyApi} from "@vef/easy-api/src/easyApi.ts";
+import {EasyApi} from "@vef/easy-api";
 
 
 export const easyApi = new EasyApi(import.meta.env.VITE_API);

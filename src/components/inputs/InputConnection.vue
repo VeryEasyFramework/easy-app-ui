@@ -53,7 +53,7 @@ import {entityStore} from "@/stores/entityStore.ts";
 import Container from "@/components/layout/Container.vue";
 
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
-import {EasyField, EntityDefinition, EntityRecord} from "@vef/easy-api/src/types.ts";
+import {EasyField, EntityDefinition, EntityRecord} from "@vef/types";
 import SelectDropDown from "@/components/inputs/SelectDropDown.vue";
 
 

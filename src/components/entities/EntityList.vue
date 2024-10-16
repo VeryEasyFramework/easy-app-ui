@@ -44,8 +44,8 @@
 <script setup lang="ts">
 import Container from "@/components/layout/Container.vue";
 import {entityStore} from "@/stores/entityStore.ts";
-import type {EasyField} from "@vef/easy-api";
-import {EntityDefinition, EntityRecord} from "@vef/easy-api";
+import type {EasyField} from "@vef/types";
+import {AdvancedFilter, EntityDefinition, EntityRecord} from "@vef/types";
 import {onBeforeMount, onBeforeUnmount, onMounted, ref, useTemplateRef} from "vue";
 import EntityListItem from "@/views/entity/EntityListItem.vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
@@ -57,7 +57,6 @@ import {listenForList} from "@/realtime/index.ts";
 import {EntityListLoader} from "@/components/entities/listLoader.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
 import EntitySearchInput from "@/components/entities/EntitySearchInput.vue";
-import {AdvancedFilter} from "@vef/easy-api/src/types.ts";
 
 const loader = new EntityListLoader()
 const props = defineProps<{

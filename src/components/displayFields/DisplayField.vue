@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import type {EasyField, EasyFieldType} from "@vef/easy-api";
+import type {EasyField, EasyFieldType} from "@vef/types";
 
 import DisplayFieldWrapper from "@/components/displayFields/DisplayFieldWrapper.vue";
 import {displayFieldsMap} from "@/components/displayFields/index.ts";

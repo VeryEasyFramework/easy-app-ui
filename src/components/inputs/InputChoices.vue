@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import {computed, onMounted, ref} from "vue";
 import InputWrapper from "./InputWrapper.vue";
-import type {EasyField} from "@vef/easy-api/src/types.ts";
+import type {EasyField} from "@vef/types";
 import ButtonDropdown from "@/components/buttons/ButtonDropdown.vue";
 
 const open = ref(false);

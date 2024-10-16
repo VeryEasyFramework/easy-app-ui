@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import {DocsAction} from "@vef/easy-api/src/types.ts";
+import {DocsAction} from "@vef/types";
 import {fieldMap} from "@/components/inputs/index.ts";
 import {formatString} from "@/utils/index.ts";
 import BasicForm from "@/components/form/BasicForm.vue";

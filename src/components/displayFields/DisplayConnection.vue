@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import type {EasyField} from "@vef/easy-api";
+import type {EasyField} from "@vef/types";
 import {useRouter} from "vue-router";
 
 

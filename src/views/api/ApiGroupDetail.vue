@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import {DocsAction, DocsActionGroup} from "@vef/easy-api/src/types.ts";
+import {DocsAction, DocsActionGroup} from "@vef/types";
 import Container from "@/components/layout/Container.vue";
 import {formatString} from "@/utils/index.ts";
 import CardWidget from "@/components/widgets/CardWidget.vue";

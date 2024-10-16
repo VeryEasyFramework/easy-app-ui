@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 
-import {EasyField} from "@vef/easy-api/src/types.ts";
+import {EasyField} from "@vef/types";
 import Container from "@/components/layout/Container.vue";
 import {computed, onMounted, ref} from "vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";

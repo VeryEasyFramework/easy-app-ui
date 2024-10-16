@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 
-import {EditLog} from "@vef/easy-api/src/types.ts";
+import {EditLog} from "@vef/types";
 import Container from "@/components/layout/Container.vue";
 import {getPrettyDate} from "@/utils/index.ts";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
