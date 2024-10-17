@@ -1,30 +1,30 @@
 <template>
   <InputWrapper
-      :label="label"
+      :label="field.label"
       :error="error"
-      :required="required"
-      :read-only="readOnly">
+      :required="field.required"
+      :read-only="field.readOnly">
     <input
-        :name="name"
+        :name="field.key"
         ref="input"
         type="number"
+        :placeholder="placeholder ||field.readOnly?'': `Enter ${field.label}`"
         v-model="inputValue"
-        :disabled="readOnly"/>
+        :disabled="field.readOnly"/>
   </InputWrapper>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import { computed, onMounted, ref } from "vue";
 import InputWrapper from "./InputWrapper.vue";
+import { EasyField } from "@vef/types/mod.ts";
 
 
 const props = defineProps<{
   modelValue?: any;
-  label?: string;
+  field: EasyField;
   error?: string;
-  name?: string;
-  required?: boolean;
-  readOnly?: boolean;
+  placeholder?: string;
   focus?: boolean;
 }>();
 const emit = defineEmits(["update:modelValue"]);

@@ -1,29 +1,32 @@
 <template>
   <InputWrapper
-      :label="label"
+      :label="field.label"
       :error="error"
-      :required="required"
-      :read-only="readOnly">
+      :required="field.required"
+      :read-only="field.readOnly">
     <textarea
-        :name="name"
+        :name="field.key"
+        rows="1"
+        @keydown.enter.stop
+        :placeholder="placeholder ||field.readOnly?'': `Enter ${field.label}`"
         ref="input"
         v-model="inputValue"
-        :disabled="readOnly"/>
+        @input="handleInput"
+        :disabled="field.readOnly"/>
   </InputWrapper>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, ref} from "vue";
+import { computed, onMounted, ref } from "vue";
 import InputWrapper from "./InputWrapper.vue";
+import { EasyField } from "@vef/types/mod.ts";
 
 
 const props = defineProps<{
   modelValue?: any;
-  label?: string;
+  field: EasyField;
+  placeholder?: string;
   error?: string;
-  name?: string;
-  required?: boolean;
-  readOnly?: boolean;
   focus?: boolean;
 }>();
 const emit = defineEmits(["update:modelValue"]);
@@ -40,7 +43,15 @@ onMounted(() => {
   if (props.focus) {
     input.value?.focus();
   }
+
+  handleInput();
 });
+
+function handleInput() {
+  if (!input.value) return;
+  input.value.style.height = "auto";
+  input.value.style.height = input.value.scrollHeight + "px";
+}
 </script>
 
 <style lang="scss" scoped></style>

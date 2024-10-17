@@ -20,7 +20,7 @@
 import { User } from "@vef/types/mod.ts";
 import Container from "@/components/layout/Container.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
-import { formatString } from "../../utils/index.ts";
+import { formatString } from "@/utils/index.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
 import Popover from "@/components/modal/Popover.vue";
 

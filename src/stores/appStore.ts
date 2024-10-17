@@ -5,6 +5,7 @@ import { notify } from "@/notify/index";
 import { easyApi } from "@/api/index.ts";
 import { entityStore } from "@/stores/entityStore.ts";
 import { realtime } from "@/realtime/index.ts";
+import { settingsStore } from "@/stores/settingsStore.ts";
 
 
 export const useAppStore = defineStore('app', {
@@ -32,8 +33,9 @@ export const useAppStore = defineStore('app', {
     async boot() {
       // this.app = await api.call("app", "boot");
       entityStore.entities = await easyApi.call("app", "entities")
+      await settingsStore.init()
       realtime.connect(this.session.sessionId)
-      
+
       this.booted = true;
     },
     initTheme() {

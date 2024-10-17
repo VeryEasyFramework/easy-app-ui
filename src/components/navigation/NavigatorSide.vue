@@ -12,8 +12,7 @@
     </Container>
     <Container class="nav row shrink">
       <NavItem :collapse="collapse" icon="person" to="/entity" text="Entities"/>
-      <NavItem :collapse="collapse" icon="format_paint" to="/theme" text="Theme"/>
-
+      <NavItem :collapse="collapse" icon="settings" to="/settings" text="Settings"/>
       <NavItem :collapse="collapse" icon="code" to="/api-explorer" text="API Explorer"/>
       <NavItem :collapse="collapse" icon="network_ping" to="/realtime" text="Realtime Explorer"/>
     </Container>
@@ -37,9 +36,9 @@ import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 import NavItem from "@/components/navigation/NavItem.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import ThemeSwitcher from "@/components/buttons/ThemeSwitcher.vue";
-import {ref} from "vue";
+import { ref } from "vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
-import {useAppStore} from "@/stores/appStore.ts";
+import { useAppStore } from "@/stores/appStore.ts";
 
 const collapse = ref(false)
 
