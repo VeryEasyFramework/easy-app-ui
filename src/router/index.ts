@@ -57,11 +57,7 @@ export const router = createRouter({
           }],
 
         },
-        {
-          name: "theme",
-          path: "/theme",
-          component: () => import("@/views/theme/ThemeView.vue")
-        },
+
 
         {
           name: "api-explorer",
