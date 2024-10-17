@@ -1,17 +1,19 @@
-@import "../variables";
+@use "sass:color";
+@use "sass:list";
+@use "../variables";
 
 $darken: 30%;
 
 
-$baseColors: $color1, $color2, $color3, $color4, $color5, $color6;
+$baseColors: variables.$color1, variables.$color2, variables.$color3, variables.$color4, variables.$color5, variables.$color6;
 :root {
 
   @for $c from 1 through 6 {
-    $color: darken(nth($baseColors, $c), $darken);
+    $color: color.adjust(list.nth($baseColors, $c), $lightness: -$darken);
     --color#{$c}: #{$color};
     @for $i from 1 through 10 {
 
-      --color#{$c}-#{$i * 100}: #{lighten($color, $i * 5)};
+      --color#{$c}-#{$i * 100 *1% }: #{color.adjust($color, $lightness: $i * 5 * 1% )};
     }
 
   }

@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import type {EasyField} from "@vef/types";
-import {computed} from "vue";
+import type { EasyField } from "@vef/types";
+import { computed } from "vue";
 
 const props = defineProps<{
   value: any;
@@ -27,8 +27,8 @@ const label = computed(() => {
 </script>
 
 <style lang="scss">
-@import "@/style/customize";
-@import "@/style/variables";
+@use "@/style/customize";
+@use "@/style/variables";
 
 .choices-field {
   width: fit-content;

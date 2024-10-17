@@ -4,8 +4,9 @@
              v-model="modelValue"
              :field="props.field"
              :error="props.error"
-             :editable="props.editable"
-             :placeholder="placeholder "
+             :edit="props.editable"
+             :placeholder="placeholder"
+             :icon="icon"
              :focus="props.focus"
              :noLabel="props.noLabel"
              @selected="$emit('selected',$event)"
@@ -17,15 +18,17 @@
 
 <script setup lang="ts">
 
-import {computed, onMounted} from "vue";
-import {fieldMap} from "@/components/inputs/index.ts";
-import {EasyField} from "@vef/types";
+import { computed } from "vue";
+import { fieldMap } from "@/components/inputs/index.ts";
+import { EasyField } from "@vef/types";
+import { MaterialIcons } from "@/components/icons/materialIcons.ts";
 
 
 const props = defineProps<{
   modelValue?: any
   titleValue?: string | number
   field: EasyField
+  icon?: MaterialIcons
   editable?: boolean
   error?: string
   focus?: boolean
@@ -36,7 +39,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'selected', value: any): void
   (event: 'update:modelValue', value: any): void
-  (event: 'update:titleValue', value: string | number): void
+  (event: 'update:titleValue', value: string | number | undefined): void
 }>()
 
 const modelValue = computed({
@@ -47,17 +50,13 @@ const modelValue = computed({
     emit("update:modelValue", value)
   }
 })
-const titleValue = computed({
+const titleValue = computed<string | number | undefined>({
   get: () => {
     return props.titleValue
   },
   set: (value) => {
     emit("update:titleValue", value)
   }
-})
-onMounted(() => {
-  console.log(props.modelValue)
-  console.log(props.field.key)
 })
 </script>
 

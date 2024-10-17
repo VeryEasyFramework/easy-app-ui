@@ -10,10 +10,8 @@
         <Container class="col-2 field-values">
           <Container v-for="field in filteredFields"
                      :key="`${field.key}value`">
-            <EasyInput v-if="edit" :field="field" v-model="record[field.key]"/>
-            <DisplayField :value="record[field.key]" v-else :field="field"
-                          format="date"
-                          :routePrefix="`/entity/${field.connectionEntity}`"/>
+            <EasyInput :editable="edit" :field="field" v-model="record[field.key]"/>
+
 
           </Container>
         </Container>
@@ -23,11 +21,10 @@
 </template>
 
 <script setup lang="ts">
-import {EntityRecord, FieldGroup} from "@vef/types";
+import { EntityRecord, FieldGroup } from "@vef/types";
 import Container from "@/components/layout/Container.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
-import {computed} from "vue";
-import DisplayField from "@/components/displayFields/DisplayField.vue";
+import { computed } from "vue";
 import EasyInput from "@/components/inputs/EasyInput.vue";
 
 const props = defineProps<{

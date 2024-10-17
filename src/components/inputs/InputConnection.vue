@@ -8,62 +8,58 @@
         :required="field.required"
         :description="field.description"
         :read-only="field.readOnly">
-      <input v-if="field.readOnly" :value="titleValue" disabled>
-      <SelectDropDown v-else @open="handleOpen">
+      <input v-if="!edit || field.readOnly" :value="titleValue" disabled>
+      <InputDropDown v-else @open="handleOpen" v-model:search-value="searchValue"
+                     @update:searchValue="handleInput"
+                     @clear="clearValue"
+                     :icon="field.connectionEntity==='user'?'person':undefined"
+                     :label="titleValue" :empty-label="connectionEntity?.config.label">
 
 
-        <Container class="selected-item overflow-hidden" :class="{
-            'empty': !titleValue,
-          }">
-          <div class="choice">{{ titleValue || `Choose ${connectionEntity?.config.label}` }}
+        <template #content="dropDownProps">
+
+
+          <div class="choice py-1" v-for="item in data" :key="item.id"
+               @click="selectItem(item,dropDownProps.hide)">
+            {{ item[titleFieldKey] || item.id }}
           </div>
-          <MaterialIcon class="arrow" :class="{
-          active: open,
-        }" icon="chevron_right"/>
-        </Container>
-        <template #dropdown="dropDownProps">
-          <Container class="dropdown-container w-100 pt-2">
-            <Container class="dropdown p-2">
 
-              <input ref="input" v-model="searchValue" @input="handleInput"/>
-              <Container>
-                <div class="label">{{ `${connectionEntity?.config.label}s` }}</div>
-                <Container class="row shrink">
-                  <div class="search-item text-small" v-for="item in data" :key="item.id"
-                       @click="selectItem(item,dropDownProps.hide)">
-                    {{ item[titleFieldKey] || item.id }}
-                  </div>
-                </Container>
-              </Container>
 
-            </Container>
-          </Container>
         </template>
-      </SelectDropDown>
+      </InputDropDown>
     </InputWrapper>
 
   </div>
 </template>
 
 <script setup lang="ts">
-import {computed, onBeforeMount, onMounted, ref} from "vue";
+import { computed, onBeforeMount, onMounted, ref } from "vue";
 import InputWrapper from "./InputWrapper.vue";
-import {easyApi} from "@/api/index.ts";
-import {entityStore} from "@/stores/entityStore.ts";
-import Container from "@/components/layout/Container.vue";
 
-import MaterialIcon from "@/components/icons/MaterialIcon.vue";
-import {EasyField, EntityDefinition, EntityRecord} from "@vef/types";
-import SelectDropDown from "@/components/inputs/SelectDropDown.vue";
+import { easyApi } from "@/api/index.ts";
+import { EasyField, EntityDefinition, EntityRecord } from "@vef/types/mod.ts";
+import { entityStore } from "@/stores/entityStore.ts";
+import { MaterialIcons } from "@/components/icons/materialIcons.ts";
+import InputDropDown from "@/components/widgets/InputDropDown.vue";
 
 
 const props = defineProps<{
   modelValue?: any;
   titleValue?: string | number;
+  edit?: boolean;
+  icon?: MaterialIcons;
   field: EasyField;
   error?: string;
   focus?: boolean;
 }>();
+
+function clearValue(close: () => void) {
+  modelValue.value = null
+  titleValue.value = ''
+
+  close()
+}
+
 const modelValue = computed({
   get: () => {
     return props.modelValue
@@ -139,8 +135,8 @@ function selectItem(item: EntityRecord, callback: () => void) {
 const data = ref<EntityRecord[]>([])
 
 
-async function handleInput(event?: Event) {
-  searchValue.value = (event?.target as HTMLInputElement)?.value || ''
+async function handleInput(value?: string) {
+  searchValue.value = value || ''
 
   const idType = connectionEntity.config.idMethod?.type === 'number' ? '=' : 'contains'
   let filterKey = titleFieldKey || 'id'
@@ -174,10 +170,10 @@ async function handleInput(event?: Event) {
 
   const results = await easyApi.getList(props.field.connectionEntity!, {
     columns: [titleFieldKey, 'id'],
-    limit: 10,
+    limit: 20,
     filter,
-    orderBy: titleFieldKey,
-    order: "asc"
+    orderBy: 'id',
+    order: "desc"
   })
 
   data.value = results.data
@@ -186,99 +182,7 @@ async function handleInput(event?: Event) {
 
 <style lang="scss">
 .connection-input {
-  .empty {
-    color: var(--color-text-muted);
-  }
 
-  .dropdown-container {
-    //box-shadow: var(--shadow-small);
-  }
-
-  .choice {
-
-
-    line-height: 1.5;
-    font-size: 0.7rem;
-    border-radius: var(--border-radius);
-
-    font-weight: bold;
-    //background-color: var(--color-text-muted-brighter);
-    &.active {
-      color: var(--color-primary);
-    }
-
-    &:hover {
-      cursor: pointer;
-      border-color: var(--color-primary);
-      color: var(--color-primary);
-      //color: white;
-    }
-
-
-  }
-
-  .selected-item {
-    cursor: pointer;
-    position: relative;
-    line-height: var(--line-height);
-    height: var(--line-height);
-    font-size: 0.7rem;
-    font-weight: bold;
-    border: 1px solid transparent;
-    border-radius: var(--border-radius);
-    padding: 0 var(--padding-x);
-    background-color: var(--color-primary-bright);
-    color: white;
-    align-items: center;
-    max-width: 300px;
-    box-sizing: border-box;
-    overflow: hidden;
-
-    .arrow {
-      transition: rotate var(--snap-ease);
-      position: absolute;
-      right: 0.2rem;
-
-      &.active {
-        rotate: 90deg;
-      }
-    }
-
-    &:hover {
-      .arrow {
-        rotate: 90deg;
-      }
-
-      .choice {
-
-        color: white;
-      }
-
-      &.empty {
-        .choice {
-          color: var(--color-primary);
-        }
-      }
-    }
-
-    &.empty {
-      color: var(--color-text-muted);
-      border-color: var(--color-border);
-      background-color: var(--color-input-bg);
-
-    }
-
-  }
-
-  .search-item {
-    user-select: none;
-    cursor: pointer;
-    border-radius: var(--border-radius);
-
-    &:hover {
-      color: var(--color-primary);
-    }
-  }
 
 }
 

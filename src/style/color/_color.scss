@@ -1,76 +1,79 @@
-@import "../variables";
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "../variables";
 
 $schemes: [('name':'light',
             'colors':(
-        'primary':$primary,
-        'secondary':$secondary,
-        'accent':$accent,
-        'success':$success,
-        'error':$error,
-        'warning':$warning,
-        'info':$info,
-        'bg':$bg-color,
-        'body-bg':$body-bg,
-        'disabled':$disabled,
-        'widget-bg':$widget-bg-color,
-        'input-bg':$input-bg,
-        'border':$border-color,
-        'text':$text,
-        'title':$title,
-        'shadow':$shadow-color,
-                'white':$white,
-        'dark':$dark,
+        'primary':variables.$primary,
+        'secondary':variables.$secondary,
+        'accent':variables.$accent,
+        'success':variables.$success,
+        'error':variables.$error,
+        'warning':variables.$warning,
+        'info':variables.$info,
+        'bg':variables.$bg-color,
+        'body-bg':variables.$body-bg,
+        'disabled':variables.$disabled,
+        'widget-bg':variables.$widget-bg-color,
+        'input-bg':variables.$input-bg,
+        'border':variables.$border-color,
+        'text':variables.$text,
+        'title':variables.$title,
+        'shadow':variables.$shadow-color,
+                'white':variables.$white,
+        'dark':variables.$dark,
 ),
             'root-colors':(
-        'primary':$primary,
-        'secondary':$secondary,
-        'accent':$accent,
-        'success':$success,
-        'error':$error,
-        'warning':$warning,
-        'info':$info,
-                'white':$white,
-        'dark':$dark,
+        'primary':variables.$primary,
+        'secondary':variables.$secondary,
+        'accent':variables.$accent,
+        'success':variables.$success,
+        'error':variables.$error,
+        'warning':variables.$warning,
+        'info':variables.$info,
+                'white':variables.$white,
+        'dark':variables.$dark,
 ),
             'vars':(
-        'change-percent':$change-percent
+        'change-percent':variables.$change-percent
 )
         ),
       (
         'name':'dark',
         'colors':(
-        'primary':$primary-dark,
-        'secondary':$secondary-dark,
-        'accent':$accent-dark,
-        'success':$success-dark,
-        'error':$error-dark,
-        'warning':$warning-dark,
-        'info':$info-dark,
-        'bg':$bg-color-dark,
-        'body-bg':$body-bg-dark,
-        'disabled':$disabled-dark,
-        'widget-bg':$widget-bg-color-dark,
-        'input-bg':$input-bg-dark,
-        'border':$border-color-dark,
-        'text':$text-dark,
-        'title':$title-dark,
-        'shadow':$shadow-color-dark,
-                'white':$white-dark,
-        'dark':$dark-dark,
+        'primary':variables.$primary-dark,
+        'secondary':variables.$secondary-dark,
+        'accent':variables.$accent-dark,
+        'success':variables.$success-dark,
+        'error':variables.$error-dark,
+        'warning':variables.$warning-dark,
+        'info':variables.$info-dark,
+        'bg':variables.$bg-color-dark,
+        'body-bg':variables.$body-bg-dark,
+        'disabled':variables.$disabled-dark,
+        'widget-bg':variables.$widget-bg-color-dark,
+        'input-bg':variables.$input-bg-dark,
+        'border':variables.$border-color-dark,
+        'text':variables.$text-dark,
+        'title':variables.$title-dark,
+        'shadow':variables.$shadow-color-dark,
+                'white':variables.$white-dark,
+        'dark':variables.$dark-dark,
 ),
         'root-colors': (
-        'primary':$primary-dark,
-        'secondary':$secondary-dark,
-        'accent':$accent-dark,
-        'success':$success-dark,
-        'error':$error-dark,
-        'warning':$warning-dark,
-        'info':$info-dark,
-                'white':$white-dark,
-        'dark':$dark-dark,
+        'primary':variables.$primary-dark,
+        'secondary':variables.$secondary-dark,
+        'accent':variables.$accent-dark,
+        'success':variables.$success-dark,
+        'error':variables.$error-dark,
+        'warning':variables.$warning-dark,
+        'info':variables.$info-dark,
+                'white':variables.$white-dark,
+        'dark':variables.$dark-dark,
 ),
         'vars': (
-        'change-percent':$change-percent-dark
+        'change-percent':variables.$change-percent-dark
 )
         ),
 ];
@@ -87,34 +90,34 @@ $schemes: [('name':'light',
   @each $item in $schemes {
 
 
-    $colors: map-get($item, 'colors');
-    $root-colors: map-get($item, 'root-colors');
-    $vars: map-get($item, 'vars');
-    $percent: map-get($vars, 'change-percent');
+    $colors: map.get($item, 'colors');
+    $root-colors: map.get($item, 'root-colors');
+    $vars: map.get($item, 'vars');
+    $percent: map.get($vars, 'change-percent');
 
-    $theme: map-get($item, 'name');
+    $theme: map.get($item, 'name');
     body[data-theme="#{$theme}"] {
       color-scheme: #{$theme};
-      @each $key in map-keys($colors) {
-        --color-#{$key}: #{map-get($colors, $key)};
-        --color-#{$key}-bright: #{mix(white,map-get($colors, $key), $percent)};
-        --color-#{$key}-brighter: #{mix(white,map-get($colors, $key), $percent * 4)};
-        --color-#{$key}-dark: #{mix(black,map-get($colors, $key), $percent)};
-        --color-#{$key}-darker: #{mix(black,map-get($colors, $key), $percent * 4)};
+      @each $key in map.keys($colors) {
+        --color-#{$key}: #{map.get($colors, $key)};
+        --color-#{$key}-bright: #{color.mix(white,map.get($colors, $key), $percent)};
+        --color-#{$key}-brighter: #{color.mix(white,map.get($colors, $key), $percent * 4)};
+        --color-#{$key}-dark: #{color.mix(black,map.get($colors, $key), $percent)};
+        --color-#{$key}-darker: #{color.mix(black,map.get($colors, $key), $percent * 4)};
 
       }
-      --color-input-bg: #{map-get($colors, 'input-bg')};
-      --color-card-bg: #{map-get($colors, 'widget-bg')};
-      --shadow: 0.5px 0.5px 3px 1px #{map-get($colors, 'shadow')};
-      --shadow-small: 0.5px 0.5px 1px 1px #{map-get($colors, 'shadow')};
-      --shadow-inset: inset 0 0 3px 1px #{map-get($colors, 'shadow')};
+      --color-input-bg: #{map.get($colors, 'input-bg')};
+      --color-card-bg: #{map.get($colors, 'widget-bg')};
+      --shadow: 0.5px 0.5px 3px 1px #{map.get($colors, 'shadow')};
+      --shadow-small: 0.5px 0.5px 1px 1px #{map.get($colors, 'shadow')};
+      --shadow-inset: inset 0 0 3px 1px #{map.get($colors, 'shadow')};
 
-      @each $key in map-keys($root-colors) {
-        --color-card-bg-#{$key}: #{map-get($root-colors,$key)};
-        --color-card-bg-#{$key}-bright: #{mix(white,map-get($root-colors,$key),$percent)};
-        --color-card-bg-#{$key}-brighter: #{mix(white,map-get($root-colors,$key),$percent * 4)};
-        --color-card-bg-#{$key}-dark: #{mix(black,map-get($root-colors,$key),$percent)};
-        --color-card-bg-#{$key}-darker: #{mix(black,map-get($root-colors,$key),$percent * 4)};
+      @each $key in map.keys($root-colors) {
+        --color-card-bg-#{$key}: #{map.get($root-colors,$key)};
+        --color-card-bg-#{$key}-bright: #{color.mix(white,map.get($root-colors,$key),$percent)};
+        --color-card-bg-#{$key}-brighter: #{color.mix(white,map.get($root-colors,$key),$percent * 4)};
+        --color-card-bg-#{$key}-dark: #{color.mix(black,map.get($root-colors,$key),$percent)};
+        --color-card-bg-#{$key}-darker: #{color.mix(black,map.get($root-colors,$key),$percent * 4)};
 
       }
 
@@ -127,15 +130,15 @@ $schemes: [('name':'light',
 
 $variations: ['bright','brighter','dark','darker'];
 @each $item in $schemes {
-  $colors: map-get($item, 'colors');
-  $root-colors: map-get($item, 'root-colors');
-  $vars: map-get($item, 'vars');
-  $percent: map-get($vars, 'change-percent');
-  $theme: map-get($item, 'name');
+  $colors: map.get($item, 'colors');
+  $root-colors: map.get($item, 'root-colors');
+  $vars: map.get($item, 'vars');
+  $percent: map.get($vars, 'change-percent');
+  $theme: map.get($item, 'name');
   [data-theme="#{$theme}"] {
 
-    border-top: 1px solid #{transparentize(map-get($root-colors,'primary'), 0.5)};
-    @each $color in map-keys($root-colors) {
+    border-top: 1px solid #{color.adjust(map.get($root-colors,'primary'), $alpha: -0.5)};
+    @each $color in map.keys($root-colors) {
       .bg-#{$color} {
         background-color: var(--color-#{$color});
       }
@@ -145,29 +148,29 @@ $variations: ['bright','brighter','dark','darker'];
       .border-#{$color} {
         border-color: var(--color-#{$color});
       }
-      @for $i from 1 through length($variations) {
-        .text-#{$color}-#{nth($variations, $i)} {
-          color: var(--color-#{$color}-#{nth($variations, $i)});
+      @for $i from 1 through list.length($variations) {
+        .text-#{$color}-#{list.nth($variations, $i)} {
+          color: var(--color-#{$color}-#{list.nth($variations, $i)});
         }
 
 
-        .bg-#{$color}-#{nth($variations, $i)} {
-          background-color: var(--color-#{$color}-#{nth($variations, $i)});
+        .bg-#{$color}-#{list.nth($variations, $i)} {
+          background-color: var(--color-#{$color}-#{list.nth($variations, $i)});
         }
 
 
-        .border-#{$color}-#{nth($variations, $i)} {
-          border-color: var(--color-#{$color}-#{nth($variations, $i)});
+        .border-#{$color}-#{list.nth($variations, $i)} {
+          border-color: var(--color-#{$color}-#{list.nth($variations, $i)});
         }
 
       }
     }
-    @for $i from 1 through length($variations) {
-      .bg-#{nth($variations, $i)} {
-        background-color: var(--color-bg-#{nth($variations, $i)});
+    @for $i from 1 through list.length($variations) {
+      .bg-#{list.nth($variations, $i)} {
+        background-color: var(--color-bg-#{list.nth($variations, $i)});
       }
-      .text-#{nth($variations, $i)} {
-        color: var(--color-text-#{nth($variations, $i)});
+      .text-#{list.nth($variations, $i)} {
+        color: var(--color-text-#{list.nth($variations, $i)});
       }
 
     }

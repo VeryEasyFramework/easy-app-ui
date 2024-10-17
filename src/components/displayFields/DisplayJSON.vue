@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import type {EasyField} from "@vef/types";
-import {computed, onMounted, ref} from "vue";
-import {formatJson} from "@/components/displayFields/jsonFormat.ts";
+import type { EasyField } from "@vef/types/mod.ts";
+import { computed } from "vue";
+import { formatJson } from "@/components/displayFields/jsonFormat.ts";
 import Container from "@/components/layout/Container.vue";
 
 const props = defineProps<{
@@ -23,6 +23,7 @@ const props = defineProps<{
 
 const content = computed(() => {
   if (!props.value) return `<div class="italic">no content</div>`
+  if (typeof props.value === 'string') return `<div class="json-string">${props.value}</div>`
   const stringContent = JSON.stringify(props.value, null, 2)
   const rows = stringContent.split("\n")
   return rows.map(row => {

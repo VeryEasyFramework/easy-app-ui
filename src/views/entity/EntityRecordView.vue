@@ -10,9 +10,19 @@
           <div class="text-small italic text-primary-bright">
             {{ record.id }}
           </div>
+          <div class="choice" v-if="entityDef.statusField">
+            <DisplayChoices :value="record[entityDef.statusField.key]"
+                            :field="entityDef.statusField"/>
+          </div>
         </Container>
-        <EntityToolbar :editMode="editMode" @save="saveRecord" @delete="deleteRecord"
-                       @edit="(edit)=>editMode=edit"/>
+        <Container class="col shrink">
+          <div class="fit-content">
+
+            <RecordAttendance :users="roomUsers"/>
+          </div>
+          <EntityToolbar :editMode="editMode" @save="saveRecord" @delete="deleteRecord"
+                         @edit="(edit)=>editMode=edit"/>
+        </Container>
       </Container>
 
       <ContainerPadded class="fields">
@@ -27,6 +37,7 @@
                             :edit="editMode"
                             :group="group" :record="record"
                             :key="group.key"/>
+
         </Container>
       </ContainerPadded>
       <Container class="info">
@@ -55,23 +66,26 @@
 <script setup lang="ts">
 
 import CardWidget from "@/components/widgets/CardWidget.vue";
-import {onBeforeMount, onMounted, ref} from "vue";
-import {EasyField, EntityDefinition, EntityRecord, RecordInfo} from "@vef/types";
+import { onBeforeMount, onMounted, ref } from "vue";
+import type { EasyField, EntityDefinition, EntityRecord, RecordInfo } from "@vef/types/mod.ts";
+import { User } from "@vef/types/mod.ts";
 import Container from "@/components/layout/Container.vue";
 import LoaderOverlay from "@/components/transitions/LoaderOverlay.vue";
-import {router} from "@/router/index.ts";
-import {easyApi} from "@/api/index.ts";
+import { router } from "@/router/index.ts";
+import { easyApi } from "@/api/index.ts";
 import TransitionFade from "@/components/transitions/TransitionFade.vue";
-import {entityStore} from "@/stores/entityStore.ts";
+import { entityStore } from "@/stores/entityStore.ts";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import EntityActions from "@/components/entities/entityRecord/EntityActions.vue";
 import EntityInfo from "@/components/entities/entityRecord/EntityInfo.vue";
 import EntityToolbar from "@/components/entities/entityRecord/EntityToolbar.vue";
-import {notify} from "@/notify/index.ts";
-import {listenForEntity} from "@/realtime/index.ts";
+import { joinRecord } from "@/realtime/index.ts";
 import EntityFieldGroup from "@/components/entities/entityRecord/EntityFieldGroup.vue";
 import EntityEditLog from "@/components/entities/entityRecord/EntityEditLog.vue";
 import ChildList from "@/views/entity/ChildList.vue";
+import DisplayChoices from "@/components/displayFields/DisplayChoices.vue";
+import { notify } from "@/notify/index.ts";
+import RecordAttendance from "@/components/realtime/RecordAttendance.vue";
 
 const props = defineProps<{
   entity: string
@@ -140,16 +154,56 @@ async function deleteRecord() {
   await router.push(`/entity/${props.entity}`)
 }
 
-listenForEntity(props.entity, 'update', async (data) => {
-  if (data.id === props.id) {
-    record.value = data
-    notify({
-      message: `${entityDef.config.label} ${record.value[entityDef.config.titleField || 'id']} was updated`,
-      title: `${entityDef.config.label} Updated`,
-      type: 'success'
-    })
+function handleUserAttendance(event: "join" | "leave", data: any) {
+  const user = data.user as User
+  const users = data.users as User[]
+
+  roomUsers.value = users
+
+  const action = event === 'join' ? 'joined' : 'left'
+  notify({
+    message: `${user.firstName} ${action} the record`,
+    title: `User ${action}`,
+    type: event === 'join' ? 'success' : 'warning'
+  })
+}
+
+const roomUsers = ref<User[]>([])
+joinRecord(props.entity, props.id, (event, data) => {
+  console.log('event', event, data)
+  switch (event) {
+    case "update":
+      console.log(data)
+      console.log(Object.keys(data))
+      record.value = data
+      notify({
+        message: `${entityDef.config.label} ${record.value[entityDef.config.titleField || 'id']} was updated`,
+        title: `${entityDef.config.label} Updated`,
+        type: 'success'
+      })
+      break;
+    case "delete":
+      router.push(`/entity/${props.entity}`)
+      break;
+    case "join":
+      handleUserAttendance("join", data)
+      break;
+    case "leave":
+      handleUserAttendance("leave", data)
+
   }
 })
+
+// listenForEntity(props.entity, 'update', async (data) => {
+//   if (data.id === props.id) {
+//     record.value = data
+//     notify({
+//       message: `${entityDef.config.label} ${record.value[entityDef.config.titleField || 'id']} was updated`,
+//       title: `${entityDef.config.label} Updated`,
+//       type: 'success'
+//     })
+//   }
+// })
 
 onBeforeMount(() => {
   // load record

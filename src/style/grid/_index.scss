@@ -1,9 +1,9 @@
-@import "grid-overflow";
-@import "grid-columns";
-@import "grid-base";
-@import "grid-rows";
-@import "grid-alignment";
-@import "grid-gap";
+@use "grid-overflow";
+@use "grid-columns";
+@use "grid-base";
+@use "grid-rows";
+@use "grid-alignment";
+@use "grid-gap";
 
 
 body {

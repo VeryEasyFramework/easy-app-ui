@@ -1,18 +1,27 @@
-@import "customize";
-@import "variables";
-@import "layout";
-@import "color";
-@import "typography";
-@import "input";
-@import "animation";
-@import "widgets";
-@import "buttons";
-@import "grid";
-@import "cursor";
+@use "customize";
+@use "variables";
+@use "layout";
+@use "color";
+@use "typography";
+@use "input";
+@use "animation";
+@use "widgets";
+@use "buttons";
+@use "grid";
+@use "cursor";
 
 :root {
-  --border-radius: #{$border-radius};
-
+  --border-radius: #{variables.$border-radius};
+  --font-size: #{variables.$font-size};
+  --font-size-mobile: #{variables.$font-size-mobile};
+  --font-family: #{variables.$font-family};
+  --font-family-title: #{variables.$font-family-title};
+  --text-body-size: 0.875rem;
+  font-size: var(--font-size);
+  font-family: var(--font-family), sans-serif;
+  color: var(--text);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 @media (max-width: 768px) {

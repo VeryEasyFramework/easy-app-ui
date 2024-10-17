@@ -11,11 +11,13 @@
         <Container class="px-3 row-gap-3">
 
           <InputDataField label="Email" placeholder="Enter your email..." required focus
+                          edit
                           name="email"
                           :error="errors.email"
                           v-model="credentials.email"/>
           <InputPasswordField v-if="!forgotPassword" label="Password" required
                               placeholder="Enter your password..."
+                              edit
                               name="password"
                               :error="errors.password"
                               v-model="credentials.password"/>
@@ -46,11 +48,11 @@ import InputPasswordField from "@/components/inputs/InputPassword.vue";
 import Button from "@/components/buttons/Button.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import FormBase from "@/components/form/FormBase.vue";
-import {reactive, ref} from "vue";
-import {useAppStore} from "@/stores/appStore.ts";
-import {router} from "@/router/index.ts";
-import {easyApi} from "@/api/index.ts";
-import {notify} from "@/notify/index.ts";
+import { reactive, ref } from "vue";
+import { useAppStore } from "@/stores/appStore.ts";
+import { router } from "@/router/index.ts";
+import { easyApi } from "@/api/index.ts";
+import { notify } from "@/notify/index.ts";
 
 const appStore = useAppStore()
 const credentials = reactive({

@@ -15,16 +15,14 @@
 
 <script setup lang="ts">
 
-import {onMounted} from "vue";
-import {useAppStore} from "@/stores/appStore.ts";
+import { onMounted } from "vue";
+import { useAppStore } from "@/stores/appStore.ts";
 import RootLayout from "@/components/layout/RootLayout.vue";
-import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import TransitionRouterView from "@/components/transitions/TransitionRouterView.vue";
-import {notify} from "@/notify/index.ts";
+import { notify } from "@/notify/index.ts";
 import LoaderOverlay from "@/components/transitions/LoaderOverlay.vue";
 import SidebarNavLayout from "@/components/layout/SidebarNavLayout.vue";
 import NavigatorSide from "@/components/navigation/NavigatorSide.vue";
-import {realtime} from "@/realtime/index.ts";
 
 
 const appStore = useAppStore()
@@ -46,8 +44,6 @@ onMounted(async () => {
       type: 'warning'
     })
   }
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  realtime.connect()
 })
 
 </script>
