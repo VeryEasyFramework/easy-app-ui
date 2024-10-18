@@ -29,10 +29,8 @@
             <Container>
 
               <div v-for="param in currentAction.params" :key="param.key">
-                <component :is="fieldMap[param.fieldType]" :label="param.key"
-                           :required="param.required"
-                           :error="currentActionParams[param.key].error"
-                           v-model="currentActionParams[param.key].value"></component>
+                <EasyInput :field="param" editable v-model="currentActionParams[param.key].value"
+                           :error="currentActionParams[param.key].error"/>
 
               </div>
             </Container>
@@ -54,20 +52,27 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import type {EntityAction, EntityDefinition, EntityRecord} from "@vef/types";
-import {onMounted, ref} from "vue";
+import type {
+  EntityAction,
+  EntityDefinition,
+  EntityRecord,
+  SettingsEntityDefinition,
+  SettingsRecord
+} from "@vef/types/mod.ts";
+import { onMounted, ref } from "vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
-import {easyApi} from "@/api/index.ts";
-import {notify} from "@/notify/index.ts";
+import { easyApi } from "@/api/index.ts";
+import { notify } from "@/notify/index.ts";
 import ModalView from "@/components/modal/ModalView.vue";
 import Form from "@/components/form/FormBase.vue";
-import {fieldMap} from "@/components/inputs/index.ts";
+import EasyInput from "@/components/inputs/EasyInput.vue";
 
 const props = defineProps<{
-  entityDef: EntityDefinition
-  record: EntityRecord
+  entityDef: EntityDefinition | SettingsEntityDefinition
+  type: "entity" | "settings"
+  record: EntityRecord | SettingsRecord
 }>()
 
 const actions = ref<EntityAction[]>([])
@@ -117,7 +122,20 @@ async function submitAction(action: EntityAction) {
   for (const key in currentActionParams.value) {
     data[key] = currentActionParams.value[key].value
   }
-  const response = await easyApi.runEntityAction(props.entityDef.entityId, props.record.id, action.key, data)
+
+  let response: Record<string, any> = {}
+  switch (props.type) {
+    case "entity":
+      response = await easyApi.runEntityAction((props.entityDef as EntityDefinition).entityId, (props.record as EntityRecord).id, action.key, data)
+      break
+    case "settings":
+      response = await easyApi.call("settings", "runSettingsAction", {
+        settings: (props.entityDef as SettingsEntityDefinition).settingsId,
+        action: action.key,
+        data
+      })
+      break
+  }
 
   notify({
     title: `Action ${action.label || action.key} completed`,

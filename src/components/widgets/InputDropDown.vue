@@ -1,12 +1,16 @@
 <template>
 
 
-  <div ref="dropdown" class="dropdown-container">
+  <div ref="dropdown" class="dropdown-container" :class="{
+    disabled: !edit,
+  }">
     <div @click="handleClick">
 
       <slot name="label">
         <Container class="selected-choice col shrink" :class="{
           'empty': !label,
+          disabled: !edit,
+          [labelClass??'']: labelClass,
         }">
           <MaterialIcon v-if="icon" :icon="icon ||'person'"/>
           <div class="choice">{{ label || `Choose ${emptyLabel}` }}
@@ -14,6 +18,7 @@
           </div>
           <MaterialIcon class="arrow" :class="{
           active: open,
+          disabled: !edit,
         }" icon="chevron_right"/>
         </Container>
       </slot>
@@ -46,18 +51,18 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onBeforeUnmount, onMounted, ref, useTemplateRef} from "vue";
-import CardWidget from "@/components/widgets/CardWidget.vue";
-import Button from "@/components/buttons/Button.vue";
+import { computed, onMounted, ref, useTemplateRef } from "vue";
 import Container from "@/components/layout/Container.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
-import {MaterialIcons} from "@/components/icons/materialIcons.ts";
+import { MaterialIcons } from "@/components/icons/materialIcons.ts";
 
 const open = ref(false);
 const props = defineProps<{
   searchValue?: string
   label?: string | number
   icon?: MaterialIcons
+  edit?: boolean
+  labelClass?: string
   emptyLabel?: string
 }>()
 const input = useTemplateRef<HTMLInputElement>('input')
@@ -78,6 +83,9 @@ const top = ref("0px");
 const left = ref("0px");
 
 function handleClick(evt: MouseEvent) {
+  if (!props.edit) {
+    return
+  }
   if (open.value) {
     hidePopover()
     return
@@ -212,9 +220,13 @@ onMounted(() => {
       &.active {
         rotate: 90deg;
       }
+
+      &.disabled {
+        display: none;
+      }
     }
 
-    &:hover {
+    &:hover:not(.disabled) {
       .arrow {
         rotate: 90deg;
       }
@@ -249,7 +261,7 @@ onMounted(() => {
   .select-dropdown {
     .dropdown {
 
-      background-color: var(--dropdown-color);
+      background-color: var(--color-widget-bg);
       border-radius: var(--border-radius);
       box-shadow: var(--shadow);
 
@@ -280,6 +292,7 @@ onMounted(() => {
 
       }
     }
+
 
     &[popover] {
       position: absolute;

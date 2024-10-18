@@ -20,7 +20,7 @@
 
 import { computed } from "vue";
 import { fieldMap } from "@/components/inputs/index.ts";
-import { EasyField } from "@vef/types";
+import { EasyField } from "@vef/types/mod.ts";
 import { MaterialIcons } from "@/components/icons/materialIcons.ts";
 
 

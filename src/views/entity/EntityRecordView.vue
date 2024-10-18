@@ -44,7 +44,7 @@
         <EntityInfo :entityDef="entityDef" :record="record!"/>
       </Container>
       <Container class="actions">
-        <EntityActions :entityDef="entityDef" :record="record!"/>
+        <EntityActions :entityDef="entityDef" :record="record!" type="entity"/>
       </Container>
 
       <Container class="children">

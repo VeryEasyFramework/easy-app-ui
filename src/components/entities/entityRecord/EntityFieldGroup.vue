@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { EntityRecord, FieldGroup } from "@vef/types";
+import { EntityRecord, FieldGroup, SettingsRecord } from "@vef/types/mod.ts";
 import Container from "@/components/layout/Container.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import { computed } from "vue";
@@ -30,7 +30,7 @@ import EasyInput from "@/components/inputs/EasyInput.vue";
 const props = defineProps<{
   group: FieldGroup
   edit?: boolean
-  record: EntityRecord
+  record: EntityRecord | SettingsRecord
 }>()
 
 const filteredFields = computed(() => {

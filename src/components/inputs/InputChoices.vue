@@ -7,14 +7,10 @@
       :read-only="!edit || field.readOnly">
     <InputDropDown @open="handleOpen" v-model:search-value="searchValue"
                    @clear="clearValue"
+                   :edit="edit && !field.readOnly"
+                   :label-class="selectedChoice?.color??''"
                    :label="selectedChoice?.label" :empty-label="field.label">
-      <template #label>
-        <div class="choice" :class="{
-          [selectedChoice?.color??'']: true,
-          'active': selectedChoice?.key === selectedChoice?.key,
-        }">{{ selectedChoice?.label }}
-        </div>
-      </template>
+
 
       <template #content="dropDownProps">
         <Container>
@@ -101,16 +97,21 @@ const emit = defineEmits(["update:modelValue"]);
 
 <style lang="scss">
 .input-choices {
+  .choice, .selected-choice .choice {
+    font-size: 0.8rem;
 
-  & .choice {
+  }
 
+  .choice {
     width: fit-content;
     padding: 0.14rem 0.3rem;
     line-height: 1;
-    font-size: 0.5rem;
     border-radius: var(--border-radius);
-    color: white;
     font-weight: bold;
+  }
+
+  .choice, .selected-choice {
+
 
     &.primary {
       background-color: var(--color-primary-brighter);
