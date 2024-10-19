@@ -33,14 +33,14 @@
 
 <script setup lang="ts">
 
-import {formatString} from "@/utils/index.ts";
+import { formatString } from "@/utils/index.ts";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import Container from "@/components/layout/Container.vue";
 import ModalView from "@/components/modal/ModalView.vue";
 import ActionInputForm from "@/views/api/ActionInputForm.vue";
-import {DocsAction} from "@vef/types";
-import {ref} from "vue";
-import {easyApi} from "@/api/index.ts";
+import { DocsAction } from "@vef/types/mod.ts";
+import { ref } from "vue";
+import { easyApi } from "@/api/index.ts";
 import DisplayJSON from "@/components/displayFields/DisplayJSON.vue";
 
 const showActionForm = ref(false)

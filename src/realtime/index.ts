@@ -95,7 +95,6 @@ export function listenForEntity(entity: string, event: 'list' | 'update' | 'crea
 }
 
 export function listenForList(entity: string, callback: (event: "create" | "update" | "delete", record: EntityRecord) => void) {
-  return
   const listener = (room: string, e: string, message: any) => {
     if (room === `entity:${entity}` && e === "list") {
       const record = message.data

@@ -33,14 +33,14 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {DocsActionGroup} from "@vef/types";
-import {easyApi} from "@/api/index.ts";
+import { onMounted, ref } from "vue";
+import { DocsActionGroup } from "@vef/types/mod.ts";
+import { easyApi } from "@/api/index.ts";
 import ListDetailLayout from "@/components/layout/ListDetailLayout.vue";
 import Container from "@/components/layout/Container.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import ApiGroupDetail from "@/views/api/ApiGroupDetail.vue";
-import {formatString} from "../../utils/index.ts";
+import { formatString } from "@/utils/index.ts";
 import TransitionFade from "@/components/transitions/TransitionFade.vue";
 
 const docs = ref<DocsActionGroup[]>([])

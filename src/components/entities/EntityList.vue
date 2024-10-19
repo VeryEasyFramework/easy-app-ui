@@ -43,18 +43,18 @@
 
 <script setup lang="ts">
 import Container from "@/components/layout/Container.vue";
-import {entityStore} from "@/stores/entityStore.ts";
-import type {EasyField} from "@vef/types";
-import {AdvancedFilter, EntityDefinition, EntityRecord} from "@vef/types";
-import {onBeforeMount, onBeforeUnmount, onMounted, ref, useTemplateRef} from "vue";
+import { entityStore } from "@/stores/entityStore.ts";
+import type { EasyField } from "@vef/types/mod.ts";
+import { AdvancedFilter, EntityDefinition, EntityRecord } from "@vef/types/mod.ts";
+import { onBeforeMount, onBeforeUnmount, onMounted, ref, useTemplateRef } from "vue";
 import EntityListItem from "@/views/entity/EntityListItem.vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import ModalView from "@/components/modal/ModalView.vue";
 import NewEntityForm from "@/components/entities/NewEntityForm.vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
-import {listenForList} from "@/realtime/index.ts";
-import {EntityListLoader} from "@/components/entities/listLoader.ts";
+import { listenForList } from "@/realtime/index.ts";
+import { EntityListLoader } from "@/components/entities/listLoader.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
 import EntitySearchInput from "@/components/entities/EntitySearchInput.vue";
 
@@ -139,7 +139,7 @@ const infinite = useTemplateRef<HTMLElement>('infinite')
 const rowGap = 3
 const rowGapPx = `${rowGap}px`
 const listHeight = ref<string>('0')
-const itemHeightBase = 60
+const itemHeightBase = 50
 const itemHeight = itemHeightBase + rowGap
 
 const itemHeightPx = `${itemHeightBase}px`

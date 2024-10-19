@@ -27,7 +27,6 @@ import EntityFieldGroup from "@/components/entities/entityRecord/EntityFieldGrou
 import { easyApi } from "@/api/index.ts";
 import EntityActions from "@/components/entities/entityRecord/EntityActions.vue";
 import { joinSettings } from "@/realtime/index.ts";
-import { notify } from "@/notify/index.ts";
 import RecordAttendance from "@/components/realtime/RecordAttendance.vue";
 import { listenForKeyPress, onControlS } from "@/utils/keyboard.ts";
 
@@ -83,11 +82,11 @@ function handleUserAttendance(event: "join" | "leave", data: any) {
   roomUsers.value = users
 
   const action = event === 'join' ? 'joined' : 'left'
-  notify({
-    message: `${user.firstName} ${action} the record`,
-    title: `User ${action}`,
-    type: event === 'join' ? 'success' : 'warning'
-  })
+  // notify({
+  //   message: `${user.firstName} ${action} the record`,
+  //   title: `User ${action}`,
+  //   type: event === 'join' ? 'success' : 'warning'
+  // })
 }
 </script>
 

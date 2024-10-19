@@ -1,19 +1,19 @@
 <template>
   <InputWrapper
-      :label="label"
+      :label="field.label"
       :error="error"
-      :required="required"
-      :read-only="readOnly">
+      :required="field.required"
+      :read-only="!edit || field.readOnly">
     <Container class="position-relative">
-
-    <textarea
-        :name="name"
-        class="json-textarea"
-        ref="input"
-        v-model="inputValueRef"
-        @input="handleInput"
-        :disabled="readOnly"/>
-      <DisplayJSON class="z-1 display-json" :value="jsonValue"/>
+      <DisplayJSON v-if="!edit || field.readOnly" class="z-1 display-json" :value="jsonValue"/>
+      <textarea
+          v-else
+          :name="field.key"
+          class="json-textarea"
+          ref="input"
+          v-model="inputValueRef"
+          @input="handleInput"
+      />
     </Container>
   </InputWrapper>
 </template>
@@ -27,11 +27,9 @@ import Container from "@/components/layout/Container.vue";
 
 const props = defineProps<{
   modelValue?: any;
-  label?: string;
+  field?: any;
   error?: string;
-  name?: string;
-  required?: boolean;
-  readOnly?: boolean;
+  edit?: boolean;
   focus?: boolean;
 }>();
 const emit = defineEmits(["update:modelValue"]);

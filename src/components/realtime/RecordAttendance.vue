@@ -2,16 +2,18 @@
   <Container class="col shrink overflow-visible">
     <TransitionList>
 
+      <Container v-for="user in users" :key="user.id" class="col shrink">
 
-      <Popover :text="`${user.firstName} ${user.lastName}`" v-for="user in users" :key="user.id">
-        <Container
-            class="col cursor-pointer label overflow-visible avatar shrink vertical-align-center bg-primary border px-2"
-            :key="user.id">
+        <Popover :text="`${user.firstName} ${user.lastName}`">
+          <Container
+              class="col cursor-pointer label overflow-visible avatar shrink vertical-align-center bg-primary border px-2"
+              :key="user.id">
 
-          <MaterialIcon icon="person" class="avatar"/>
-          <div>{{ formatString(`${user.firstName} ${user.lastName}`, "initials") }}</div>
-        </Container>
-      </Popover>
+            <MaterialIcon icon="person" class="avatar"/>
+            <div>{{ formatString(`${user.firstName} ${user.lastName}`, "initials") }}</div>
+          </Container>
+        </Popover>
+      </Container>
     </TransitionList>
   </Container>
 </template>

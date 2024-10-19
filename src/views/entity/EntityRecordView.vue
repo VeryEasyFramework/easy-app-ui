@@ -161,11 +161,11 @@ function handleUserAttendance(event: "join" | "leave", data: any) {
   roomUsers.value = users
 
   const action = event === 'join' ? 'joined' : 'left'
-  notify({
-    message: `${user.firstName} ${action} the record`,
-    title: `User ${action}`,
-    type: event === 'join' ? 'success' : 'warning'
-  })
+  // notify({
+  //   message: `${user.firstName} ${action} the record`,
+  //   title: `User ${action}`,
+  //   type: event === 'join' ? 'success' : 'warning'
+  // })
 }
 
 const roomUsers = ref<User[]>([])

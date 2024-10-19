@@ -1,8 +1,8 @@
 <template>
-  <CardWidget class="full-width entity-list-item position-relative" :class="{
+  <CardWidget class="px-3 py-2 full-width entity-list-item position-relative" :class="{
     active
   }" @click="$emit('select', record.id)">
-    <Container class="row shrink">
+    <Container class="row gap-1 shrink overflow-visible">
       <Container class="col shrink horizontal-align-between ">
 
         <div class="text-small text-primary bold item-label">
@@ -41,12 +41,12 @@
 </template>
 
 <script setup lang="ts">
-import type {EasyField, EntityDefinition, EntityRecord} from "@vef/types";
+import type { EasyField, EntityDefinition, EntityRecord } from "@vef/types/mod.ts";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import Container from "@/components/layout/Container.vue";
 import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
-import {displayFieldsMap} from "@/components/displayFields/index.ts";
+import { displayFieldsMap } from "@/components/displayFields/index.ts";
 
 defineProps<{
   entityDef: EntityDefinition,

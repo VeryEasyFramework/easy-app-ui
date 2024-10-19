@@ -1,16 +1,17 @@
 <template>
   <InputWrapper
-      :label="field.label"
+      :label="field?.label"
       :error="error"
-      :required="field.required"
-      :read-only="field.readOnly">
+      :required="field?.required"
+      :description="field?.description"
+      :read-only="!edit || field?.readOnly">
     <input
         :name="field.key"
         ref="input"
         :placeholder="placeholder ||field.readOnly?'': `Enter ${field.label}`"
         type="number"
         v-model="inputValue"
-        :disabled="field.readOnly"/>
+        :disabled="!edit || field?.readOnly"/>
   </InputWrapper>
 </template>
 
@@ -23,6 +24,7 @@ import { EasyField } from "@vef/types/mod.ts";
 const props = defineProps<{
   modelValue?: any;
   field: EasyField;
+  edit?: boolean;
   placeholder?: string;
   error?: string;
   focus?: boolean;

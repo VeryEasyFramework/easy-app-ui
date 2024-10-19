@@ -2,7 +2,8 @@
   <CardWidget class="">
 
     <Container class="row shrink">
-      <div class="title-4 text-primary">{{ group.title }}</div>
+      <div v-if="group.key != 'default'" class="title-4 text-primary">{{ group.title }}</div>
+      <div v-if="group.description" class="title-6 pb-2 italic">{{ group.description }}</div>
       <Container class="group-fields col shrink column-gap-3 overflow-hidden" :class="{
     edit: edit
   }">

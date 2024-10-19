@@ -1,23 +1,25 @@
 <template>
   <BasicForm :columns="action.params.length > 3? 2:1" :name="action.actionName"
              @cancel="$emit('cancel')" @submitted="handleSubmit">
-    <component :is="fieldMap[param.type]" v-for="(param,index) in action.params"
-               :key="param.paramName"
-               v-model="data[param.paramName].value"
-               :error="data[param.paramName].error"
-               :focus="index === 0"
-               :required="param.required"
-               :label="formatString(param.paramName,'titleCase','camelCase')"/>
+
+    <EasyInput v-for="(param, index) in action.params" :field="{
+      label: formatString(param.paramName,'titleCase','camelCase'),
+      key: param.paramName,
+      fieldType: param.type,
+      required: param.required,
+      readOnly: false
+    }" v-model="data[param.paramName].value" edit :error="data[param.paramName].error"
+               :focus="index===0" :key="param.paramName"/>
 
   </BasicForm>
 </template>
 
 <script setup lang="ts">
-import {DocsAction} from "@vef/types";
-import {fieldMap} from "@/components/inputs/index.ts";
-import {formatString} from "@/utils/index.ts";
+import { DocsAction } from "@vef/types/mod.ts";
+import { formatString } from "@/utils/index.ts";
 import BasicForm from "@/components/form/BasicForm.vue";
-import {onBeforeMount, ref} from "vue";
+import { onBeforeMount, ref } from "vue";
+import EasyInput from "@/components/inputs/EasyInput.vue";
 
 const props = defineProps<{
   action: DocsAction

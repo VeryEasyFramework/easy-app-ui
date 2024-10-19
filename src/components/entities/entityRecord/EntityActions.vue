@@ -11,6 +11,8 @@
         <Container class="col-2 shrink vertical-align-center">
           <ButtonIcon icon="play_arrow" color="secondary" @click="handleAction(action)"
                       :label="action.label" key="play"/>
+          <ButtonIcon icon="queue_play_next" color="info" @click="handleAction(action,true)"
+                      :label="action.label" key="queue"/>
           <Container>
             <div class="title-5 text-accent">{{ action.label }}</div>
             <div class="text-small italic">{{ action.description }}</div>
@@ -23,7 +25,8 @@
       <ContainerPadded class="row row-gap-4">
 
         <div class="title-4 text-center">{{ currentAction.label || currentAction.key }}</div>
-        <Form name="actionParamsForm" @submitted="async  ()=> await submitAction(currentAction)">
+        <Form name="actionParamsForm"
+              @submitted="async  ()=> await submitAction(currentAction,enqueue)">
           <Container class="row row-gap-4">
 
             <Container>
@@ -38,7 +41,8 @@
 
               <ButtonIcon icon="cancel" color="error" @click="showActionParams = false"
                           label="Cancel"/>
-              <ButtonIcon icon="play_arrow" type="submit" color="secondary"
+              <ButtonIcon :icon="enqueue?'queue_play_next':  'play_arrow'" type="submit"
+                          :color="enqueue?'info': 'secondary'"
 
                           :label="currentAction.label"/>
             </Container>
@@ -91,11 +95,12 @@ const currentActionParams = ref<Record<string, {
   value: any
 }>>({})
 const showActionParams = ref(false)
+const enqueue = ref(false)
 onMounted(() => {
   actions.value = props.entityDef.actions.filter(a => !a.private) as EntityAction[]
 })
 
-async function handleAction(action: EntityAction) {
+async function handleAction(action: EntityAction, queue = false) {
   currentAction.value = action
   if (action.params && action.params.length > 0) {
     currentActionParams.value = {}
@@ -106,14 +111,15 @@ async function handleAction(action: EntityAction) {
       }
     })
     showActionParams.value = true
+    enqueue.value = queue
     return
   }
 
-  await submitAction(action)
+  await submitAction(action, queue)
 
 }
 
-async function submitAction(action: EntityAction) {
+async function submitAction(action: EntityAction, queue = false) {
 
   if (!validateParams(action, currentActionParams.value)) {
     return
@@ -126,7 +132,13 @@ async function submitAction(action: EntityAction) {
   let response: Record<string, any> = {}
   switch (props.type) {
     case "entity":
-      response = await easyApi.runEntityAction((props.entityDef as EntityDefinition).entityId, (props.record as EntityRecord).id, action.key, data)
+      response = await easyApi.call('entity', "runEntityAction", {
+        entity: (props.entityDef as EntityDefinition).entityId,
+        id: (props.record as EntityRecord).id,
+        action: action.key,
+        data,
+        enqueue: queue
+      })
       break
     case "settings":
       response = await easyApi.call("settings", "runSettingsAction", {
@@ -152,6 +164,7 @@ async function submitAction(action: EntityAction) {
     }
   }
   showActionParams.value = false
+  enqueue.value = false
 }
 
 function validateParams(action: EntityAction, params: Record<string, {

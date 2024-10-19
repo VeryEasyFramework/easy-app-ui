@@ -35,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import {DocsAction, DocsActionGroup} from "@vef/types";
+import { DocsAction, DocsActionGroup } from "@vef/types/mod.ts";
 import Container from "@/components/layout/Container.vue";
-import {formatString} from "@/utils/index.ts";
+import { formatString } from "@/utils/index.ts";
 import CardWidget from "@/components/widgets/CardWidget.vue";
-import {ref} from "vue";
+import { ref } from "vue";
 import TransitionFade from "@/components/transitions/TransitionFade.vue";
 
 import ActionDetailView from "@/views/api/ActionDetailView.vue";
