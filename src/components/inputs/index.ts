@@ -18,7 +18,7 @@ import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
 import InputDecimal from "@/components/inputs/InputDecimal.vue";
 import InputRichText from "@/components/inputs/InputRichText.vue";
 import InputURL from "@/components/inputs/InputURL.vue";
-import InputTag from "@/components/inputs/InputTag.vue";
+import InputList from "@/components/inputs/InputList.vue";
 
 export const fieldMap: Record<EasyFieldType, Component> = {
   BigIntField: InputBigInt,
@@ -40,5 +40,5 @@ export const fieldMap: Record<EasyFieldType, Component> = {
   TimeStampField: InputTimestamp,
   RichTextField: InputRichText,
   URLField: InputURL,
-  TagField: InputTag,
+  ListField: InputList
 }
