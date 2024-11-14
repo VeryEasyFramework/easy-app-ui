@@ -1,5 +1,5 @@
-import type {EasyFieldType} from "@vef/types";
-import type {Component} from "vue";
+import type { EasyFieldType } from "@vef/types";
+import type { Component } from "vue";
 import InputBigInt from "@/components/inputs/InputBigInt.vue";
 import InputBoolean from "@/components/inputs/InputBoolean.vue";
 import InputChoices from "@/components/inputs/InputChoices.vue";
@@ -18,25 +18,27 @@ import InputTimestamp from "@/components/inputs/InputTimestamp.vue";
 import InputDecimal from "@/components/inputs/InputDecimal.vue";
 import InputRichText from "@/components/inputs/InputRichText.vue";
 import InputURL from "@/components/inputs/InputURL.vue";
+import InputTag from "@/components/inputs/InputTag.vue";
 
 export const fieldMap: Record<EasyFieldType, Component> = {
-   BigIntField: InputBigInt,
-   BooleanField: InputBoolean,
-   ChoicesField: InputChoices,
-   ConnectionField: InputConnection,
-   DateField: InputDate,
-   DecimalField: InputDecimal,
-   EmailField: InputEmail,
-   ImageField: InputImage,
-   IntField: InputInt,
-   JSONField: InputJSON,
-   MultiChoiceField: InputMultiChoice,
-   PasswordField: InputPassword,
-   PhoneField: InputPhone,
-   TextField: InputText,
-   DataField: InputData,
-   IDField: InputData,
-   TimeStampField: InputTimestamp,
-   RichTextField: InputRichText,
-   URLField: InputURL
+  BigIntField: InputBigInt,
+  BooleanField: InputBoolean,
+  ChoicesField: InputChoices,
+  ConnectionField: InputConnection,
+  DateField: InputDate,
+  DecimalField: InputDecimal,
+  EmailField: InputEmail,
+  ImageField: InputImage,
+  IntField: InputInt,
+  JSONField: InputJSON,
+  MultiChoiceField: InputMultiChoice,
+  PasswordField: InputPassword,
+  PhoneField: InputPhone,
+  TextField: InputText,
+  DataField: InputData,
+  IDField: InputData,
+  TimeStampField: InputTimestamp,
+  RichTextField: InputRichText,
+  URLField: InputURL,
+  TagField: InputTag,
 }

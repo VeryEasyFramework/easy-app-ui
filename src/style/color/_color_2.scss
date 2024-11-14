@@ -13,7 +13,7 @@ $baseColors: variables.$color1, variables.$color2, variables.$color3, variables.
     --color#{$c}: #{$color};
     @for $i from 1 through 10 {
 
-      --color#{$c}-#{$i * 100 *1% }: #{color.adjust($color, $lightness: $i * 5 * 1% )};
+      --color#{$c}-#{$i * 100}: #{color.adjust($color, $lightness: $i * 5 * 1% )};
     }
 
   }
