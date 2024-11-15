@@ -17,9 +17,9 @@
 
 <script setup lang="ts">
 
-import {computed, onMounted} from "vue";
-import {fieldMap} from "@/components/inputs/index.ts";
-import {EasyField} from "@vef/types";
+import { computed, onMounted } from "vue";
+import { fieldMap } from "@/components/inputs/index.ts";
+import { EasyField } from "@vef/types";
 
 
 const props = defineProps<{
@@ -50,13 +50,11 @@ const titleValue = computed({
   get: () => {
     return props.titleValue
   },
-  set: (value) => {
+  set: (value: string | number) => {
     emit("update:titleValue", value)
   }
 })
 onMounted(() => {
-  console.log(props.modelValue)
-  console.log(props.field.key)
 })
 </script>
 

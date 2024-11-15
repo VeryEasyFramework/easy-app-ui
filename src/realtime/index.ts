@@ -1,22 +1,21 @@
 import { RealtimeClient } from "@vef/easy-api/mod.ts";
 import { onBeforeUnmount, onMounted } from "vue";
-import type { EntityRecord } from "@vef/types";
-import { SettingsRecord, User } from "@vef/types/mod.ts";
+import { Entry, Settings, User } from "@vef/types/mod.ts";
 
 const host = import.meta.env.VITE_WS
 export const realtime = new RealtimeClient(
   host
 )
 
-type EntityEvent = "update" | "delete" | "join" | "leave"
+type EntryTypeEvent = "update" | "delete" | "join" | "leave"
 type SettingsEvent = "update" | "join" | "leave"
 
-export function joinRecord(entity: string, id: string, callback: (event: EntityEvent, data: EntityRecord) => void) {
-  const entityRoom = `entity:${entity}:${id}`
+export function joinRecord(entryType: string, id: string, callback: (event: EntryTypeEvent, data: Entry) => void) {
+  const entryRoom = `entryType:${entryType}:${id}`
 
   const listener = (room: string, e: string, data: any) => {
-    const ev = e as EntityEvent
-    if (room === entityRoom) {
+    const ev = e as EntryTypeEvent
+    if (room === entryRoom) {
       switch (ev) {
         case "join":
           callback(ev, data)
@@ -35,23 +34,23 @@ export function joinRecord(entity: string, id: string, callback: (event: EntityE
   }
   onMounted(() => {
     realtime.onMessage(listener)
-    realtime.join(entityRoom)
+    realtime.join(entryRoom)
   })
 
   onBeforeUnmount(() => {
     realtime.removeMessageListener(listener)
-    realtime.leave(entityRoom)
+    realtime.leave(entryRoom)
   })
 }
 
-export function joinSettings(settings: string, callback: (event: SettingsEvent, data: SettingsRecord | {
+export function joinSettings(settings: string, callback: (event: SettingsEvent, data: Settings | {
   users: User[]
 }) => void) {
-  const entityRoom = `settings:${settings}`
+  const settingsRoom = `settingsType:${settings}`
 
   const listener = (room: string, e: string, data: any) => {
-    const ev = e as EntityEvent
-    if (room === entityRoom) {
+    const ev = e as EntryTypeEvent
+    if (room === settingsRoom) {
       switch (ev) {
         case "join":
           callback(ev, data)
@@ -67,36 +66,36 @@ export function joinSettings(settings: string, callback: (event: SettingsEvent, 
   }
   onMounted(() => {
     realtime.onMessage(listener)
-    realtime.join(entityRoom)
+    realtime.join(settingsRoom)
   })
 
   onBeforeUnmount(() => {
     realtime.removeMessageListener(listener)
-    realtime.leave(entityRoom)
+    realtime.leave(settingsRoom)
   })
 }
 
-export function listenForEntity(entity: string, event: 'list' | 'update' | 'create' | 'delete', callback: (data: EntityRecord) => void) {
+export function listenForEntry(entryType: string, event: 'list' | 'update' | 'create' | 'delete', callback: (data: Entry) => void) {
   const listener = (room: string, e: string, data: any) => {
-    if (room === `entity:${entity}` && e === event) {
+    if (room === `entryType:${entryType}` && e === event) {
       callback(data.data)
     }
   }
   onMounted(() => {
     realtime.onMessage(listener)
-    realtime.join(`entity:${entity}`, event)
+    realtime.join(`entryType:${entryType}`, event)
   })
 
   onBeforeUnmount(() => {
     realtime.removeMessageListener(listener)
-    realtime.leave(`entity:${entity}`, event)
+    realtime.leave(`entryType:${entryType}`, event)
   })
 
 }
 
-export function listenForList(entity: string, callback: (event: "create" | "update" | "delete", record: EntityRecord) => void) {
+export function listenForList(entryType: string, callback: (event: "create" | "update" | "delete", record: Entry) => void) {
   const listener = (room: string, e: string, message: any) => {
-    if (room === `entity:${entity}` && e === "list") {
+    if (room === `entryType:${entryType}` && e === "list") {
       const record = message.data
       const action = message.action
       callback(action, record)
@@ -104,12 +103,12 @@ export function listenForList(entity: string, callback: (event: "create" | "upda
   }
   onMounted(() => {
     realtime.onMessage(listener)
-    realtime.join(`entity:${entity}`, "list")
+    realtime.join(`entryType:${entryType}`, "list")
   })
 
   onBeforeUnmount(() => {
     realtime.removeMessageListener(listener)
-    realtime.leave(`entity:${entity}`, "list")
+    realtime.leave(`entryType:${entryType}`, "list")
   })
 
 }

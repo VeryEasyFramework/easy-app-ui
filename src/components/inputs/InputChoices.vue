@@ -51,10 +51,10 @@ const props = defineProps<{
 const open = ref(false);
 const selectedChoice = computed({
   get: () => {
-    return props.field.choices?.find((choice: Choice) => choice.key === props.modelValue);
+    return props.field.choices?.find((choice: Choice<PropertyKey>) => choice.key === props.modelValue);
   },
   set: (value) => {
-    emit("update:modelValue", value.key);
+    emit("update:modelValue", value?.key);
   }
 })
 const searchValue = ref("");
@@ -73,7 +73,7 @@ function handleOpen(value: boolean) {
 
 }
 
-function handleSelect(choice: Choice, callback: () => void) {
+function handleSelect(choice: Choice<PropertyKey>, callback: () => void) {
   selectedChoice.value = choice;
   callback();
   emit("update:modelValue", choice.key);
@@ -83,7 +83,7 @@ const filteredChoices = computed(() => {
   if (!searchValue.value) {
     return props.field.choices;
   }
-  return props.field.choices?.filter((choice: Choice) => {
+  return props.field.choices?.filter((choice: Choice<PropertyKey>) => {
 
     if (choice.label.toLowerCase().includes(searchValue.value.toLowerCase())) {
       return choice;

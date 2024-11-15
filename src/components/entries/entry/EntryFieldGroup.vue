@@ -11,7 +11,7 @@
         <Container class="col-2 field-values">
           <Container v-for="field in filteredFields"
                      :key="`${field.key}value`">
-            <EasyInput :editable="edit" :field="field" v-model="record[field.key]"/>
+            <EasyInput :editable="edit" :field="field" v-model="entry[field.key]"/>
 
 
           </Container>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { EntityRecord, FieldGroup, SettingsRecord } from "@vef/types/mod.ts";
+import { Entry, FieldGroup, Settings } from "@vef/types/mod.ts";
 import Container from "@/components/layout/Container.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import { computed } from "vue";
@@ -31,7 +31,7 @@ import EasyInput from "@/components/inputs/EasyInput.vue";
 const props = defineProps<{
   group: FieldGroup
   edit?: boolean
-  record: EntityRecord | SettingsRecord
+  entry: Entry | Settings
 }>()
 
 const filteredFields = computed(() => {

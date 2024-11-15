@@ -8,20 +8,20 @@
 
 <script setup lang="ts">
 
-import {AdvancedFilter, EasyField, EasyFieldType, EntityDefinition} from "@vef/types";
-import {onMounted} from "vue";
+import { AdvancedFilter, EasyField, EasyFieldType, EntryType } from "@vef/types/mod.ts";
+import { onMounted } from "vue";
 
 const props = defineProps<{
-  entity?: EntityDefinition
+  entryType?: EntryType
 }>()
 let fields: EasyField[] = []
 const searchableTypes: EasyFieldType[] = ["DataField", "EmailField", "TextField", "IntField", "PhoneField"]
 onMounted(() => {
-  if (!props.entity) {
-    throw new Error("EntitySearchInput requires an entity prop")
+  if (!props.entryType) {
+    throw new Error("Entry SearchInput requires an entry type prop")
   }
 
-  fields = props.entity.fields.filter(f => searchableTypes.includes(f.fieldType))
+  fields = props.entryType.fields.filter(f => searchableTypes.includes(f.fieldType))
 })
 
 const emit = defineEmits<{

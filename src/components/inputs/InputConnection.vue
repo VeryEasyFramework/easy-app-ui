@@ -12,8 +12,8 @@
       <InputDropDown v-else @open="handleOpen" v-model:search-value="searchValue"
                      @update:searchValue="handleInput"
                      @clear="clearValue"
-                     :icon="field.connectionEntity==='user'?'person':undefined"
-                     :label="titleValue" :empty-label="connectionEntity?.config.label">
+                     :icon="field.connectionEntryType==='user'?'person':undefined"
+                     :label="titleValue" :empty-label="connectionEntryType?.config.label">
 
 
         <template #content="dropDownProps">
@@ -37,8 +37,8 @@ import { computed, onBeforeMount, onMounted, ref } from "vue";
 import InputWrapper from "./InputWrapper.vue";
 
 import { easyApi } from "@/api/index.ts";
-import { EasyField, EntityDefinition, EntityRecord } from "@vef/types/mod.ts";
-import { entityStore } from "@/stores/entityStore.ts";
+import type { EasyField, Entry, EntryType } from "@vef/types/mod.ts";
+import { entryTypeStore } from "@/stores/entryTypeStore.ts";
 import { MaterialIcons } from "@/components/icons/materialIcons.ts";
 import InputDropDown from "@/components/widgets/InputDropDown.vue";
 
@@ -96,18 +96,21 @@ const emit = defineEmits(["update:modelValue", "update:titleValue", "selected"])
 const input = ref<HTMLInputElement>();
 
 
-let connectionEntity: EntityDefinition
+let connectionEntryType: EntryType | undefined
 let titleFieldKey: string = 'id'
 let titleField: EasyField | undefined
 onBeforeMount(() => {
-  const entity = entityStore.entities.find(e => e.entityId === props.field.connectionEntity)
-  if (!entity) {
-    throw new Error(`Entity ${props.field.connectionEntity} not found`)
+  if (!props.field.connectionEntryType) {
+    throw new Error('Connection field must have connectionEntryType')
+  }
+  const entryType = entryTypeStore.get(props.field.connectionEntryType)
+  if (!entryType) {
+    throw new Error(`Entry ${props.field.connectionEntryType} not found`)
   }
 
-  connectionEntity = entity
-  titleFieldKey = connectionEntity.config.titleField || 'id'
-  titleField = connectionEntity.fields.find(f => f.key === titleFieldKey)
+  connectionEntryType = entryType
+  titleFieldKey = connectionEntryType.config.titleField || 'id'
+  titleField = connectionEntryType.fields.find(f => f.key === titleFieldKey)
 
 })
 onMounted(() => {
@@ -123,7 +126,7 @@ const searchValue = ref('')
 const open = ref(false)
 
 
-function selectItem(item: EntityRecord, callback: () => void) {
+function selectItem(item: Entry, callback: () => void) {
 
   modelValue.value = item.id
   titleValue.value = item[titleFieldKey]
@@ -132,13 +135,13 @@ function selectItem(item: EntityRecord, callback: () => void) {
   callback()
 }
 
-const data = ref<EntityRecord[]>([])
+const data = ref<Entry[]>([])
 
 
 async function handleInput(value?: string) {
   searchValue.value = value || ''
 
-  const idType = connectionEntity.config.idMethod?.type === 'number' ? '=' : 'contains'
+  const idType = connectionEntryType?.config.idMethod?.type === 'number' ? '=' : 'contains'
   let filterKey = titleFieldKey || 'id'
   let filterOp = idType
   if (titleField) {
@@ -168,7 +171,7 @@ async function handleInput(value?: string) {
     }
   }
 
-  const results = await easyApi.getList(props.field.connectionEntity!, {
+  const results = await easyApi.getList(props.field.connectionEntryType!, {
     columns: [titleFieldKey, 'id'],
     limit: 20,
     filter,

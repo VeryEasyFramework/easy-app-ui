@@ -11,7 +11,7 @@
             })
           }}
         </div>
-        <RouterLink class="user-link" :to="`/entity/user/${entry.user}`">
+        <RouterLink class="user-link" :to="`/entry/user/${entry.user}`">
 
           {{ entry.userFullName }}
         </RouterLink>
@@ -19,7 +19,7 @@
           {{ actionMap[entry.action] }}
         </div>
         <div>
-          {{ entry.recordTitle || entry.recordId }}
+          {{ entry.entryTitle || entry.entryId }}
         </div>
         <MaterialIcon class="cursor-pointer" icon="info" @click="currentLog=entry;showLog=true"/>
 
@@ -37,12 +37,12 @@
 
 <script setup lang="ts">
 
-import {EditLog} from "@vef/types";
+import { EditLog } from "@vef/types/mod.ts";
 import Container from "@/components/layout/Container.vue";
-import {getPrettyDate} from "@/utils/index.ts";
+import { getPrettyDate } from "@/utils/index.ts";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import DisplayJSON from "@/components/displayFields/DisplayJSON.vue";
-import {ref} from "vue";
+import { ref } from "vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 
 const actionMap = {

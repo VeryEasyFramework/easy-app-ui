@@ -54,7 +54,10 @@ onMounted(() => {
   if (props.focus) {
     input.value?.focus();
   }
-  inputValueRef.value = JSON.stringify(props.modelValue, null, 2);
+  if (props.modelValue) {
+
+    inputValueRef.value = JSON.stringify(props.modelValue, null, 2);
+  }
 
 });
 </script>

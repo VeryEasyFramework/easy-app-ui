@@ -1,26 +1,28 @@
 <template>
   <ListDetailLayout maxWidth="300px">
     <template #list>
-      <EntityList :entity="entity" :activeEntity="id"
-                  @select="(value)=>$router.push(`/entity/${entity}/${value}`)" :key="entity"/>
+      <EntryList :entry-type="entryType"
+                 @select="(value)=>$router.push(`/entry/${entryType}/${value}`)" :key="entryType"/>
     </template>
     <template #detail>
-      <TransitionRouterView :key="props.id"/>
+      <TransitionRouterView :key="$route.params.id as string || '1' "/>
     </template>
   </ListDetailLayout>
 </template>
 
 <script setup lang="ts">
 import ListDetailLayout from "@/components/layout/ListDetailLayout.vue";
-import EntityList from "@/components/entities/EntityList.vue";
 import TransitionRouterView from "@/components/transitions/TransitionRouterView.vue";
-import {listenForKeyPress, onControlN} from "@/utils/keyboard.ts";
+import EntryList from "@/components/entries/EntryList.vue";
+import { onMounted } from "vue";
 
 const props = defineProps<{
-  entity: string
+  entryType: string
   id?: string
 }>()
 
+onMounted(() => {
+})
 
 </script>
 

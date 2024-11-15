@@ -6,7 +6,7 @@
       <input
           :name="name"
           ref="input"
-          :placeholder="`Search ${connectionEntity?.config.label}s...`"
+          :placeholder="`Search ${connectionEntryType?.config.label}s...`"
           @input="handleInput"
           type="text"
       />
@@ -34,10 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import type {EasyField, EntityRecord} from "@vef/types";
-import {easyApi} from "@/api/index.ts";
-import {entityStore} from "@/stores/entityStore.ts";
+import { onMounted, ref } from "vue";
+import type { EasyField, Entry } from "@vef/types/mod.ts";
+import { easyApi } from "@/api/index.ts";
+import { entryTypeStore } from "@/stores/entryTypeStore.ts";
 import Container from "@/components/layout/Container.vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 
@@ -66,21 +66,21 @@ const selectedItem = ref<{ id: string | null, title: string }>({
   title: ''
 })
 const titleField = ref('')
-const data = ref<EntityRecord[]>([])
-let connectionEntity = entityStore.entities.find(e => e.entityId === props.field.connectionEntity)
+const data = ref<Entry[]>([])
+let connectionEntryType = entryTypeStore.get(props.field.connectionEntryType!)
 
 async function handleInput(event?: Event) {
   searchValue.value = (event?.target as HTMLInputElement).value || ''
-  titleField.value = connectionEntity?.config.titleField || 'id'
+  titleField.value = connectionEntryType?.config.titleField || 'id'
   const columns = ['id']
   if (titleField.value !== 'id') {
     columns.push(titleField.value)
   }
-  const results = await easyApi.getList(props.field.connectionEntity!, {
+  const results = await easyApi.getList(props.field.connectionEntryType!, {
     columns,
     limit: 10,
-    orderBy: connectionEntity?.config.orderField || 'id',
-    order: connectionEntity?.config.orderDirection || 'desc',
+    orderBy: connectionEntryType?.config.orderField || 'id',
+    order: connectionEntryType?.config.orderDirection || 'desc',
     filter: {
       [titleField.value]: {
         op: 'contains',
@@ -103,7 +103,7 @@ function handleRemove(item: { id: string | number, label: string }) {
   emit('remove', item)
 }
 
-function handleSelect(item: EntityRecord) {
+function handleSelect(item: Entry) {
   selectedItem.value.id = item.id
   selectedItem.value.title = item[titleField.value]
   // input.value!.value = item[titleField.value]

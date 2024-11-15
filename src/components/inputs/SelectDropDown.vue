@@ -22,8 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref, useTemplateRef} from "vue";
-import CardWidget from "@/components/widgets/CardWidget.vue";
+import { onMounted, ref, useTemplateRef } from "vue";
 import Button from "@/components/buttons/Button.vue";
 
 const open = ref(false);
@@ -73,7 +72,6 @@ onMounted(() => {
     const toggleEvent = event as ToggleEvent
     open.value = toggleEvent.newState === 'open'
     emit('open', toggleEvent.newState === 'open')
-    console.log(toggleEvent.newState)
   })
   hidePopover();
 })

@@ -1,16 +1,17 @@
 <template>
-  <ContainerPadded class="entity-list-wrapper">
+  <ContainerPadded class="entry-list-wrapper">
     <div class="title-3">
-      {{ entityDef?.config.label }}
+      {{ entryType?.config.label }}
     </div>
     <CardWidget>
 
       <Container class="list-header col horizontal-align-between">
-        <EntitySearchInput :entity="entityDef" @search="handleSearch"/>
+        <EntrySearchInput v-if="loader.initialized" :entryType="entryType" @search="handleSearch"/>
 
         <div>
 
-          <ButtonIcon :label="`New ${entity}`" @click="openNewEntityModal" icon="add" size="1"/>
+          <ButtonIcon :label="`New ${entryType?.config?.label}`" @click="openNewEntryModal"
+                      icon="add" size="1"/>
         </div>
 
       </Container>
@@ -26,51 +27,53 @@
            class="grid standard-grid-no-padding list-container row  infinite overflow-hidden ">
         <TransitionList fade>
 
-          <EntityListItem v-for="item in loader.entityList.value" :active="activeEntity==item.id"
-                          :key="item.id"
-                          :entityDef="entityDef!"
-                          :fields="filteredListFields"
-                          :record="<EntityRecord>item" @select="(value)=>$emit('select',value)"/>
+          <EntryListItem v-for="entry in loader.entryList.value"
+                         :active="$route.params.id==entry.id"
+                         :key="entry.id"
+                         :entry-type="entryType!"
+                         :fields="filteredListFields"
+                         :entry="entry" @select="(value)=>$emit('select',value)"/>
         </TransitionList>
 
       </div>
     </div>
-    <ModalView v-model="showNewEntityModal">
-      <NewEntityForm :entityDef="loader.entity" @close="closeNewEntityModal"/>
+    <ModalView v-model="showNewEntryModal">
+      <NewEntryForm :entry-type="loader.entryType" @close="closeNewEntryModal"/>
     </ModalView>
   </ContainerPadded>
 </template>
 
 <script setup lang="ts">
 import Container from "@/components/layout/Container.vue";
-import { entityStore } from "@/stores/entityStore.ts";
-import type { EasyField } from "@vef/types/mod.ts";
-import { AdvancedFilter, EntityDefinition, EntityRecord } from "@vef/types/mod.ts";
+import { entryTypeStore } from "@/stores/entryTypeStore.ts";
+import type { AdvancedFilter, EasyField, EntryType } from "@vef/types/mod.ts";
 import { onBeforeMount, onBeforeUnmount, onMounted, ref, useTemplateRef } from "vue";
-import EntityListItem from "@/views/entity/EntityListItem.vue";
+
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
 import ModalView from "@/components/modal/ModalView.vue";
-import NewEntityForm from "@/components/entities/NewEntityForm.vue";
+
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import { listenForList } from "@/realtime/index.ts";
-import { EntityListLoader } from "@/components/entities/listLoader.ts";
+import { EntryListLoader } from "@/components/entries/listLoader.ts";
 import TransitionList from "@/components/transitions/TransitionList.vue";
-import EntitySearchInput from "@/components/entities/EntitySearchInput.vue";
 
-const loader = new EntityListLoader()
+import EntryListItem from "@/views/entry/EntryListItem.vue";
+import EntrySearchInput from "@/components/entries/EntrySearchInput.vue";
+import NewEntryForm from "@/components/entries/NewEntryForm.vue";
+
+const loader = new EntryListLoader()
 const props = defineProps<{
-  entity: string,
-  activeEntity?: string
+  entryType: string,
 }>()
-let entityDef = ref<EntityDefinition>()
+const entryType = ref<EntryType>()
 
-function openNewEntityModal() {
-  showNewEntityModal.value = true
+function openNewEntryModal() {
+  showNewEntryModal.value = true
 }
 
-function closeNewEntityModal() {
-  showNewEntityModal.value = false
+function closeNewEntryModal() {
+  showNewEntryModal.value = false
 }
 
 function handleSearch(filter: Record<string, AdvancedFilter>) {
@@ -79,7 +82,7 @@ function handleSearch(filter: Record<string, AdvancedFilter>) {
 
 }
 
-const showNewEntityModal = ref(false)
+const showNewEntryModal = ref(false)
 
 
 let filteredListFields: EasyField[] = []
@@ -90,36 +93,35 @@ const emit = defineEmits<{
 
 onBeforeMount(async () => {
 
-  const entity = entityStore.entities.find(e => e.entityId === props.entity)
-
-  if (!entity) {
+  const entryTypeDef = entryTypeStore.get(props.entryType)
+  if (!entryTypeDef) {
     return
   }
-  entityDef.value = entity
-  loader.entity = entity
-  const connectionTitleFields = entity.fields.filter(f => f.connectionTitleField).map(f => f.connectionTitleField)
-  filteredListFields = entity.fields.filter(f => {
-    if (!entity.listFields.includes(f.key)) {
+  entryType.value = entryTypeDef
+  loader.entryType = entryTypeDef
+  const connectionTitleFields = entryTypeDef.fields.filter(f => f.connectionTitleField).map(f => f.connectionTitleField)
+  filteredListFields = entryTypeDef.fields.filter(f => {
+    if (!entryTypeDef.listFields.includes(f.key)) {
       return false
     }
-    if (['id', 'createdAt', 'updatedAt', entity.config.titleField].includes(f.key)) {
+    if (['id', 'createdAt', 'updatedAt', entryTypeDef.config.titleField].includes(f.key)) {
       return false
     }
     return !connectionTitleFields.includes(f.key)
   })
 
 })
-listenForList(props.entity, async (action, record) => {
+listenForList(props.entryType, async (action, record) => {
   switch (action) {
     case 'create':
       await handleResize()
       break
     case 'update':
       let inList = false
-      loader.entityList.value.forEach((e, i) => {
+      loader.entryList.value.forEach((e, i) => {
         if (e.id === record.id) {
           inList = true
-          loader.entityList.value[i] = record
+          loader.entryList.value[i] = record
         }
       })
       if (!inList) {
@@ -127,7 +129,7 @@ listenForList(props.entity, async (action, record) => {
       }
       break
     case 'delete':
-      loader.entityList.value = loader.entityList.value.filter(e => e.id !== record.id)
+      loader.entryList.value = loader.entryList.value.filter(e => e.id !== record.id)
       break
   }
 })
@@ -144,7 +146,7 @@ const itemHeight = itemHeightBase + rowGap
 
 const itemHeightPx = `${itemHeightBase}px`
 onMounted(async () => {
-  await loader.init(entityDef.value as EntityDefinition)
+  await loader.init(entryType.value as EntryType)
   const parent = infinite.value?.parentElement
   if (parent) {
     await resetContainer(parent)
@@ -200,7 +202,7 @@ async function resetContainer(parentEl: HTMLElement) {
 </script>
 
 <style lang="scss">
-.entity-list-wrapper {
+.entry-list-wrapper {
   grid-template-areas: "." "list-header" "." "list-container";
   grid-template-columns: 1fr;
   grid-template-rows: max-content max-content max-content 1fr;

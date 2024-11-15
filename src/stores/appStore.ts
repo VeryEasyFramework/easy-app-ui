@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
-import { UserSession } from "@vef/types";
+import { UserSession } from "@vef/types/mod.ts";
 
 import { notify } from "@/notify/index";
 import { easyApi } from "@/api/index.ts";
-import { entityStore } from "@/stores/entityStore.ts";
+import { entryTypeStore } from "@/stores/entryTypeStore.ts";
 import { realtime } from "@/realtime/index.ts";
-import { settingsStore } from "@/stores/settingsStore.ts";
+import { settingsTypeStore } from "@/stores/settingsTypeStore.ts";
 
 
 export const useAppStore = defineStore('app', {
@@ -32,8 +32,8 @@ export const useAppStore = defineStore('app', {
     },
     async boot() {
       // this.app = await api.call("app", "boot");
-      entityStore.entities = await easyApi.call("app", "entities")
-      await settingsStore.init()
+      await entryTypeStore.init()
+      await settingsTypeStore.init()
       realtime.connect(this.session.sessionId)
 
       this.booted = true;

@@ -1,5 +1,5 @@
-import type {EasyFieldType} from "@vef/types";
-import type {Component} from "vue";
+import type { EasyFieldType } from "@vef/types";
+import type { Component } from "vue";
 import DisplayData from "@/components/displayFields/DisplayData.vue";
 import DisplayInt from "@/components/displayFields/DisplayInt.vue";
 import DisplayBigInt from "@/components/displayFields/DisplayBigInt.vue";
@@ -20,23 +20,24 @@ import DisplayURL from "@/components/displayFields/DisplayURL.vue";
 import DisplayRichText from "@/components/displayFields/DisplayRichText.vue";
 
 export const displayFieldsMap: Record<EasyFieldType, Component> = {
-   IDField: DisplayData,
-   DataField: DisplayData,
-   IntField: DisplayInt,
-   BigIntField: DisplayBigInt,
-   DateField: DisplayDate,
-   BooleanField: DisplayBoolean,
-   PasswordField: DisplayPassword,
-   ChoicesField: DisplayChoices,
-   MultiChoiceField: DisplayMultiChoice,
-   TextField: DisplayText,
-   EmailField: DisplayEmail,
-   ImageField: DisplayImage,
-   JSONField: DisplayJSON,
-   PhoneField: DisplayPhone,
-   ConnectionField: DisplayConnection,
-   TimeStampField: DisplayTimestamp,
-   DecimalField: DisplayDecimal,
-   URLField: DisplayURL,
-   RichTextField: DisplayRichText
+  IDField: DisplayData,
+  DataField: DisplayData,
+  IntField: DisplayInt,
+  BigIntField: DisplayBigInt,
+  DateField: DisplayDate,
+  BooleanField: DisplayBoolean,
+  PasswordField: DisplayPassword,
+  ChoicesField: DisplayChoices,
+  MultiChoiceField: DisplayMultiChoice,
+  TextField: DisplayText,
+  EmailField: DisplayEmail,
+  ImageField: DisplayImage,
+  JSONField: DisplayJSON,
+  PhoneField: DisplayPhone,
+  ConnectionField: DisplayConnection,
+  TimeStampField: DisplayTimestamp,
+  DecimalField: DisplayDecimal,
+  URLField: DisplayURL,
+  RichTextField: DisplayRichText,
+  ListField: DisplayData,
 }

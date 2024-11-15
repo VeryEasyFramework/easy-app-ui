@@ -27,8 +27,8 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import {EasyField} from "@vef/types";
-import {computed, onMounted, ref} from "vue";
+import { EasyField } from "@vef/types/mod.ts";
+import { computed, onMounted, ref } from "vue";
 import MaterialIcon from "@/components/icons/MaterialIcon.vue";
 
 const props = defineProps<{
@@ -40,7 +40,7 @@ const input = ref<HTMLInputElement>()
 const searchValue = ref('')
 const filteredChoices = computed(() => {
   return props.field.choices?.filter((choice) => {
-    if (props.values.map(v => v.id).includes(choice.key)) {
+    if (props.values.map(v => v.id).includes(choice.key as string)) {
       return false
     }
     if (choice.label.toLowerCase().includes(searchValue.value.toLowerCase())) {

@@ -25,22 +25,22 @@ export const router = createRouter({
       component: () => import("@/views/HomeView.vue"),
       children: [
         {
-          name: "entity",
-          path: "/entity",
+          name: "entry",
+          path: "/entry",
           children: [
             {
-              name: "entities",
+              name: "entryTypes",
               path: "",
-              component: () => import("@/views/entity/EntityView.vue"),
+              component: () => import("@/views/entry/EntryView.vue"),
             }, {
-              name: "entityList",
-              path: "/entity/:entity",
-              component: () => import("@/views/entity/EntityListView.vue"),
+              name: "entryList",
+              path: "/entry/:entryType",
+              component: () => import("@/views/entry/EntryListView.vue"),
               props: true,
               children: [{
-                name: "entityRecord",
+                name: "entryDetail",
                 path: ":id",
-                component: () => import("@/views/entity/EntityRecordView.vue"),
+                component: () => import("@/views/entry/EntryDetailView.vue"),
                 props: true
               }]
             },
@@ -51,7 +51,7 @@ export const router = createRouter({
           component: () => import("@/views/settings/SettingsView.vue"),
           children: [{
             name: "settingsDetail",
-            path: "/settings/:id",
+            path: "/settings/:settingsType",
             component: () => import("@/views/settings/SettingsDetailView.vue"),
             props: true
           }],

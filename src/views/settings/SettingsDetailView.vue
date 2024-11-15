@@ -7,12 +7,12 @@
     </Container>
     <Container class="row shrink fields-area">
 
-      <EntityFieldGroup edit v-for="group in fieldGroups" :group="group" :record="record"
-                        :key="group.key"/>
+      <EntryFieldGroup edit v-for="group in fieldGroups" :group="group" :entry="settings"
+                       :key="group.key"/>
     </Container>
     <Container class="row shrink actions-area">
       <RecordAttendance :users="roomUsers"/>
-      <EntityActions :entity-def="def" :record="record" type="settings"/>
+      <EntryActions :entry-type="def" :entry="settings" type="settings"/>
     </Container>
   </Container>
 </template>
@@ -21,21 +21,22 @@
 
 import Container from "@/components/layout/Container.vue";
 import { computed, onBeforeMount, ref } from "vue";
-import { settingsStore } from "@/stores/settingsStore.ts";
-import type { SettingsEntityDefinition, SettingsRecord, User } from "@vef/types/mod.ts";
-import EntityFieldGroup from "@/components/entities/entityRecord/EntityFieldGroup.vue";
+import { settingsTypeStore } from "@/stores/settingsTypeStore.ts";
+import type { Settings, SettingsType, User } from "@vef/types/mod.ts";
 import { easyApi } from "@/api/index.ts";
-import EntityActions from "@/components/entities/entityRecord/EntityActions.vue";
 import { joinSettings } from "@/realtime/index.ts";
 import RecordAttendance from "@/components/realtime/RecordAttendance.vue";
 import { listenForKeyPress, onControlS } from "@/utils/keyboard.ts";
+import EntryFieldGroup from "@/components/entries/entry/EntryFieldGroup.vue";
+import EntryActions from "@/components/entries/entry/EntryActions.vue";
 
 const props = defineProps<{
-  id: string
+  settingsType: string
 }>()
-const record = ref<SettingsRecord>({})
-const def = computed<SettingsEntityDefinition>(() => {
-  return settingsStore.settings.find(s => s.settingsId === props.id)!
+
+const settings = ref<Settings>({})
+const def = computed<SettingsType>(() => {
+  return settingsTypeStore.get(props.settingsType)!
 })
 
 const fieldGroups = computed(() => {
@@ -44,8 +45,8 @@ const fieldGroups = computed(() => {
 const loaded = ref(false)
 onBeforeMount(async () => {
   loaded.value = false
-  record.value = await easyApi.call("settings", "getSettingsRecord", {
-    settingsId: props.id
+  settings.value = await easyApi.call("settings", "getSettings", {
+    settingsType: props.settingsType
   })
   loaded.value = true
 })
@@ -54,16 +55,16 @@ listenForKeyPress((event) => {
   onControlS(event, async () => {
     event.preventDefault()
     await easyApi.call("settings", "updateSettings", {
-      settingsId: props.id,
-      data: record.value
+      settingsType: props.settingsType,
+      data: settings.value
     })
   })
 })
 
-joinSettings(props.id, (event, data) => {
+joinSettings(props.settingsType, (event, data) => {
   switch (event) {
     case "update":
-      record.value = data
+      settings.value = data
       break
     case "join":
       handleUserAttendance("join", data)

@@ -1,10 +1,10 @@
 <template>
 
-  <component :is="fieldMap[props.field.fieldType]"
+  <component :is="fieldMap[field.fieldType]"
              v-model="modelValue"
-             :field="props.field"
+             :field="field"
              :error="props.error"
-             :edit="props.editable"
+             :edit="editable"
              :placeholder="placeholder"
              :icon="icon"
              :focus="props.focus"

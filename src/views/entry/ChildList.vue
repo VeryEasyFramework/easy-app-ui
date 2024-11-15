@@ -32,13 +32,13 @@
 
 <script setup lang="ts">
 
-import {EasyField} from "@vef/types";
+import { EasyField } from "@vef/types";
 import Container from "@/components/layout/Container.vue";
-import {computed, onMounted, ref} from "vue";
+import { computed, onMounted, ref } from "vue";
 import ContainerPadded from "@/components/layout/ContainerPadded.vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import ChildInput from "@/components/inputs/ChildInput.vue";
-import {easyApi} from "@/api/index.ts";
+import { easyApi } from "@/api/index.ts";
 
 export interface ChildListConfig {
   tableName: string;
@@ -103,10 +103,10 @@ async function handleSelectedConnection(value: string, field: EasyField, row: Ch
   }
 
 
-  const record = await easyApi.getEntity(field.connectionEntity!, value)
+  const entry = await easyApi.getEntry(field.connectionEntryType!, value)
 
   fetchFields.forEach((f) => {
-    row[f.key] = record[f.fetchOnCreate!.field]
+    row[f.key] = entry[f.fetchOnCreate!.field]
   })
 
 

@@ -11,7 +11,7 @@
                     @click="collapse=!collapse" class="flat"/>
     </Container>
     <Container class="nav row shrink">
-      <NavItem :collapse="collapse" icon="person" to="/entity" text="Entities"/>
+      <NavItem :collapse="collapse" icon="person" to="/entry" text="Entries"/>
       <NavItem :collapse="collapse" icon="settings" to="/settings" text="Settings"/>
       <NavItem :collapse="collapse" icon="code" to="/api-explorer" text="API Explorer"/>
       <NavItem :collapse="collapse" icon="network_ping" to="/realtime" text="Realtime Explorer"/>

@@ -32,7 +32,8 @@
             <Container>
 
               <div v-for="param in currentAction.params" :key="param.key">
-                <EasyInput :field="param" editable v-model="currentActionParams[param.key].value"
+                <EasyInput :field="param" :editable="true"
+                           v-model="currentActionParams[param.key].value"
                            :error="currentActionParams[param.key].error"/>
 
               </div>
@@ -56,13 +57,7 @@
 <script setup lang="ts">
 
 import Container from "@/components/layout/Container.vue";
-import type {
-  EntityAction,
-  EntityDefinition,
-  EntityRecord,
-  SettingsEntityDefinition,
-  SettingsRecord
-} from "@vef/types/mod.ts";
+import type { Entry, EntryAction, EntryType, Settings, SettingsType } from "@vef/types/mod.ts";
 import { onMounted, ref } from "vue";
 import ButtonIcon from "@/components/buttons/ButtonIcon.vue";
 import CardWidget from "@/components/widgets/CardWidget.vue";
@@ -74,14 +69,14 @@ import Form from "@/components/form/FormBase.vue";
 import EasyInput from "@/components/inputs/EasyInput.vue";
 
 const props = defineProps<{
-  entityDef: EntityDefinition | SettingsEntityDefinition
-  type: "entity" | "settings"
-  record: EntityRecord | SettingsRecord
+  entryType: EntryType | SettingsType
+  type: "entry" | "settings"
+  entry: Entry | Settings
 }>()
 
-const actions = ref<EntityAction[]>([])
+const actions = ref<EntryAction[]>([])
 
-const currentAction = ref<EntityAction>({
+const currentAction = ref<EntryAction>({
   key: "",
   label: "",
   description: "",
@@ -97,10 +92,10 @@ const currentActionParams = ref<Record<string, {
 const showActionParams = ref(false)
 const enqueue = ref(false)
 onMounted(() => {
-  actions.value = props.entityDef.actions.filter(a => !a.private) as EntityAction[]
+  actions.value = props.entryType.actions.filter((a: EntryAction) => !a.private) as EntryAction[]
 })
 
-async function handleAction(action: EntityAction, queue = false) {
+async function handleAction(action: EntryAction, queue = false) {
   currentAction.value = action
   if (action.params && action.params.length > 0) {
     currentActionParams.value = {}
@@ -119,7 +114,7 @@ async function handleAction(action: EntityAction, queue = false) {
 
 }
 
-async function submitAction(action: EntityAction, queue = false) {
+async function submitAction(action: EntryAction, queue = false) {
 
   if (!validateParams(action, currentActionParams.value)) {
     return
@@ -131,10 +126,10 @@ async function submitAction(action: EntityAction, queue = false) {
 
   let response: Record<string, any> = {}
   switch (props.type) {
-    case "entity":
-      response = await easyApi.call('entity', "runEntityAction", {
-        entity: (props.entityDef as EntityDefinition).entityId,
-        id: (props.record as EntityRecord).id,
+    case "entry":
+      response = await easyApi.call('entry', "runEntryAction", {
+        entryType: (props.entryType as EntryType).entryType,
+        id: (props.entry as Entry).id,
         action: action.key,
         data,
         enqueue: queue
@@ -142,7 +137,7 @@ async function submitAction(action: EntityAction, queue = false) {
       break
     case "settings":
       response = await easyApi.call("settings", "runSettingsAction", {
-        settings: (props.entityDef as SettingsEntityDefinition).settingsId,
+        settingsType: (props.entryType as SettingsType).settingsType,
         action: action.key,
         data
       })
@@ -167,7 +162,7 @@ async function submitAction(action: EntityAction, queue = false) {
   enqueue.value = false
 }
 
-function validateParams(action: EntityAction, params: Record<string, {
+function validateParams(action: EntryAction, params: Record<string, {
   error?: string;
   value: any;
 }>) {

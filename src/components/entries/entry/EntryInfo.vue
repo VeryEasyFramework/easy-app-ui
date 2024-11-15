@@ -2,23 +2,23 @@
   <Container>
     <Container class="col">
       <div class="label">Created At:</div>
-      <DisplayTimestamp class="label text-info-dark" :value="record.createdAt"/>
+      <DisplayTimestamp class="label text-info-dark" :value="entry.createdAt"/>
     </Container>
     <Container class="col">
       <div class="label">Last Updated:</div>
-      <DisplayTimestamp class="label text-info-dark" :value="record.updatedAt"/>
+      <DisplayTimestamp class="label text-info-dark" :value="entry.updatedAt"/>
     </Container>
   </Container>
 </template>
 
 <script setup lang="ts">
-import type {EntityDefinition, EntityRecord} from "@vef/types";
 import Container from "@/components/layout/Container.vue";
 import DisplayTimestamp from "@/components/displayFields/DisplayTimestamp.vue";
+import { Entry, EntryType } from "@vef/types/mod.ts";
 
 const props = defineProps<{
-  entityDef: EntityDefinition
-  record: EntityRecord
+  entryType: EntryType
+  entry: Entry
 }>()
 </script>
 

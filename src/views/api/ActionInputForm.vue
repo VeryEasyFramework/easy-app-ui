@@ -2,24 +2,30 @@
   <BasicForm :columns="action.params.length > 3? 2:1" :name="action.actionName"
              @cancel="$emit('cancel')" @submitted="handleSubmit">
 
-    <EasyInput v-for="(param, index) in action.params" :field="{
-      label: formatString(param.paramName,'titleCase','camelCase'),
-      key: param.paramName,
-      fieldType: param.type,
-      required: param.required,
-      readOnly: false
-    }" v-model="data[param.paramName].value" edit :error="data[param.paramName].error"
+    <EasyInput v-for="(param, index) in action.params" :field="makeField(param)"
+               v-model="data[param.paramName].value" edit :error="data[param.paramName].error"
                :focus="index===0" :key="param.paramName"/>
 
   </BasicForm>
 </template>
 
 <script setup lang="ts">
-import { DocsAction } from "@vef/types/mod.ts";
-import { formatString } from "@/utils/index.ts";
+import { DocsAction, DocsActionParam } from "@vef/types/mod.ts";
 import BasicForm from "@/components/form/BasicForm.vue";
 import { onBeforeMount, ref } from "vue";
 import EasyInput from "@/components/inputs/EasyInput.vue";
+import { formatString } from "@/utils/index.ts";
+
+
+function makeField(param: DocsActionParam) {
+  return {
+    label: formatString(param.paramName, 'titleCase', 'camelCase'),
+    key: param.paramName,
+    fieldType: param.type,
+    required: param.required,
+    readOnly: false
+  }
+}
 
 const props = defineProps<{
   action: DocsAction

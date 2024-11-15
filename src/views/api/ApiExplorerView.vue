@@ -51,7 +51,6 @@ function setGroup(g: DocsActionGroup) {
 }
 
 onMounted(async () => {
-  console.log("ApiExplorerView mounted")
   docs.value = await easyApi.call("app", "apiDocs")
 })
 </script>
